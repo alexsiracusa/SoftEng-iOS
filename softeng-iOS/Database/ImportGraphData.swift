@@ -37,7 +37,7 @@ func insertNodes(into: FMDatabase) {
     let columns = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
     for row in rows.dropFirst() {
         do {
-            try insert(values: row, into: "Node", columns: columns, with: db)
+            try insert(values: row, columns: columns, table: "Node", db: db)
         } catch {
             print("failed to insert \(row) into Node")
         }
@@ -61,7 +61,7 @@ func insertEdges(into: FMDatabase) {
     let columns = ["id", "start_id", "end_id"]
     for row in rows.dropFirst() {
         do {
-            try insert(values: row, into: "Edge", columns: columns, with: db)
+            try insert(values: row, columns: columns, table: "Edge", db: db)
         } catch {
             print("failed to insert \(row) into Edge")
         }

@@ -29,6 +29,16 @@
 		FA87A38A2BB8A5E40043C106 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A3872BB8A5E40043C106 /* Helper.swift */; };
 		FA87A3C22BB998C80043C106 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAEC47F52BB5E30900515518 /* Assets.xcassets */; };
 		FA87A3C32BB998C80043C106 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAEC47F82BB5E30900515518 /* Preview Assets.xcassets */; };
+		FA87A3C92BB9A9530043C106 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = FA87A3C82BB9A9530043C106 /* LazyPager */; };
+		FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A3CB2BB9AAFA0043C106 /* DatabaseEnvironment.swift */; };
+		FA87A3CF2BB9ABC90043C106 /* FloorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A3CE2BB9ABC90043C106 /* FloorView.swift */; };
+		FA87A3D12BB9ACE90043C106 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = FA87A3D02BB9ACE90043C106 /* LazyPager */; };
+		FA87A3D32BB9ACF00043C106 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = FA87A3D22BB9ACF00043C106 /* LazyPager */; };
+		FA87A3D52BB9ACF90043C106 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = FA87A3D42BB9ACF90043C106 /* FMDB */; };
+		FA87A3D72BB9AD000043C106 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = FA87A3D62BB9AD000043C106 /* FMDB */; };
+		FA87A3DA2BBA0ABB0043C106 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A3D92BBA0ABB0043C106 /* Node.swift */; };
+		FA87A3DC2BBA0CDF0043C106 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A3DB2BBA0CDF0043C106 /* Edge.swift */; };
+		FA87A3DE2BBA10E90043C106 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87A3DD2BBA10E90043C106 /* Misc.swift */; };
 		FAEC47F02BB5E30800515518 /* softeng_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */; };
 		FAEC47F22BB5E30800515518 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC47F12BB5E30800515518 /* ContentView.swift */; };
 		FAEC48032BB5E30900515518 /* softeng_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC48022BB5E30900515518 /* softeng_iOSTests.swift */; };
@@ -65,6 +75,11 @@
 		FA87A37D2BB8839D0043C106 /* InitializeDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializeDatabase.swift; sourceTree = "<group>"; };
 		FA87A3812BB8987B0043C106 /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		FA87A3872BB8A5E40043C106 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		FA87A3CB2BB9AAFA0043C106 /* DatabaseEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseEnvironment.swift; sourceTree = "<group>"; };
+		FA87A3CE2BB9ABC90043C106 /* FloorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorView.swift; sourceTree = "<group>"; };
+		FA87A3D92BBA0ABB0043C106 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		FA87A3DB2BBA0CDF0043C106 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		FA87A3DD2BBA10E90043C106 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		FAEC47EC2BB5E30800515518 /* softeng-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "softeng-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = softeng_iOSApp.swift; sourceTree = "<group>"; };
 		FAEC47F12BB5E30800515518 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA87A3C92BB9A9530043C106 /* LazyPager in Frameworks */,
 				FA87A37B2BB883450043C106 /* FMDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +106,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA87A3D12BB9ACE90043C106 /* LazyPager in Frameworks */,
+				FA87A3D52BB9ACF90043C106 /* FMDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA87A3D32BB9ACF00043C106 /* LazyPager in Frameworks */,
+				FA87A3D72BB9AD000043C106 /* FMDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,12 +148,39 @@
 		FA87A37C2BB8837F0043C106 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				FA87A3D82BBA0AAE0043C106 /* Tables */,
 				FA87A3812BB8987B0043C106 /* Schema.swift */,
 				FA87A37D2BB8839D0043C106 /* InitializeDatabase.swift */,
 				FA87A3522BB85AC90043C106 /* ImportGraphData.swift */,
 				FA87A3872BB8A5E40043C106 /* Helper.swift */,
+				FA87A3CB2BB9AAFA0043C106 /* DatabaseEnvironment.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		FA87A3CA2BB9AAC00043C106 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				FA87A3DD2BBA10E90043C106 /* Misc.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		FA87A3CD2BB9ABAC0043C106 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				FA87A3CE2BB9ABC90043C106 /* FloorView.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		FA87A3D82BBA0AAE0043C106 /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				FA87A3D92BBA0ABB0043C106 /* Node.swift */,
+				FA87A3DB2BBA0CDF0043C106 /* Edge.swift */,
+			);
+			path = Tables;
 			sourceTree = "<group>";
 		};
 		FAEC47E32BB5E30800515518 = {
@@ -161,8 +208,10 @@
 			children = (
 				FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */,
 				FAEC47F12BB5E30800515518 /* ContentView.swift */,
+				FA87A3CD2BB9ABAC0043C106 /* MainViews */,
 				FA87A33C2BB84D450043C106 /* StaticData */,
 				FA87A37C2BB8837F0043C106 /* Database */,
+				FA87A3CA2BB9AAC00043C106 /* Utility */,
 				FAEC47F52BB5E30900515518 /* Assets.xcassets */,
 				FAEC47F72BB5E30900515518 /* Preview Content */,
 			);
@@ -212,6 +261,7 @@
 			name = "softeng-iOS";
 			packageProductDependencies = (
 				FA87A37A2BB883450043C106 /* FMDB */,
+				FA87A3C82BB9A9530043C106 /* LazyPager */,
 			);
 			productName = "softeng-iOS";
 			productReference = FAEC47EC2BB5E30800515518 /* softeng-iOS.app */;
@@ -231,6 +281,10 @@
 				FAEC48002BB5E30900515518 /* PBXTargetDependency */,
 			);
 			name = "softeng-iOSTests";
+			packageProductDependencies = (
+				FA87A3D02BB9ACE90043C106 /* LazyPager */,
+				FA87A3D42BB9ACF90043C106 /* FMDB */,
+			);
 			productName = "softeng-iOSTests";
 			productReference = FAEC47FE2BB5E30900515518 /* softeng-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -249,6 +303,10 @@
 				FAEC480A2BB5E30900515518 /* PBXTargetDependency */,
 			);
 			name = "softeng-iOSUITests";
+			packageProductDependencies = (
+				FA87A3D22BB9ACF00043C106 /* LazyPager */,
+				FA87A3D62BB9AD000043C106 /* FMDB */,
+			);
 			productName = "softeng-iOSUITests";
 			productReference = FAEC48082BB5E30900515518 /* softeng-iOSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -287,6 +345,7 @@
 			mainGroup = FAEC47E32BB5E30800515518;
 			packageReferences = (
 				FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */,
+				FA87A3C72BB9A8650043C106 /* XCRemoteSwiftPackageReference "LazyPager" */,
 			);
 			productRefGroup = FAEC47ED2BB5E30800515518 /* Products */;
 			projectDirPath = "";
@@ -340,9 +399,14 @@
 				FA87A3822BB8987B0043C106 /* Schema.swift in Sources */,
 				FAEC47F22BB5E30800515518 /* ContentView.swift in Sources */,
 				FA87A3532BB85AC90043C106 /* ImportGraphData.swift in Sources */,
+				FA87A3DA2BBA0ABB0043C106 /* Node.swift in Sources */,
 				FAEC47F02BB5E30800515518 /* softeng_iOSApp.swift in Sources */,
+				FA87A3DE2BBA10E90043C106 /* Misc.swift in Sources */,
+				FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */,
 				FA87A37E2BB8839D0043C106 /* InitializeDatabase.swift in Sources */,
 				FA87A3882BB8A5E40043C106 /* Helper.swift in Sources */,
+				FA87A3DC2BBA0CDF0043C106 /* Edge.swift in Sources */,
+				FA87A3CF2BB9ABC90043C106 /* FloorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,10 +756,43 @@
 				minimumVersion = 2.7.10;
 			};
 		};
+		FA87A3C72BB9A8650043C106 /* XCRemoteSwiftPackageReference "LazyPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gh123man/LazyPager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		FA87A37A2BB883450043C106 /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+		FA87A3C82BB9A9530043C106 /* LazyPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA87A3C72BB9A8650043C106 /* XCRemoteSwiftPackageReference "LazyPager" */;
+			productName = LazyPager;
+		};
+		FA87A3D02BB9ACE90043C106 /* LazyPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA87A3C72BB9A8650043C106 /* XCRemoteSwiftPackageReference "LazyPager" */;
+			productName = LazyPager;
+		};
+		FA87A3D22BB9ACF00043C106 /* LazyPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA87A3C72BB9A8650043C106 /* XCRemoteSwiftPackageReference "LazyPager" */;
+			productName = LazyPager;
+		};
+		FA87A3D42BB9ACF90043C106 /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+		FA87A3D62BB9AD000043C106 /* FMDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */;
 			productName = FMDB;

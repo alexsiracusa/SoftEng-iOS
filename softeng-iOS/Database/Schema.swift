@@ -9,6 +9,7 @@ import Foundation
 
 let SCHEMA = """
 
+
 PRAGMA foreign_keys = ON;
 
 DROP TABLE IF EXISTS Flower_Request;
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Node (
     building    TEXT,
     type        TEXT        CHECK (type IN ('CONF', 'DEPT', 'HALL', 'LABS', 'REST',
                                             'SERV', 'ELEV', 'EXIT', 'STAI', 'RETL',
-                                            'INFO', 'EXIT', 'BATH')),
+                                            'INFO', 'BATH')),
     long_name   TEXT,
     short_name  TEXT
 ) STRICT;

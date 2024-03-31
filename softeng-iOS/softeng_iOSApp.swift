@@ -14,5 +14,6 @@ struct softeng_iOSApp: App {
         WindowGroup {
             ContentView()
         }
+        .environmentObject(DatabaseEnvironment())
     }
 }

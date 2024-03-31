@@ -6,29 +6,21 @@
 //
 
 import SwiftUI
+import FMDB
+import LazyPager
 
 struct ContentView: View {
+    @EnvironmentObject var database: DatabaseEnvironment
+    
+    @State var data = ["00_thelowerlevel1"]
 
     var body: some View {
-        Image("00_thelowerlevel1")
-//        NavigationSplitView {
-//            List {
-//                Image("00_thelowerlevel1.png")
-//            }
-//            .toolbar {
-//                ToolbarItem {
-//                    Button(action: addNodes) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
-//            }
-//        } detail: {
-//            Text("Select an item")
-//        }
-    }
-    
-    private func addNodes() {
-        setupDatabase()
+        LazyPager(data: data) { element in
+            Image(element)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        }
+        .zoomable(min: 1, max: 10)
     }
 }
 
