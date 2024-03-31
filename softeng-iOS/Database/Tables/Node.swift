@@ -57,7 +57,7 @@ extension NodeType {
     }
 }
 
-class Node {
+class Node: Identifiable {
     
     static let dbColumns = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
     
@@ -69,6 +69,14 @@ class Node {
     let type: NodeType
     let long_name: String
     let short_name: String
+    
+    var x_percent: Double {
+        return Double(self.xcoord) / 5000
+    }
+    
+    var y_percent: Double {
+        return Double(self.ycoord) / 3400
+    }
     
     init(
         id: String, xcoord: Int, ycoord: Int, floor: Floor, building: String,

@@ -16,9 +16,7 @@ struct ContentView: View {
 
     var body: some View {
         LazyPager(data: data) { element in
-            Image(element)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            FloorView()
         }
         .zoomable(min: 1, max: 10)
     }
