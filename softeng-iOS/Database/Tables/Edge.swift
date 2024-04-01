@@ -8,7 +8,7 @@
 import Foundation
 import FMDB
 
-class Edge {
+class Edge: Identifiable {
     
     static let dbColumns = ["id", "start_id", "end_id", "blocked", "heat"]
     
@@ -17,6 +17,13 @@ class Edge {
     let end_id: String
     let blocked: Bool
     let heat: Int
+    
+    var start: Node! = nil
+    var end: Node! = nil
+    
+    func onFloor(floor: Floor) -> Bool {
+        return start.floor == floor && end.floor == floor
+    }
     
     init(id: String, start_id: String, end_id: String, blocked: Bool, heat: Int) {
         self.id = id

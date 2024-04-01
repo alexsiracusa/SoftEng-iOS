@@ -15,6 +15,20 @@ struct FloorView: View {
     
     @State var mapSize: CGSize = CGSize(width: 0, height: 0)
     
+    func getPoint(x_percent: CGFloat, y_percent: CGFloat) -> CGPoint {
+        CGPoint(
+            x: (mapSize.width * x_percent * zoom) - offset.x + origin.x,
+            y: (mapSize.height * y_percent * zoom) - offset.y + origin.y
+        )
+    }
+    
+    func getPoint(node: Node) -> CGPoint {
+        CGPoint(
+            x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
+            y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
+        )
+    }
+    
     
     var body: some View {
         ZoomableScrollView(zoom: $zoom, offset: $offset, origin: $origin) {
@@ -31,17 +45,34 @@ struct FloorView: View {
         .zIndex(0)
         .overlay(
             GeometryReader { proxy in
-                ForEach(database.nodes) { node in
-                    if node.floor == .L1 {
-                        Circle()
-                            .fill(.red)
-                            .frame(width: 8, height: 8)
-                            .position(
-                                x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-                                y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-                            )
-                            .zIndex(1)
+                ZStack {
+                    ForEach(database.nodes) { node in
+                        if node.floor == .L1 {
+                            Circle()
+                                .fill(.red)
+                                .frame(width: 8, height: 8)
+                                .position(
+                                    x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
+                                    y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
+                                )
+                                .zIndex(1)
+                        }
                     }
+                    ForEach(database.edges) { edge in
+                        if edge.onFloor(floor: .L1) {
+                            Path() { path in
+                                path.move(to: getPoint(node: edge.start))
+                                path.addLine(to: getPoint(node: edge.end))
+                            }
+                            .stroke(.red, lineWidth: 2)
+                        }
+                    }
+                }
+                .onChange(of: mapSize) {
+                    self.origin = CGPoint(
+                        x: 0,
+                        y: (proxy.size.height / 2) - (self.mapSize.height / 2)
+                    )
                 }
             }
         )
