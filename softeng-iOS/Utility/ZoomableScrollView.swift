@@ -11,19 +11,32 @@ import SwiftUI
 struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     private var content: Content
     @Binding var zoom: CGFloat
+    @Binding var offset: CGPoint
+    @Binding var origin: CGPoint
     
-    init(zoom: Binding<CGFloat>, @ViewBuilder content: () -> Content) {
+    init(zoom: Binding<CGFloat>, offset: Binding<CGPoint>, origin: Binding<CGPoint>, @ViewBuilder content: () -> Content) {
         self.content = content()
         _zoom = zoom
+        _offset = offset
+        _origin = origin
     }
     
     func makeUIView(context: Context) -> UIScrollView {
         // set up the UIScrollView
-        let scrollView = UIScrollView()
+        let config = Config(minZoom: 1, maxZoom: 12)
+        let hostingController = context.coordinator.hostingController
+        let scrollView = ZoomableView(
+            hostingController: hostingController,
+            index: 0, data: "",
+            config: config,
+            origin: $origin
+        )
+        
+        //let scrollView = UIScrollView()
         scrollView.delegate = context.coordinator  // for viewForZooming(in:)
-        scrollView.maximumZoomScale = 12
-        scrollView.minimumZoomScale = 1
-        scrollView.bouncesZoom = true
+        //scrollView.maximumZoomScale = 12
+        //scrollView.minimumZoomScale = 1
+        //scrollView.bouncesZoom = true
         
         // create a UIHostingController to hold our SwiftUI content
         let hostedView = context.coordinator.hostingController.view!
@@ -38,7 +51,8 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(zoom: $zoom, hostingController: UIHostingController(rootView: self.content))
+        return Coordinator(zoom: $zoom, offset: $offset, 
+                           hostingController: UIHostingController(rootView: self.content))
     }
     
     func updateUIView(_ uiView: UIScrollView, context: Context) {
@@ -52,9 +66,11 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     class Coordinator: NSObject, UIScrollViewDelegate {
         var hostingController: UIHostingController<Content>
         @Binding var zoom: CGFloat
+        @Binding var offset: CGPoint
         
-        init(zoom: Binding<CGFloat>, hostingController: UIHostingController<Content>) {
+        init(zoom: Binding<CGFloat>, offset: Binding<CGPoint>, hostingController: UIHostingController<Content>) {
             _zoom = zoom
+            _offset = offset
             self.hostingController = hostingController
         }
         
@@ -64,6 +80,7 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             self.zoom = scrollView.zoomScale
+            self.offset = scrollView.contentOffset
         }
     }
 }
