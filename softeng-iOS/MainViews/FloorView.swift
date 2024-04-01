@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FloorView: View {
     @EnvironmentObject var database: DatabaseEnvironment
+    @Binding var zoom: CGFloat
     
     var body: some View {
         Image("00_thelowerlevel1")
@@ -20,7 +21,7 @@ struct FloorView: View {
                     if node.floor == .L1 {
                         Circle()
                             .fill(.red)
-                            .frame(width: 3, height: 3)
+                            .frame(width: 8 * (1 / zoom), height: 8 * (1 / zoom))
                             .position(
                                 x: proxy.size.width * node.x_percent,
                                 y: proxy.size.height * node.y_percent
@@ -33,6 +34,6 @@ struct FloorView: View {
 }
 
 #Preview {
-    FloorView()
+    FloorView(zoom: .constant(1))
         .environmentObject(DatabaseEnvironment())
 }

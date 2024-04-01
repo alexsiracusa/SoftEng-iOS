@@ -7,18 +7,18 @@
 
 import SwiftUI
 import FMDB
-import LazyPager
 
 struct ContentView: View {
     @EnvironmentObject var database: DatabaseEnvironment
     
     @State var data = ["00_thelowerlevel1"]
+    @State var zoom: CGFloat = 1.0
+    
 
     var body: some View {
-        LazyPager(data: data) { element in
-            FloorView()
+        ZoomableScrollView(zoom: $zoom) {
+            FloorView(zoom: $zoom)
         }
-        .zoomable(min: 1, max: 10)
     }
 }
 
