@@ -51,7 +51,9 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(zoom: $zoom, offset: $offset, 
+        return Coordinator(zoom: $zoom, 
+                           offset: $offset,
+                           origin: $origin,
                            hostingController: UIHostingController(rootView: self.content))
     }
     
@@ -61,16 +63,35 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         assert(context.coordinator.hostingController.view.superview == uiView)
     }
     
+    typealias UIViewControllerType = Coordinator
+    
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        return Coordinator(zoom: $zoom,
+                           offset: $offset,
+                           origin: $origin,
+                           hostingController: UIHostingController(rootView: self.content))
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+    
     // MARK: - Coordinator
     
     class Coordinator: NSObject, UIScrollViewDelegate {
         var hostingController: UIHostingController<Content>
         @Binding var zoom: CGFloat
         @Binding var offset: CGPoint
+        @Binding var origin: CGPoint
         
-        init(zoom: Binding<CGFloat>, offset: Binding<CGPoint>, hostingController: UIHostingController<Content>) {
+        init(zoom: Binding<CGFloat>, 
+             offset: Binding<CGPoint>,
+             origin: Binding<CGPoint>,
+             hostingController: UIHostingController<Content>)
+        {
             _zoom = zoom
             _offset = offset
+            _origin = origin
             self.hostingController = hostingController
         }
         
@@ -81,6 +102,7 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             self.zoom = scrollView.zoomScale
             self.offset = scrollView.contentOffset
+            self.origin = hostingController.view.subviews[0].convert(CGPointZero, to: scrollView.coordinateSpace)
         }
     }
 }
