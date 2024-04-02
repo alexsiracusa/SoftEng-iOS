@@ -46,7 +46,12 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         scrollView.addSubview(hostedView)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        //scrollView.bouncesZoom = false
+        
+        // hide de-sync
+        scrollView.bouncesZoom = false
+        scrollView.bouncesVertically = false
+        scrollView.bouncesHorizontally = false
+        scrollView.bounces = false
         
         return scrollView
     }
