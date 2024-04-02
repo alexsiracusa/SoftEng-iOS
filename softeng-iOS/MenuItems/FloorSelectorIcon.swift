@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct FloorSelectorIcon: View {
+    @Binding var expanded: Bool
+    let size: CGFloat
+    
+    func toggle() {
+        withAnimation {
+            self.expanded.toggle()
+        }
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: toggle) {
+            RoundedRectangle(cornerRadius: (3/8) * size)
+                .fill(COLOR_AC_P)
+                .frame(width: size, height: size)
+                .overlay(
+                    Image(systemName: "square.3.layers.3d")
+                        .resizable()
+                        .foregroundColor(COLOR_TXT_S)
+                        .frame(width: (5/8) * size, height: (5/8) * size)
+                )
+        }
+        .buttonStyle(ScaleButton())
     }
 }
 
 #Preview {
-    FloorSelectorIcon()
+    FloorSelectorIcon(expanded: .constant(false), size: 40)
 }

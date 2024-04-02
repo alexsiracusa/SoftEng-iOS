@@ -108,7 +108,9 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             self.zoom = scrollView.zoomScale
             self.offset = scrollView.contentOffset
-            self.origin = hostingController.view.subviews[0].convert(CGPointZero, to: scrollView.coordinateSpace)
+            if !hostingController.view.subviews.isEmpty {
+                self.origin = hostingController.view.subviews[0].convert(CGPointZero, to: scrollView.coordinateSpace)
+            }
         }
     }
 }

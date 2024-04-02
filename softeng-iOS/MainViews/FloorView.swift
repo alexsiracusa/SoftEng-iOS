@@ -15,6 +15,12 @@ struct FloorView: View {
     
     @State var mapSize: CGSize = CGSize(width: 0, height: 0)
     
+    @Binding var floor: FloorData
+    
+    init(floor: Binding<FloorData>) {
+        _floor = floor
+    }
+    
     func getPoint(x_percent: CGFloat, y_percent: CGFloat) -> CGPoint {
         CGPoint(
             x: (mapSize.width * x_percent * zoom) - offset.x + origin.x,
@@ -29,10 +35,9 @@ struct FloorView: View {
         )
     }
     
-    
     var body: some View {
         ZoomableScrollView(zoom: $zoom, offset: $offset, origin: $origin) {
-            Image("00_thelowerlevel1")
+            Image(floor.image_name)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .overlay(
@@ -47,7 +52,7 @@ struct FloorView: View {
             GeometryReader { proxy in
                 ZStack {
                     ForEach(database.nodes) { node in
-                        if node.floor == .L1 {
+                        if node.floor == floor.floor {
                             Circle()
                                 .fill(.red)
                                 .frame(width: 8, height: 8)
@@ -59,7 +64,7 @@ struct FloorView: View {
                         }
                     }
                     ForEach(database.edges) { edge in
-                        if edge.onFloor(floor: .L1) {
+                        if edge.onFloor(floor: floor.floor) {
                             Path() { path in
                                 path.move(to: getPoint(node: edge.start))
                                 path.addLine(to: getPoint(node: edge.end))
@@ -80,6 +85,7 @@ struct FloorView: View {
 }
 
 #Preview {
-    FloorView()
+    FloorView(floor: .constant(FloorData(floor: .F1, image_name: "01_thefirstfloor")))
         .environmentObject(DatabaseEnvironment())
+        .environmentObject(ViewModel())
 }

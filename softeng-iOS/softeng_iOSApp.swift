@@ -15,5 +15,6 @@ struct softeng_iOSApp: App {
             ContentView()
         }
         .environmentObject(DatabaseEnvironment())
+        .environmentObject(ViewModel())
     }
 }

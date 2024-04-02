@@ -8,6 +8,7 @@
 import Foundation
 
 class FloorData: Identifiable {
+    let id = UUID()
     let floor: Floor
     let image_name: String
     

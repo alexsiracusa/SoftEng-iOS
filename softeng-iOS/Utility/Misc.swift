@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct RuntimeError: LocalizedError {
     let description: String
@@ -27,4 +28,18 @@ func ?!<T>(value: T?, error: @autoclosure () -> Error) throws -> T {
         throw error()
     }
     return value
+}
+
+struct ScaleButton: ButtonStyle {
+    let factor: CGFloat
+
+    init(factor: CGFloat = 0.90) {
+        self.factor = factor
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? factor : 1)
+            .animation(.interactiveSpring(), value: UUID())
+    }
 }

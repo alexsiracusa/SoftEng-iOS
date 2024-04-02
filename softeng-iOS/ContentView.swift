@@ -11,12 +11,14 @@ import FMDB
 
 struct ContentView: View {
     @EnvironmentObject var database: DatabaseEnvironment
-
+    
     var body: some View {
-        FloorView()
+        ViewController()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(DatabaseEnvironment())
+        .environmentObject(ViewModel())
 }

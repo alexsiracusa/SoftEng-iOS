@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct ViewController: View {
+    @EnvironmentObject var database: DatabaseEnvironment
+    @EnvironmentObject var viewModel: ViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { proxy in
+            ZStack(alignment: .bottomTrailing) {
+                FloorView(floor: $viewModel.selectedFloor)
+                    .zIndex(0)
+                    .ignoresSafeArea()
+                FloorSelector(size: 60)
+                    .zIndex(1)
+                    .padding(.trailing, 25)
+                    .padding(.bottom, 40)
+                
+            }
+        }
     }
 }
 
 #Preview {
     ViewController()
+        .environmentObject(DatabaseEnvironment())
+        .environmentObject(ViewModel())
 }
