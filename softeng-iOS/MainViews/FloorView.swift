@@ -49,7 +49,6 @@ struct FloorView: View {
                     }
                 )
         }
-        .zIndex(0)
         .overlay(
             GeometryReader { proxy in
                 ZStack {
@@ -85,6 +84,8 @@ struct FloorView: View {
                 }
             }
         )
+        .zIndex(0)
+        .background(COLOR_BG_P)
     }
 }
 

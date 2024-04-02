@@ -20,9 +20,10 @@ struct ViewController: View {
                     .ignoresSafeArea()
                 
                 // Search and Map Selector
+                SearchView()
+                    .zIndex(2)
+                
                 VStack {
-                    SearchBar(size: 48)
-                        .padding(.top, 15)
                     Spacer()
                     HStack {
                         Spacer()
