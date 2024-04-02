@@ -14,6 +14,16 @@ enum Floor: Int {
     case F1 = 1
     case F2 = 2
     case F3 = 3
+    
+    var description: String {
+        switch self {
+        case .L2: return "L2 The Lower Level 2"
+        case .L1: return "L2 The Lower Level 1"
+        case .F1: return "F1 The First Floor 1"
+        case .F2: return "F2 The Second Floor 2"
+        case .F3: return "F3 The Third Floor 3"
+        }
+    }
 }
 
 extension Floor {
@@ -43,6 +53,23 @@ enum NodeType: String {
     case RETL = "RETL"
     case INFO = "INFO"
     case BATH = "BATH"
+    
+    var description: String {
+        switch self {
+        case .CONF: return "Conference"
+        case .DEPT: return "Department"
+        case .HALL: return "Hallway"
+        case .LABS: return "Labratory"
+        case .REST: return "Restroom"
+        case .SERV: return "Service"
+        case .ELEV: return "Elevator"
+        case .EXIT: return "Exit"
+        case .STAI: return "Staris"
+        case .RETL: return "Retail"
+        case .INFO: return "Information"
+        case .BATH: return "Bathroom"
+        }
+    }
 }
 
 extension NodeType {
@@ -78,6 +105,12 @@ class Node: Identifiable {
         return Double(self.ycoord) / 3400
     }
     
+    var searchString: String {
+        return [long_name + short_name + building + type.description + floor.description + id]
+            .joined(separator: " ")
+            .lowercased()
+    }
+    
     init(
         id: String, xcoord: Int, ycoord: Int, floor: Floor, building: String,
         type: NodeType, long_name: String, short_name: String
@@ -106,6 +139,19 @@ class Node: Identifiable {
             print(error.localizedDescription)
             return nil
         }
+    }
+    
+    static var example: Node {
+        return Node(
+            id: "ACONF00102",
+            xcoord: 1580,
+            ycoord: 2538,
+            floor: .F2,
+            building: "BTM",
+            type: .HALL,
+            long_name: "Hall",
+            short_name: "Hall"
+        )
     }
 }
 

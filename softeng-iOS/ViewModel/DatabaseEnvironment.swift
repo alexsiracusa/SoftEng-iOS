@@ -9,6 +9,8 @@ import Foundation
 import FMDB
 
 class DatabaseEnvironment: ObservableObject {
+    @Published var loaded: Bool = false
+    
     var fmdb: FMDatabase
     @Published var nodes: [Node]
     @Published var edges: [Edge]
@@ -18,15 +20,32 @@ class DatabaseEnvironment: ObservableObject {
     private var edgeDict: [String: [Edge]]
     private var graph: Graph!
     
+    private var nodeSearchList: [String]
+    private var nodeSearchDict: [String: Node]
+    
     init() {
         fmdb = setupDatabase()
         
         self.nodes = []
         self.edges = []
+        
         self.nodeDict = [:]
         self.edgeDict = [:]
         self.graph = nil
         
+        self.nodeSearchList = []
+        self.nodeSearchDict = [:]
+        
+        do {
+            try self.loadDatabase()
+        }
+        catch {
+            print("failed to read map data")
+        }
+        
+    }
+    
+    func loadDatabase() throws {
         do {
             let nodeData = try selectAll(columns: Node.dbColumns, table: "Node", db: fmdb)
             let edgeData = try selectAll(columns: Edge.dbColumns, table: "Edge", db: fmdb)
@@ -34,36 +53,55 @@ class DatabaseEnvironment: ObservableObject {
             self.nodes = getNodes(results: nodeData)
             self.edges = getEdges(results: edgeData)
             
-            // create nodeDict
-            self.nodeDict = self.nodes.reduce(into: [String: Node]()) {
-                $0[$1.id] = $1
-            }
-            
-            // create edgeDict
-            for node in nodes {
-                self.edgeDict[node.id] = []
-            }
-            for edge in self.edges {
-                self.edgeDict[edge.start_id]?.append(edge)
-                self.edgeDict[edge.end_id]?.append(edge)
-            }
+            preprossesData()
             
             self.graph = Graph(nodeDict: nodeDict, edges: edges, edgeDict: edgeDict)
             self.path = graph.pathfind(start: "AHALL00203", end: "GLABS014L2")
             
-            initializeEdges()
+            self.loaded = true
         }
-        catch {
-            print("failed to read map data")
+        catch let error {
+            self.loaded = false
+            throw error
         }
     }
     
-    func initializeEdges() {
+    private func preprossesData() {
+        // create nodeDict
+        self.nodeDict = self.nodes.reduce(into: [String: Node]()) {
+            $0[$1.id] = $1
+        }
+        
+        // create edgeDict
+        for node in nodes {
+            self.edgeDict[node.id] = []
+        }
+        for edge in self.edges {
+            self.edgeDict[edge.start_id]?.append(edge)
+            self.edgeDict[edge.end_id]?.append(edge)
+        }
+        
+        // initialize edges
         for edge in edges {
             edge.start = nodeDict[edge.start_id]
             edge.end = nodeDict[edge.end_id]
         }
+        
+        // initialize search data structures
+        self.nodeSearchList = self.nodes.map({$0.searchString})
+        self.nodeSearchDict = self.nodes.reduce(into: [String: Node]()) {
+            $0[$1.searchString] = $1
+        }
+        
     }
+    
+    func searchNodes(query: String) -> [Node] {
+        return self.nodeSearchList.sortedByFuzzyMatchPattern(query.lowercased())
+            //.filter({$0.confidenceScore(query.lowercased()) ?? 0 > 0.001})
+            .prefix(30)
+            .map({nodeSearchDict[$0]!})
+    }
+    
 }
 
 

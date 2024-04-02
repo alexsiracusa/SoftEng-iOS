@@ -13,13 +13,16 @@ struct SearchBar: View {
     
     @Binding var fullscreen: Bool
     @FocusState var focused: Bool
-    @State var search: String = ""
+    
+    @Binding var search: String
+    @Binding var searchResults: [Node]?
     
     let size: CGFloat
     
     func close() {
         self.focused = false
         self.fullscreen = false
+        self.search = ""
     }
     
     var body: some View {
@@ -52,7 +55,6 @@ struct SearchBar: View {
                     // Search Field
                     TextField("Search here", text: $search)
                         .focused($focused)
-                        //.foregroundColor(.gray)
                         .font(.system(size: 20))
                     Spacer()
                 }
@@ -64,7 +66,13 @@ struct SearchBar: View {
 }
 
 #Preview {
-    SearchBar(fullscreen: .constant(false), focused: FocusState<Bool>(), size: 40)
-        .environmentObject(DatabaseEnvironment())
-        .environmentObject(ViewModel())
+    SearchBar(
+        fullscreen: .constant(false),
+        focused: FocusState<Bool>(),
+        search: .constant(""),
+        searchResults: .constant(nil), 
+        size: 40
+    )
+    .environmentObject(DatabaseEnvironment())
+    .environmentObject(ViewModel())
 }
