@@ -30,6 +30,13 @@ func ?!<T>(value: T?, error: @autoclosure () -> Error) throws -> T {
     return value
 }
 
+infix operator **: MultiplicationPrecedence
+//{ associativity left precedence 170 }
+
+func ** (num: Double, power: Double) -> Double{
+    return pow(num, power)
+}
+
 struct ScaleButton: ButtonStyle {
     let factor: CGFloat
 

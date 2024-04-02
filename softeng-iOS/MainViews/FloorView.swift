@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FloorView: View {
     @EnvironmentObject var database: DatabaseEnvironment
+    @EnvironmentObject var viewModel: ViewModel
+    
     @State var zoom: CGFloat = 1.0
     @State var offset: CGPoint = CGPoint(x: 0, y: 0)
     @State var origin: CGPoint = CGPoint(x: 0, y: 0)
@@ -51,25 +53,27 @@ struct FloorView: View {
         .overlay(
             GeometryReader { proxy in
                 ZStack {
-                    ForEach(database.nodes) { node in
-                        if node.floor == floor.floor {
-                            Circle()
-                                .fill(.red)
-                                .frame(width: 8, height: 8)
-                                .position(
-                                    x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-                                    y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-                                )
-                                .zIndex(1)
-                        }
-                    }
-                    ForEach(database.edges) { edge in
-                        if edge.onFloor(floor: floor.floor) {
-                            Path() { path in
-                                path.move(to: getPoint(node: edge.start))
-                                path.addLine(to: getPoint(node: edge.end))
+                    if let path = database.path {
+                        ForEach(path.path) { node in
+                            if node.floor == floor.floor {
+                                Circle()
+                                    .fill(.red)
+                                    .frame(width: 8, height: 8)
+                                    .position(
+                                        x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
+                                        y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
+                                    )
+                                    .zIndex(1)
                             }
-                            .stroke(.red, lineWidth: 2)
+                        }
+                        ForEach(path.edges) { edge in
+                            if edge.onFloor(floor: floor.floor) {
+                                Path() { path in
+                                    path.move(to: getPoint(node: edge.start))
+                                    path.addLine(to: getPoint(node: edge.end))
+                                }
+                                .stroke(.red, lineWidth: 2)
+                            }
                         }
                     }
                 }
