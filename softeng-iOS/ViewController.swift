@@ -17,7 +17,7 @@ struct ViewController: View {
                 FloorView(floor: $viewModel.selectedFloor)
                     .zIndex(0)
                     .ignoresSafeArea()
-                FloorSelector(size: 60)
+                FloorSelector(size: 50)
                     .zIndex(1)
                     .padding(.trailing, 25)
                     .padding(.bottom, 40)
