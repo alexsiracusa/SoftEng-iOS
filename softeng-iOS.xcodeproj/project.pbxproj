@@ -44,6 +44,7 @@
 		FAEC480F2BB5E30900515518 /* softeng_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC480E2BB5E30900515518 /* softeng_iOSUITestsLaunchTests.swift */; };
 		FAF8F26E2BBC3FC200ACD763 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F26D2BBC3FC200ACD763 /* Graph.swift */; };
 		FAF8F2702BBC436600ACD763 /* BinaryHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F26F2BBC436600ACD763 /* BinaryHeap.swift */; };
+		FAF8F2722BBC625100ACD763 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F2712BBC625100ACD763 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		FAEC480E2BB5E30900515518 /* softeng_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = softeng_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FAF8F26D2BBC3FC200ACD763 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		FAF8F26F2BBC436600ACD763 /* BinaryHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHeap.swift; sourceTree = "<group>"; };
+		FAF8F2712BBC625100ACD763 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				FA18C9E12BBBAF5200B8A96E /* FloorSelector.swift */,
 				FA79763E2BBBC637009D90C3 /* FloorSelectorIcon.swift */,
 				FA79763C2BBBC112009D90C3 /* FloorIcon.swift */,
+				FAF8F2712BBC625100ACD763 /* SearchBar.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */,
 				FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */,
 				FA87A37E2BB8839D0043C106 /* InitializeDatabase.swift in Sources */,
+				FAF8F2722BBC625100ACD763 /* SearchBar.swift in Sources */,
 				FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */,
 				FA87A3882BB8A5E40043C106 /* Helper.swift in Sources */,
 				FA87A3DC2BBA0CDF0043C106 /* Edge.swift in Sources */,

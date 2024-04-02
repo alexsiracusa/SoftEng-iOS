@@ -7,9 +7,15 @@
 
 import Foundation
 
+enum DisplayState {
+    case MAP
+    case SEARCH
+}
+
 class ViewModel: ObservableObject {
     @Published var floorViews: [FloorData]
     @Published var selectedFloor: FloorData
+    @Published var displayState: DisplayState = .MAP
     
     init() {
         let floor3 = FloorData(floor: .F3, image_name: "03_thethirdfloor")
