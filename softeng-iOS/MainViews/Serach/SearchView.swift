@@ -37,12 +37,17 @@ struct SearchView: View {
             
             if let searchResults, fullscreen  {
                 ScrollView {
-                    LazyVStack(spacing: 0) {
-                        ForEach(searchResults) { node in
-                            SearchResult(node: node)
+                    ScrollViewReader { value in
+                        LazyVStack(spacing: 0) {
+                            ForEach(searchResults) { node in
+                                SearchResult(node: node)
+                            }
+                        }
+                        .disabled(focused)
+                        .onAppear() {
+                            value.scrollTo(0)
                         }
                     }
-                    .disabled(focused)
                 }
                 .ignoresSafeArea()
                 .onTapGesture {
