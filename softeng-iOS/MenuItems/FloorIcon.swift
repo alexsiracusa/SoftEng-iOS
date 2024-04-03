@@ -15,19 +15,21 @@ struct FloorIcon: View {
     var body: some View {
         RoundedRectangle(cornerRadius: (3/8) * size)
             .fill(selected ? COLOR_AC_S : COLOR_LOGO)
-            .stroke(COLOR_LOGO, lineWidth: selected ? (1/12) * size : 0)
             .frame(width: size, height: size)
             .overlay(
                 Text(name)
                     .monospaced()
                     .bold()
                     .font(.system(size: (1/2) * size))
-                    .foregroundColor(COLOR_TXT_S)
+                    .foregroundColor(selected ? .black : COLOR_TXT_S)
                     .frame(width: size, height: size)
             )
     }
 }
 
 #Preview {
-    FloorIcon(selected: false, name: "L2", size: 40)
+    VStack {
+        FloorIcon(selected: false, name: "L2", size: 100)
+        FloorIcon(selected: true, name: "L2", size: 100)
+    }
 }
