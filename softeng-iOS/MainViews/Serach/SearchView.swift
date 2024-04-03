@@ -37,7 +37,7 @@ struct SearchView: View {
             
             if let searchResults, fullscreen  {
                 ScrollView {
-                    VStack(spacing: 0) {
+                    LazyVStack(spacing: 0) {
                         ForEach(searchResults) { node in
                             SearchResult(node: node)
                         }

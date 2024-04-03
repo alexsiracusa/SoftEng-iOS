@@ -106,7 +106,7 @@ class Node: Identifiable {
     }
     
     var searchString: String {
-        return [long_name + short_name + building + type.description + floor.description + id]
+        return [long_name, short_name, building, type.description, floor.description + id]
             .joined(separator: " ")
             .lowercased()
     }

@@ -49,6 +49,8 @@
 		FAF8F2772BBC9CFA00ACD763 /* FuzzyMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F2762BBC9CFA00ACD763 /* FuzzyMatching.swift */; };
 		FAF8F2792BBCB43B00ACD763 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F2782BBCB43B00ACD763 /* SearchResult.swift */; };
 		FAF8F27B2BBCE23100ACD763 /* FloorIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27A2BBCE23100ACD763 /* FloorIcon.swift */; };
+		FAF8F27F2BBCEA8400ACD763 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27E2BBCEA8400ACD763 /* TestView.swift */; };
+		FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2812BBCEC4B00ACD763 /* Fuse */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,7 @@
 		FAF8F2762BBC9CFA00ACD763 /* FuzzyMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzyMatching.swift; sourceTree = "<group>"; };
 		FAF8F2782BBCB43B00ACD763 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		FAF8F27A2BBCE23100ACD763 /* FloorIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorIcon.swift; sourceTree = "<group>"; };
+		FAF8F27E2BBCEA8400ACD763 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA87A37B2BB883450043C106 /* FMDB in Frameworks */,
+				FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +258,7 @@
 				FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */,
 				FAEC47F12BB5E30800515518 /* ContentView.swift */,
 				FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */,
+				FAF8F27E2BBCEA8400ACD763 /* TestView.swift */,
 				FA18C9DB2BBBA88E00B8A96E /* ViewModel */,
 				FA87A3CD2BB9ABAC0043C106 /* MainViews */,
 				FA18C9E02BBBAF3B00B8A96E /* MenuItems */,
@@ -319,6 +324,7 @@
 			name = "softeng-iOS";
 			packageProductDependencies = (
 				FA87A37A2BB883450043C106 /* FMDB */,
+				FAF8F2812BBCEC4B00ACD763 /* Fuse */,
 			);
 			productName = "softeng-iOS";
 			productReference = FAEC47EC2BB5E30800515518 /* softeng-iOS.app */;
@@ -400,6 +406,7 @@
 			mainGroup = FAEC47E32BB5E30800515518;
 			packageReferences = (
 				FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */,
+				FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */,
 			);
 			productRefGroup = FAEC47ED2BB5E30800515518 /* Products */;
 			projectDirPath = "";
@@ -450,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF8F27F2BBCEA8400ACD763 /* TestView.swift in Sources */,
 				FA18C9E22BBBAF5200B8A96E /* FloorSelector.swift in Sources */,
 				FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */,
 				FAF8F2702BBC436600ACD763 /* BinaryHeap.swift in Sources */,
@@ -818,6 +826,14 @@
 				minimumVersion = 2.7.10;
 			};
 		};
+		FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krisk/fuse-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -835,6 +851,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */;
 			productName = FMDB;
+		};
+		FAF8F2812BBCEC4B00ACD763 /* Fuse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */;
+			productName = Fuse;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
