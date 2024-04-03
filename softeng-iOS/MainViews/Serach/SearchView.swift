@@ -31,6 +31,10 @@ struct SearchView: View {
             .background(fullscreen ? .white : .clear)
             .animation(nil, value: UUID())
             
+            if searchResults == nil || !fullscreen {
+                Spacer()
+            }
+            
             if let searchResults, fullscreen  {
                 ScrollView {
                     VStack(spacing: 0) {
@@ -38,10 +42,13 @@ struct SearchView: View {
                             SearchResult(node: node)
                         }
                     }
+                    .disabled(focused)
+                }
+                .ignoresSafeArea()
+                .onTapGesture {
+                    focused = false
                 }
             }
-            
-            Spacer()
         }
         .background(fullscreen ? COLOR_BG_P : .clear)
         .ignoresSafeArea(.keyboard)

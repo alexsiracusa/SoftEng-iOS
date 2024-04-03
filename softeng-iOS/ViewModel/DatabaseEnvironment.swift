@@ -9,17 +9,33 @@ import Foundation
 import FMDB
 
 class DatabaseEnvironment: ObservableObject {
+    // if the view has loaded data from the database
     @Published var loaded: Bool = false
     
+    // raw data
     var fmdb: FMDatabase
     @Published var nodes: [Node]
     @Published var edges: [Edge]
-    @Published var path: PathfindingResult? = nil
     
+    // pathfinding
+    @Published var path: PathfindingResult? = nil
+    @Published var pathStart: Node? = nil {
+        didSet {
+            tryPath()
+        }
+    }
+    @Published var pathEnd: Node? = nil {
+        didSet {
+            tryPath()
+        }
+    }
+    
+    // quick lookup for pathfinding
     private var nodeDict: [String: Node]
     private var edgeDict: [String: [Edge]]
     private var graph: Graph!
     
+    // quick lookup for searching
     private var nodeSearchList: [String]
     private var nodeSearchDict: [String: Node]
     
@@ -56,8 +72,6 @@ class DatabaseEnvironment: ObservableObject {
             preprossesData()
             
             self.graph = Graph(nodeDict: nodeDict, edges: edges, edgeDict: edgeDict)
-            self.path = graph.pathfind(start: "AHALL00203", end: "GLABS014L2")
-            
             self.loaded = true
         }
         catch let error {
@@ -95,10 +109,21 @@ class DatabaseEnvironment: ObservableObject {
         
     }
     
+    func tryPath() {
+        guard let pathStart, let pathEnd else {
+            return
+        }
+        pathfind(start: pathStart.id, end: pathEnd.id)
+    }
+    
+    func pathfind(start: String, end: String) {
+        self.path = graph.pathfind(start: start, end: end)
+    }
+    
     func searchNodes(query: String) -> [Node] {
         return self.nodeSearchList.sortedByFuzzyMatchPattern(query.lowercased())
             //.filter({$0.confidenceScore(query.lowercased()) ?? 0 > 0.001})
-            .prefix(30)
+            .prefix(60)
             .map({nodeSearchDict[$0]!})
     }
     

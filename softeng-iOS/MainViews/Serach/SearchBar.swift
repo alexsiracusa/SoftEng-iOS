@@ -22,7 +22,8 @@ struct SearchBar: View {
     func close() {
         self.focused = false
         self.fullscreen = false
-        self.search = ""
+        //self.search = ""
+        //searchResults = []
     }
     
     var body: some View {
@@ -43,8 +44,11 @@ struct SearchBar: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                         else {
-                            Circle()
-                                .fill(COLOR_LOGO)
+                            Image("Brigham_and_Womens_Hospital_Logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding((3/40) * size)
+                                .padding(.leading, (3/40) * size)
                         }
                     }
                     .frame(

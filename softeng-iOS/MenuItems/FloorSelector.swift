@@ -25,7 +25,7 @@ struct FloorSelector: View {
                 id: \.offset
             )
             { index, floor in
-                FloorIcon(floorIndex: index, expanded: $expanded, size: size)
+                FloorIconButton(floorIndex: index, expanded: $expanded, size: size)
                     .animation(.spring(duration: 0.3), value: expanded)
                     .zIndex(-Double(index))
                     .offset(
