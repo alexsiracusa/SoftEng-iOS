@@ -53,10 +53,10 @@ struct FloorView: View {
             GeometryReader { proxy in
                 ZStack {
                     if let path = database.path {
-                        ForEach(path.path) { node in
+                        ForEach(path.displayNodes, id: \.node.id) { color, node in
                             if node.floor == floor.floor {
                                 Circle()
-                                    .fill(.red)
+                                    .fill(color)
                                     .frame(width: 8, height: 8)
                                     .position(
                                         x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
@@ -65,13 +65,13 @@ struct FloorView: View {
                                     .zIndex(1)
                             }
                         }
-                        ForEach(path.edges) { edge in
+                        ForEach(path.displayEdges, id: \.edge.id) { color, edge in
                             if edge.onFloor(floor: floor.floor) {
                                 Path() { path in
                                     path.move(to: getPoint(node: edge.start))
                                     path.addLine(to: getPoint(node: edge.end))
                                 }
-                                .stroke(.red, lineWidth: 2)
+                                .stroke(color, lineWidth: 2)
                             }
                         }
                     }

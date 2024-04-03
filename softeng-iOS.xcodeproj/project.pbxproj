@@ -50,6 +50,7 @@
 		FAF8F27B2BBCE23100ACD763 /* FloorIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27A2BBCE23100ACD763 /* FloorIcon.swift */; };
 		FAF8F27F2BBCEA8400ACD763 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27E2BBCEA8400ACD763 /* TestView.swift */; };
 		FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2812BBCEC4B00ACD763 /* Fuse */; };
+		FAF8F2852BBCFC4600ACD763 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2842BBCFC4600ACD763 /* Algorithms */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF8F2852BBCFC4600ACD763 /* Algorithms in Frameworks */,
 				FA87A37B2BB883450043C106 /* FMDB in Frameworks */,
 				FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */,
 			);
@@ -322,6 +324,7 @@
 			packageProductDependencies = (
 				FA87A37A2BB883450043C106 /* FMDB */,
 				FAF8F2812BBCEC4B00ACD763 /* Fuse */,
+				FAF8F2842BBCFC4600ACD763 /* Algorithms */,
 			);
 			productName = "softeng-iOS";
 			productReference = FAEC47EC2BB5E30800515518 /* softeng-iOS.app */;
@@ -404,6 +407,7 @@
 			packageReferences = (
 				FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */,
 				FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */,
+				FAF8F2832BBCFC4600ACD763 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = FAEC47ED2BB5E30800515518 /* Products */;
 			projectDirPath = "";
@@ -830,6 +834,14 @@
 				minimumVersion = 1.4.0;
 			};
 		};
+		FAF8F2832BBCFC4600ACD763 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -852,6 +864,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */;
 			productName = Fuse;
+		};
+		FAF8F2842BBCFC4600ACD763 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAF8F2832BBCFC4600ACD763 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
