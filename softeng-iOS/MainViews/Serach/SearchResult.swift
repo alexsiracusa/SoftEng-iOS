@@ -10,64 +10,47 @@ import SwiftUI
 struct SearchResult: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
+    
     let node: Node
+    @Binding var fullscreen: Bool
+    @FocusState var focused: Bool
     
     var isSelected: Bool {
         return viewModel.selectedFloor.floor == node.floor
     }
     
     var body: some View {
-        HStack(spacing: 0) {
-            FloorIcon(
-                selected: isSelected,
-                name: String(describing: node.floor),
-                size: 25
-            )
-            .padding(.trailing, 7)
-            Text("\(node.long_name) (\(node.building))")
-            
-            Spacer()
-            
-            Button(action: {
-                if database.pathStart?.id == node.id {
-                    database.pathStart = nil
-                    database.path = nil
-                }
-                else {
-                    database.pathStart = node
-                }
-            }) {
-                Image(systemName: "location.circle")
-                    .foregroundColor(
-                        database.pathStart?.id ?? "" == node.id ?
-                            .blue : .black
+        Button(action: {
+            database.selectNode = node
+            viewModel.setFloor(floor: node.floor)
+            self.focused = false
+            self.fullscreen = false
+        }) {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    FloorIcon(
+                        selected: isSelected,
+                        name: String(describing: node.floor),
+                        size: 25
                     )
-            }
-            .buttonStyle(PlainButtonStyle())
-            
-            Spacer()
-                .frame(width: 15)
-            
-            Button(action: {
-                if database.pathEnd?.id == node.id {
-                    database.pathEnd = nil
-                    database.path = nil
+                    .padding(.trailing, 15)
+                    
+                    Text("\(node.short_name) (\(node.building))")
+                        .lineLimit(2)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "arrow.up.left")
+                        .padding(.leading, 10)
                 }
-                else {
-                    database.pathEnd = node
-                }
-            }) {
-                Image(systemName: "arrow.triangle.turn.up.right.circle")
-                    .foregroundColor(
-                        database.pathEnd?.id ?? "" == node.id ?
-                            .blue : .black
-                    )
+                .padding(.vertical, 17)
+                .padding(.horizontal, 20)
+                
+                Divider()
+                    .padding(.leading, 60)
             }
-            .buttonStyle(PlainButtonStyle())
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 20)
-        .background(.white)
+        .buttonStyle(GreyBackgroundButton())
         
     }
     
@@ -76,7 +59,10 @@ struct SearchResult: View {
 }
 
 #Preview {
-    SearchResult(node: Node.example)
-        .environmentObject(DatabaseEnvironment())
-        .environmentObject(ViewModel())
+    SearchResult(node: Node.example, 
+                 fullscreen: .constant(false),
+                 focused: FocusState<Bool>()
+    )
+    .environmentObject(DatabaseEnvironment())
+    .environmentObject(ViewModel())
 }

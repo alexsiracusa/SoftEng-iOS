@@ -50,3 +50,10 @@ struct ScaleButton: ButtonStyle {
             .animation(.interactiveSpring(), value: UUID())
     }
 }
+
+struct GreyBackgroundButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? COLOR_BG_T : .white)
+    }
+}

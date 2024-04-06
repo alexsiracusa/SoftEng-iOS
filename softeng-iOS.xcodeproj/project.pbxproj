@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA09CC122BC0FA3B00BD7F52 /* OffsetScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC112BC0FA3B00BD7F52 /* OffsetScrollView.swift */; };
 		FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */; };
 		FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */; };
 		FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */; };
@@ -72,7 +71,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FA09CC112BC0FA3B00BD7F52 /* OffsetScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetScrollView.swift; sourceTree = "<group>"; };
 		FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorData.swift; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				FAF8F26F2BBC436600ACD763 /* BinaryHeap.swift */,
 				FA87A3F52BBA65D70043C106 /* ZoomableScrollView.swift */,
 				FA87A3FA2BBB0EBC0043C106 /* ZoomableView.swift */,
-				FA09CC112BC0FA3B00BD7F52 /* OffsetScrollView.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -475,7 +472,6 @@
 				FAEC47F02BB5E30800515518 /* softeng_iOSApp.swift in Sources */,
 				FAF8F26E2BBC3FC200ACD763 /* Graph.swift in Sources */,
 				FA87A3DE2BBA10E90043C106 /* Misc.swift in Sources */,
-				FA09CC122BC0FA3B00BD7F52 /* OffsetScrollView.swift in Sources */,
 				FA87A3F62BBA65D70043C106 /* ZoomableScrollView.swift in Sources */,
 				FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */,
 				FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */,

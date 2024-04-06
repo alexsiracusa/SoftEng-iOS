@@ -27,4 +27,8 @@ class ViewModel: ObservableObject {
         self.floorViews = [lower2, lower1, floor1, floor2, floor3]
         self.selectedFloor = floor1
     }
+    
+    func setFloor(floor: Floor) {
+        selectedFloor = floorViews.first(where: {$0.floor == floor}) ?? selectedFloor
+    }
 }

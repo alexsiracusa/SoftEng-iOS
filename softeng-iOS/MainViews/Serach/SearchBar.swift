@@ -21,11 +21,6 @@ struct SearchBar: View {
     
     let size: CGFloat
     
-    func close() {
-        self.focused = false
-        self.fullscreen = false
-    }
-    
     func clearSearch() {
         self.search = ""
         searchResults = []
@@ -43,7 +38,10 @@ struct SearchBar: View {
                     // Icon
                     HStack {
                         if fullscreen {
-                            Button(action: close) {
+                            Button(action: {
+                                self.focused = false
+                                self.fullscreen = false
+                            }) {
                                 Image(systemName: "chevron.backward")
                             }
                             .buttonStyle(PlainButtonStyle())

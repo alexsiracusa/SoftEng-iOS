@@ -52,7 +52,7 @@ struct FloorView: View {
                     // Render Selected Node
                     if let selected = database.selectNode {
                         AnyView(
-                            renderNode(color: .blue, node: selected)
+                            renderNode(color: .red, node: selected)
                         )
                     }
                     

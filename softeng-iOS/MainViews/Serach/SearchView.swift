@@ -47,9 +47,16 @@ struct SearchView: View {
                                 Array(searchResults.enumerated()),
                                 id: \.offset
                             ) { index, node in
-                                SearchResult(node: node)
+                                SearchResult(
+                                    node: node,
+                                    fullscreen: $fullscreen,
+                                    focused: _focused
+                                )
                                     .id(index)
                             }
+                        }
+                        .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+                            return viewDimensions[.listRowSeparatorLeading] + 40
                         }
                         .onChange(of: scrollTarget) {
                             if let target = scrollTarget {
