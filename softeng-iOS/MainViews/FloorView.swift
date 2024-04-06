@@ -52,19 +52,19 @@ struct FloorView: View {
                     // Render Selected Node
                     if let selected = database.selectNode {
                         AnyView(
-                            renderNode(proxy: proxy, color: .blue, node: selected)
+                            renderNode(color: .blue, node: selected)
                         )
                     }
                     
                     if let path = database.path {
                         ForEach(path.displayNodes, id: \.node.id) { color, node in
                             AnyView(
-                                renderNode(proxy: proxy, color: color, node: node)
+                                renderNode(color: color, node: node)
                             )
                         }
                         ForEach(path.displayEdges, id: \.edge.id) { color, edge in
                             AnyView(
-                                renderEdge(proxy: proxy, color: color, edge: edge)
+                                renderEdge(color: color, edge: edge)
                             )
                         }
                     }
@@ -82,7 +82,6 @@ struct FloorView: View {
     }
     
     func renderNode(
-        proxy: SwiftUI.GeometryProxy,
         color: Color,
         node: Node
     ) -> any View {
@@ -90,10 +89,7 @@ struct FloorView: View {
             Circle()
                 .fill(color)
                 .frame(width: 8, height: 8)
-                .position(
-                    x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-                    y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-                )
+                .position(getPoint(node: node))
                 .zIndex(1)
         }
         else {
@@ -102,7 +98,6 @@ struct FloorView: View {
     }
     
     func renderEdge(
-        proxy: SwiftUI.GeometryProxy,
         color: Color,
         edge: Edge
     ) -> any View {
