@@ -17,6 +17,9 @@ struct SearchView: View {
     @State var search = ""
     @State var searchResults: [Node]? = nil
     
+    @State var position: CGPoint = CGPoint(x: 0, y: 0)
+    @State var scrollTarget: Int? = nil
+    
     var body: some View {
         VStack(spacing: 0) {
             SearchBar(
@@ -24,6 +27,7 @@ struct SearchView: View {
                 focused: _focused,
                 search: $search,
                 searchResults: $searchResults,
+                scrollTarget: $scrollTarget,
                 size: 46
             )
             .padding(.top, 10)
@@ -39,20 +43,43 @@ struct SearchView: View {
                 ScrollView {
                     ScrollViewReader { value in
                         LazyVStack(spacing: 0) {
-                            ForEach(searchResults) { node in
+                            ForEach(
+                                Array(searchResults.enumerated()),
+                                id: \.offset
+                            ) { index, node in
                                 SearchResult(node: node)
+                                    .id(index)
                             }
                         }
-                        .disabled(focused)
+                        .onChange(of: scrollTarget) {
+                            if let target = scrollTarget {
+                                value.scrollTo(target)
+                                scrollTarget = nil
+                            }
+                        }
                         .onAppear() {
+                            scrollTarget = nil
                             value.scrollTo(0)
                         }
                     }
+                    .background(GeometryReader { geometry in
+                        Color.clear.preference(
+                            key: SizingPreferenceKey.self,
+                            value: geometry.frame(in: .named("scroll")).origin
+                        )
+                    })
+                }
+                .coordinateSpace(name: "scroll")
+                .onPreferenceChange(SizingPreferenceKey.self) { position in
+                    if self.position != position &&
+                        self.position.y != 0 &&
+                        position.y != 0
+                    {
+                        focused = false
+                    }
+                    self.position = position
                 }
                 .ignoresSafeArea()
-                .onTapGesture {
-                    focused = false
-                }
             }
         }
         .background(fullscreen ? COLOR_BG_P : .clear)
@@ -64,28 +91,17 @@ struct SearchView: View {
                     fullscreen = true
                 }
             }
-            else {
-                Task {
-                    await runSearch()
-                }
-            }
             
         }
     }
     
-    func runSearch() async {
-        if search == "" {
-            setSearch(results: [])
-        }
-        else if search != "" && fullscreen {
-            let results = database.searchNodes(query: search)
-            setSearch(results: results)
-        }
-    }
+}
+
+struct SizingPreferenceKey: PreferenceKey {
+    static var defaultValue: CGPoint { .zero }
     
-    @MainActor
-    func setSearch(results: [Node]) {
-        self.searchResults = results
+    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+        // No-op
     }
 }
 

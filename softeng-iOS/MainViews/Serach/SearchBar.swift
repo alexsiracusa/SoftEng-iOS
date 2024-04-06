@@ -14,16 +14,21 @@ struct SearchBar: View {
     @Binding var fullscreen: Bool
     @FocusState var focused: Bool
     
+    @State var lastSearchTime: NSDate = NSDate()
     @Binding var search: String
     @Binding var searchResults: [Node]?
+    @Binding var scrollTarget: Int?
     
     let size: CGFloat
     
     func close() {
         self.focused = false
         self.fullscreen = false
-        //self.search = ""
-        //searchResults = []
+    }
+    
+    func clearSearch() {
+        self.search = ""
+        searchResults = []
     }
     
     var body: some View {
@@ -61,12 +66,72 @@ struct SearchBar: View {
                         .focused($focused)
                         .font(.system(size: 20))
                     Spacer()
+                    
+                    // Clear Button
+                    if search != "" {
+                        HStack {
+                            if fullscreen {
+                                Button(action: clearSearch) {
+                                    Image(systemName: "xmark.circle")
+                                        .resizable()
+                                        .font(.system(size: 6, weight: .regular))
+                                        .frame(
+                                            width: (3/7) * size,
+                                            height: (3/7) * size
+                                        )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                            else {
+                                Button(action: clearSearch) {
+                                    Image(systemName: "xmark")
+                                        .resizable()
+                                        .font(.system(size: 6, weight: .semibold))
+                                        .frame(
+                                            width: (4/14) * size,
+                                            height: (4/14) * size
+                                        )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .frame(
+                            width: (5/7) * size,
+                            height: (5/7) * size
+                        )
+                        .padding(.trailing, (3/40) * size)
+                    }
                 }
                 .padding(5)
             )
             .padding(.horizontal, 20)
+            .onChange(of: search) {
+                Task {
+                    await runSearch(time: NSDate())
+                }
+            }
             
     }
+    
+    func runSearch(time: NSDate) async {
+        self.lastSearchTime = time
+        if search == "" {
+            setSearch(results: [], time: time)
+        }
+        else if search != "" && fullscreen {
+            let results = database.searchNodes(query: search)
+            setSearch(results: results, time: time)
+        }
+    }
+    
+    @MainActor
+    func setSearch(results: [Node], time: NSDate) {
+        if lastSearchTime == time {
+            scrollTarget = 0
+            self.searchResults = results
+        }
+    }
+    
 }
 
 #Preview {
@@ -75,6 +140,7 @@ struct SearchBar: View {
         focused: FocusState<Bool>(),
         search: .constant(""),
         searchResults: .constant(nil), 
+        scrollTarget: .constant(0),
         size: 40
     )
     .environmentObject(DatabaseEnvironment())
