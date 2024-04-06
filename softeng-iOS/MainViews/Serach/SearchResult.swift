@@ -31,6 +31,7 @@ struct SearchResult: View {
             Button(action: {
                 if database.pathStart?.id == node.id {
                     database.pathStart = nil
+                    database.path = nil
                 }
                 else {
                     database.pathStart = node
@@ -50,6 +51,7 @@ struct SearchResult: View {
             Button(action: {
                 if database.pathEnd?.id == node.id {
                     database.pathEnd = nil
+                    database.path = nil
                 }
                 else {
                     database.pathEnd = node
