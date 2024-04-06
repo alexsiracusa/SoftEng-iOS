@@ -25,6 +25,12 @@ class Edge: Identifiable {
         return start.floor == floor && end.floor == floor
     }
     
+    func neighborOf(node: String) -> String? {
+        if start_id == node { return end_id }
+        if end_id == node { return start_id }
+        return nil
+    }
+    
     init(id: String, start_id: String, end_id: String, blocked: Bool, heat: Int) {
         self.id = id
         self.start_id = start_id

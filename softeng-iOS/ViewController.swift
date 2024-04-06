@@ -13,14 +13,27 @@ struct ViewController: View {
     
     var body: some View {
         GeometryReader { proxy in
-            ZStack(alignment: .bottomTrailing) {
+            ZStack {
+                // Map View
                 FloorView(floor: $viewModel.selectedFloor)
                     .zIndex(0)
                     .ignoresSafeArea()
-                FloorSelector(size: 50)
-                    .zIndex(1)
-                    .padding(.trailing, 25)
-                    .padding(.bottom, 40)
+                
+                // Search and Map Selector
+                SearchView()
+                    .zIndex(2)
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        FloorSelector(size: 50)
+                            .zIndex(1)
+                            .padding(.trailing, 25)
+                            .padding(.bottom, 40)
+                    }
+                }
+                .ignoresSafeArea(.keyboard)
                 
             }
         }
