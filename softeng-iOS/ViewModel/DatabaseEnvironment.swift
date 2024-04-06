@@ -124,15 +124,17 @@ class DatabaseEnvironment: ObservableObject {
     func searchNodes(query: String) -> [Node] {
         let fuse = Fuse()
         
-        let results = self.nodes.map({
+        let results = self.nodes
+            .filter({$0.type != .HALL})
+            .map({
             (
                 score: fuse.search(query.lowercased(), in: $0.searchString)?.score ?? 1,
                 node: $0
             )
-        })
-        .sorted(by: {$0.score < $1.score})
-        .filter({$0.score < 0.75})
-        .map({$0.node})
+            })
+            .sorted(by: {$0.score < $1.score})
+            .filter({$0.score < 0.75})
+            .map({$0.node})
         
         return results
     }
