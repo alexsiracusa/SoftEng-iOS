@@ -18,6 +18,9 @@ class DatabaseEnvironment: ObservableObject {
     @Published var nodes: [Node]
     @Published var edges: [Edge]
     
+    //
+    @Published var selectNode: Node? = nil
+    
     // pathfinding
     @Published var path: PathfindingResult? = nil
     @Published var pathStart: Node? = nil {

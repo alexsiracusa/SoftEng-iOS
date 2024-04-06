@@ -31,10 +31,7 @@ struct FloorView: View {
     }
     
     func getPoint(node: Node) -> CGPoint {
-        CGPoint(
-            x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-            y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-        )
+        return getPoint(x_percent: node.x_percent, y_percent: node.y_percent)
     }
     
     var body: some View {
@@ -52,27 +49,23 @@ struct FloorView: View {
         .overlay(
             GeometryReader { proxy in
                 ZStack {
+                    // Render Selected Node
+                    if let selected = database.selectNode {
+                        AnyView(
+                            renderNode(proxy: proxy, color: .blue, node: selected)
+                        )
+                    }
+                    
                     if let path = database.path {
                         ForEach(path.displayNodes, id: \.node.id) { color, node in
-                            if node.floor == floor.floor {
-                                Circle()
-                                    .fill(color)
-                                    .frame(width: 8, height: 8)
-                                    .position(
-                                        x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-                                        y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-                                    )
-                                    .zIndex(1)
-                            }
+                            AnyView(
+                                renderNode(proxy: proxy, color: color, node: node)
+                            )
                         }
                         ForEach(path.displayEdges, id: \.edge.id) { color, edge in
-                            if edge.onFloor(floor: floor.floor) {
-                                Path() { path in
-                                    path.move(to: getPoint(node: edge.start))
-                                    path.addLine(to: getPoint(node: edge.end))
-                                }
-                                .stroke(color, lineWidth: 2)
-                            }
+                            AnyView(
+                                renderEdge(proxy: proxy, color: color, edge: edge)
+                            )
                         }
                     }
                 }
@@ -86,6 +79,43 @@ struct FloorView: View {
         )
         .zIndex(0)
         .background(COLOR_BG_P)
+    }
+    
+    func renderNode(
+        proxy: SwiftUI.GeometryProxy,
+        color: Color,
+        node: Node
+    ) -> any View {
+        if node.floor == floor.floor {
+            Circle()
+                .fill(color)
+                .frame(width: 8, height: 8)
+                .position(
+                    x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
+                    y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
+                )
+                .zIndex(1)
+        }
+        else {
+            EmptyView()
+        }
+    }
+    
+    func renderEdge(
+        proxy: SwiftUI.GeometryProxy,
+        color: Color,
+        edge: Edge
+    ) -> any View {
+        if edge.onFloor(floor: floor.floor) {
+            Path() { path in
+                path.move(to: getPoint(node: edge.start))
+                path.addLine(to: getPoint(node: edge.end))
+            }
+            .stroke(color, lineWidth: 2)
+        }
+        else {
+            EmptyView()
+        }
     }
 }
 
