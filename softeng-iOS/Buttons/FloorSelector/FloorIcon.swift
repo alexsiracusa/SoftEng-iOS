@@ -14,7 +14,7 @@ struct FloorIcon: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: (3/8) * size)
-            .fill(selected ? COLOR_AC_S : COLOR_LOGO)
+            .fill(selected ? COLOR_AC_S : COLOR_LOGO_S)
             .frame(width: size, height: size)
             .overlay(
                 Text(name)

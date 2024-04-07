@@ -11,13 +11,19 @@ struct NodeDetail: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
+    @Binding var height: PresentationDetent
+    
     var node: Node? {
         return database.selectedNode
     }
     
+    var selected: Bool {
+        return viewModel.selectedFloor.floor == node!.floor
+    }
+    
     func floorIcon(node: Node) -> some View {
         FloorIcon(
-            selected: viewModel.selectedFloor.floor == node.floor,
+            selected: selected,
             name: node.floor.name,
             size: 25)
     }
@@ -25,10 +31,16 @@ struct NodeDetail: View {
     var body: some View {
         VStack {
             if let node {
-                HStack {
-                    floorIcon(node: node)
+                HStack(alignment: .center) {
+                    Button(action: {
+                        viewModel.setFloor(floor: node.floor)
+                    }) {
+                        floorIcon(node: node)
+                    }
+                    .buttonStyle(ScaleButton())
                     
                     Text("\(node.long_name)")
+                        .lineLimit(height == SHEET_LOW ? 1 : nil)
                     
                     Spacer()
                     
@@ -37,13 +49,32 @@ struct NodeDetail: View {
                         .frame(width: 25, height: 25)
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 25)
+                .padding(.top, 15)
             
                 ScrollView {
                     VStack(alignment: .leading) {
-                        
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 10) {
+                                DirectionsButton(
+                                    sheetHeight: $height,
+                                    node: node,
+                                    size: 40
+                                )
+                                LocationButton(
+                                    sheetHeight: $height,
+                                    node: node,
+                                    size: 40
+                                )
+                                SaveButton(
+                                    node: node,
+                                    size: 40
+                                )
+                            }
+                            .frame(height: 40)
+                            .padding(.horizontal, 10)
+                            .padding(.top, 10)
+                        }
                     }
-                    .padding(.horizontal, 20)
                 }
             }
         }
@@ -54,7 +85,7 @@ struct NodeDetail: View {
     let database = DatabaseEnvironment()
     database.selectedNode = Node.example
     
-    return NodeDetail()
+    return NodeDetail(height: .constant(SHEET_LOW))
         .environmentObject(database)
         .environmentObject(ViewModel())
 }

@@ -11,7 +11,8 @@ struct ViewController: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
-    let heights = [0.1, 0.375, 0.99].map({PresentationDetent.fraction($0)})
+    let heights = [SHEET_LOW, SHEET_MEDIUM, SHEET_HIGH]
+    @State private var selectedDetent = SHEET_LOW
     
     var body: some View {
         GeometryReader { proxy in
@@ -36,18 +37,23 @@ struct ViewController: View {
                             .padding(.bottom, 40)
                     }
                 }
-                .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
+                .offset(y: viewModel.sheet ? -proxy.size.height * 0.12 : 0)
                 .ignoresSafeArea(.keyboard)
                 
             }
         }
         .sheet(isPresented: $viewModel.presentSheet) {
-            NodeDetail()
+            NodeDetail(height: $selectedDetent)
+                .ignoresSafeArea()
                 .interactiveDismissDisabled()
-                .presentationDetents(Set(heights))
-                .presentationBackgroundInteraction(
-                    .enabled(upThrough: heights[1])
+                .presentationDetents(
+                    Set(heights),
+                    selection: $selectedDetent
                 )
+                .presentationBackgroundInteraction(
+                    .enabled(upThrough: SHEET_MEDIUM)
+                )
+                
             
         }
     }
