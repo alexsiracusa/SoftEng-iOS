@@ -7,6 +7,7 @@
 
 import Foundation
 import FMDB
+import SwiftUI
 
 enum Floor: Int {
     case L2 = -1
@@ -51,18 +52,18 @@ extension Floor {
 }
 
 enum NodeType: String {
-    case CONF = "CONF"
-    case DEPT = "DEPT"
+    case CONF = "CONF" // ConferenceIcon
+    case DEPT = "DEPT" // DepartmentIcon
     case HALL = "HALL"
-    case LABS = "LABS"
-    case REST = "REST"
-    case SERV = "SERV"
-    case ELEV = "ELEV"
-    case EXIT = "EXIT"
-    case STAI = "STAI"
-    case RETL = "RETL"
-    case INFO = "INFO"
-    case BATH = "BATH"
+    case LABS = "LABS" // LabIcon
+    case REST = "REST" // RestroomIcon
+    case SERV = "SERV" // Service Icon or ATM
+    case ELEV = "ELEV" // ElevatorIcon
+    case EXIT = "EXIT" // ExitIcon
+    case STAI = "STAI" // EscalatorIcon
+    case RETL = "RETL" // VendingIcon or CafeIcon or GiftShopIcon or FoodIcon
+    case INFO = "INFO" // InfoIcon
+    case BATH = "BATH" // RestroomIcon
     
     var description: String {
         switch self {
@@ -119,6 +120,37 @@ class Node: Identifiable {
         return [long_name, short_name, building, type.description, floor.description + id]
             .joined(separator: " ")
             .lowercased()
+    }
+    
+    var icon: Image {
+        switch type {
+        case .CONF: return Image(uiImage: UIImage(named: "ConferenceIcon")!)
+        case .DEPT: return Image(uiImage: UIImage(named: "DepartmentIcon")!)
+        case .HALL: return Image(uiImage: UIImage(named: "InfoIcon")!)
+        case .LABS: return Image(uiImage: UIImage(named: "LabIcon")!)
+        case .REST: return Image(uiImage: UIImage(named: "RestroomIcon")!)
+        case .SERV: 
+            if self.long_name.lowercased().contains("atm") {
+                return Image(uiImage: UIImage(named: "ATMIcon")!)
+            }
+            return Image(uiImage: UIImage(named: "ServiceIcon")!)
+        case .ELEV: return Image(uiImage: UIImage(named: "ElevatorIcon2")!)
+        case .EXIT: return Image(uiImage: UIImage(named: "ExitIcon")!)
+        case .STAI: return Image(uiImage: UIImage(named: "EscalatorIcon")!)
+        case .RETL: 
+            if self.long_name.lowercased().contains("vending") {
+                return Image(uiImage: UIImage(named: "VendingIcon")!)
+            }
+            else if self.long_name.lowercased().contains("cafe") {
+                return Image(uiImage: UIImage(named: "CafeIcon")!)
+            }
+            else if self.long_name.lowercased().contains("gift") {
+                return Image(uiImage: UIImage(named: "GiftShopIcon")!)
+            }
+            return Image(uiImage: UIImage(named: "FoodIcon")!)
+        case .INFO: return Image(uiImage: UIImage(named: "InfoIcon")!)
+        case .BATH: return Image(uiImage: UIImage(named: "RestroomIcon")!)
+        }
     }
     
     init(

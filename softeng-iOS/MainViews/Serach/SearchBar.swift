@@ -28,8 +28,13 @@ struct SearchBar: View {
         self.focused = false
         viewModel.searchFullscreen = false
         
-        if let node = database.selectedNode {
-            search = node.short_name
+        // run search with node name
+        Task {
+            if let node = database.selectedNode {
+                search = node.long_name
+                let results = database.searchNodes(query: search)
+                self.searchResults = results
+            }
         }
     }
     

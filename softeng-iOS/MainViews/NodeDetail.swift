@@ -31,6 +31,10 @@ struct NodeDetail: View {
                     Text("\(node.long_name)")
                     
                     Spacer()
+                    
+                    node.icon
+                        .resizable()
+                        .frame(width: 25, height: 25)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 25)

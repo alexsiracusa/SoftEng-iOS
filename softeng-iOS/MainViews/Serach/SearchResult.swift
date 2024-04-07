@@ -32,9 +32,11 @@ struct SearchResult: View {
             viewModel.sheet = true
             
             // run search with node name
-            self.search = node.short_name
-            let results = database.searchNodes(query: search)
-            self.searchResults = results
+            Task {
+                self.search = node.long_name
+                let results = database.searchNodes(query: search)
+                self.searchResults = results
+            }
         }) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
@@ -45,10 +47,14 @@ struct SearchResult: View {
                     )
                     .padding(.trailing, 15)
                     
-                    Text("\(node.short_name) (\(node.building))")
+                    Text("\(node.long_name) (\(node.building))")
                         .lineLimit(2)
                     
                     Spacer()
+                    
+                    node.icon
+                        .resizable()
+                        .frame(width: 25, height: 25)
                     
                     Image(systemName: "arrow.up.left")
                         .padding(.leading, 10)
