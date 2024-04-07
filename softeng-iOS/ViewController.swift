@@ -17,16 +17,27 @@ struct ViewController: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack {
+                
+                if viewModel.pickDirectionsView {
+                    VStack {
+                        DirectionsPicker()
+                        
+                        Spacer()
+                    }
+                    .zIndex(3)
+                }
+                
                 // Map View
                 FloorView(floor: $viewModel.selectedFloor)
                     .zIndex(0)
                     .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
                     .ignoresSafeArea()
                 
-                // Search and Map Selector
+                // Search View
                 SearchView()
                     .zIndex(2)
                 
+                // Floor Selector
                 VStack {
                     Spacer()
                     HStack {

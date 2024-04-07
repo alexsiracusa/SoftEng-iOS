@@ -18,6 +18,7 @@ struct DirectionsButton: View {
     var body: some View {
         Button(action: {
             // TODO
+            viewModel.pickDirectionsView = true
             sheetHeight = SHEET_LOW
         }) {
             Directions(size: size)

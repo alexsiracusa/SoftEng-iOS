@@ -29,6 +29,7 @@ class ViewModel: ObservableObject {
     }
     
     @Published var presentSheet: Bool = false
+    @Published var pickDirectionsView: Bool = false
     
     init() {
         let floor3 = FloorData(floor: .F3, image_name: "03_thethirdfloor")
