@@ -13,7 +13,6 @@ struct SearchBar: View {
     
     @FocusState var focused: Bool
     
-    @State var lastSearchTime: NSDate = NSDate()
     @Binding var search: String
     @Binding var searchResults: [Node]?
     @Binding var scrollTarget: Int?
@@ -23,6 +22,15 @@ struct SearchBar: View {
     func clearSearch() {
         self.search = ""
         searchResults = []
+    }
+    
+    func closeView() {
+        self.focused = false
+        viewModel.searchFullscreen = false
+        
+        if let node = database.selectedNode {
+            search = node.short_name
+        }
     }
     
     var body: some View {
@@ -37,10 +45,7 @@ struct SearchBar: View {
                     // Icon
                     HStack {
                         if viewModel.searchFullscreen {
-                            Button(action: {
-                                self.focused = false
-                                viewModel.searchFullscreen = false
-                            }) {
+                            Button(action: closeView) {
                                 Image(systemName: "chevron.backward")
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -80,7 +85,13 @@ struct SearchBar: View {
                                 .buttonStyle(PlainButtonStyle())
                             }
                             else {
-                                Button(action: clearSearch) {
+                                Button(action: {
+                                    database.selectedNode = nil
+                                    withAnimation {
+                                        viewModel.sheet = false
+                                    }
+                                    clearSearch()
+                                }) {
                                     Image(systemName: "xmark")
                                         .resizable()
                                         .font(.system(size: 6, weight: .semibold))
@@ -102,31 +113,7 @@ struct SearchBar: View {
                 .padding(5)
             )
             .padding(.horizontal, 20)
-            .onChange(of: search) {
-                Task {
-                    await runSearch(time: NSDate())
-                }
-            }
             
-    }
-    
-    func runSearch(time: NSDate) async {
-        self.lastSearchTime = time
-        if search == "" {
-            setSearch(results: [], time: time)
-        }
-        else if search != "" && viewModel.searchFullscreen {
-            let results = database.searchNodes(query: search)
-            setSearch(results: results, time: time)
-        }
-    }
-    
-    @MainActor
-    func setSearch(results: [Node], time: NSDate) {
-        if lastSearchTime == time {
-            scrollTarget = 0
-            self.searchResults = results
-        }
     }
     
 }

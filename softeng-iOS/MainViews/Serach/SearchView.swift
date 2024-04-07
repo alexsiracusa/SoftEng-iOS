@@ -13,6 +13,7 @@ struct SearchView: View {
     
     @FocusState private var focused: Bool
     
+    @State var lastSearchTime: NSDate = NSDate()
     @State var search = ""
     @State var searchResults: [Node]? = nil
     
@@ -48,7 +49,9 @@ struct SearchView: View {
                                 SearchResult(
                                     node: node,
                                     fullscreen: $viewModel.searchFullscreen,
-                                    focused: _focused
+                                    focused: _focused,
+                                    search: $search,
+                                    searchResults: $searchResults
                                 )
                                     .id(index)
                             }
@@ -96,7 +99,30 @@ struct SearchView: View {
                     viewModel.searchFullscreen = true
                 }
             }
-            
+        }
+        .onChange(of: search) {
+            Task {
+                await runSearch(time: NSDate())
+            }
+        }
+    }
+    
+    func runSearch(time: NSDate) async {
+        self.lastSearchTime = time
+        if search == "" {
+            setSearch(results: [], time: time)
+        }
+        else if search != "" && viewModel.searchFullscreen {
+            let results = database.searchNodes(query: search)
+            setSearch(results: results, time: time)
+        }
+    }
+    
+    @MainActor
+    func setSearch(results: [Node], time: NSDate) {
+        if lastSearchTime == time {
+            scrollTarget = 0
+            self.searchResults = results
         }
     }
     

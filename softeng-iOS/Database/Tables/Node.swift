@@ -24,6 +24,16 @@ enum Floor: Int {
         case .F3: return "F3 The Third Floor 3"
         }
     }
+    
+    var name: String {
+        switch self {
+        case .L2: return "L2"
+        case .L1: return "L2"
+        case .F1: return "F1"
+        case .F2: return "F2"
+        case .F3: return "F3"
+        }
+    }
 }
 
 extension Floor {

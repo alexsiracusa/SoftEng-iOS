@@ -15,6 +15,10 @@ struct SearchResult: View {
     @Binding var fullscreen: Bool
     @FocusState var focused: Bool
     
+    // search data
+    @Binding var search: String
+    @Binding var searchResults: [Node]?
+    
     var isSelected: Bool {
         return viewModel.selectedFloor.floor == node.floor
     }
@@ -26,6 +30,11 @@ struct SearchResult: View {
             self.focused = false
             self.fullscreen = false
             viewModel.sheet = true
+            
+            // run search with node name
+            self.search = node.short_name
+            let results = database.searchNodes(query: search)
+            self.searchResults = results
         }) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
@@ -55,14 +64,15 @@ struct SearchResult: View {
         
     }
     
-    
-    
 }
 
 #Preview {
-    SearchResult(node: Node.example, 
-                 fullscreen: .constant(false),
-                 focused: FocusState<Bool>()
+    SearchResult(
+        node: Node.example,
+        fullscreen: .constant(false),
+        focused: FocusState<Bool>(),
+        search: .constant(""),
+        searchResults: .constant(nil)
     )
     .environmentObject(DatabaseEnvironment())
     .environmentObject(ViewModel())
