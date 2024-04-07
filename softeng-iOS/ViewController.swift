@@ -11,12 +11,15 @@ struct ViewController: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
+    let heights = [0.1, 0.375, 0.99].map({PresentationDetent.fraction($0)})
+    
     var body: some View {
         GeometryReader { proxy in
             ZStack {
                 // Map View
                 FloorView(floor: $viewModel.selectedFloor)
                     .zIndex(0)
+                    .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
                     .ignoresSafeArea()
                 
                 // Search and Map Selector
@@ -33,9 +36,19 @@ struct ViewController: View {
                             .padding(.bottom, 40)
                     }
                 }
+                .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
                 .ignoresSafeArea(.keyboard)
                 
             }
+        }
+        .sheet(isPresented: $viewModel.presentSheet) {
+            NodeDetail()
+                .interactiveDismissDisabled()
+                .presentationDetents(Set(heights))
+                .presentationBackgroundInteraction(
+                    .enabled(upThrough: heights[1])
+                )
+            
         }
     }
 }

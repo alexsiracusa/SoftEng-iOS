@@ -12,7 +12,6 @@ struct SearchView: View {
     @EnvironmentObject var viewModel: ViewModel
     
     @FocusState private var focused: Bool
-    @State var fullscreen = false
     
     @State var search = ""
     @State var searchResults: [Node]? = nil
@@ -23,7 +22,6 @@ struct SearchView: View {
     var body: some View {
         VStack(spacing: 0) {
             SearchBar(
-                fullscreen: $fullscreen,
                 focused: _focused,
                 search: $search,
                 searchResults: $searchResults,
@@ -32,14 +30,14 @@ struct SearchView: View {
             )
             .padding(.top, 10)
             .padding(.bottom, 12)
-            .background(fullscreen ? .white : .clear)
+            .background(viewModel.searchFullscreen ? .white : .clear)
             .animation(nil, value: UUID())
             
-            if searchResults == nil || !fullscreen {
+            if searchResults == nil || !viewModel.searchFullscreen {
                 Spacer()
             }
             
-            if let searchResults, fullscreen  {
+            if let searchResults, viewModel.searchFullscreen  {
                 ScrollView {
                     ScrollViewReader { value in
                         LazyVStack(spacing: 0) {
@@ -49,7 +47,7 @@ struct SearchView: View {
                             ) { index, node in
                                 SearchResult(
                                     node: node,
-                                    fullscreen: $fullscreen,
+                                    fullscreen: $viewModel.searchFullscreen,
                                     focused: _focused
                                 )
                                     .id(index)
@@ -89,13 +87,13 @@ struct SearchView: View {
                 .ignoresSafeArea()
             }
         }
-        .background(fullscreen ? COLOR_BG_P : .clear)
+        .background(viewModel.searchFullscreen ? COLOR_BG_P : .clear)
         .ignoresSafeArea(.keyboard)
         .transition(.opacity)
         .onChange(of: focused) {
             if focused {
                 withAnimation {
-                    fullscreen = true
+                    viewModel.searchFullscreen = true
                 }
             }
             

@@ -17,6 +17,19 @@ class ViewModel: ObservableObject {
     @Published var selectedFloor: FloorData
     @Published var displayState: DisplayState = .MAP
     
+    @Published var searchFullscreen = false {
+        didSet {
+            presentSheet = sheet && !searchFullscreen
+        }
+    }
+    @Published var sheet: Bool = false {
+        didSet {
+            presentSheet = sheet && !searchFullscreen
+        }
+    }
+    
+    @Published var presentSheet: Bool = false
+    
     init() {
         let floor3 = FloorData(floor: .F3, image_name: "03_thethirdfloor")
         let floor2 = FloorData(floor: .F2, image_name: "02_thesecondfloor")

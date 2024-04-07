@@ -11,7 +11,6 @@ struct SearchBar: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
-    @Binding var fullscreen: Bool
     @FocusState var focused: Bool
     
     @State var lastSearchTime: NSDate = NSDate()
@@ -29,18 +28,18 @@ struct SearchBar: View {
     var body: some View {
         RoundedRectangle(cornerRadius: (1/2) * size)
             .fill(.white)
-            .stroke(fullscreen ? .gray : .clear, lineWidth: 0.33)
-            .shadow(radius: !fullscreen ? 3 : 0, y: !fullscreen ? 3 : 0)
+            .stroke(viewModel.searchFullscreen ? .gray : .clear, lineWidth: 0.33)
+            .shadow(radius: !viewModel.searchFullscreen ? 3 : 0, y: !viewModel.searchFullscreen ? 3 : 0)
             .frame(maxWidth: .infinity)
             .frame(height: size)
             .overlay(
                 HStack() {
                     // Icon
                     HStack {
-                        if fullscreen {
+                        if viewModel.searchFullscreen {
                             Button(action: {
                                 self.focused = false
-                                self.fullscreen = false
+                                viewModel.searchFullscreen = false
                             }) {
                                 Image(systemName: "chevron.backward")
                             }
@@ -68,7 +67,7 @@ struct SearchBar: View {
                     // Clear Button
                     if search != "" {
                         HStack {
-                            if fullscreen {
+                            if viewModel.searchFullscreen {
                                 Button(action: clearSearch) {
                                     Image(systemName: "xmark.circle")
                                         .resizable()
@@ -116,7 +115,7 @@ struct SearchBar: View {
         if search == "" {
             setSearch(results: [], time: time)
         }
-        else if search != "" && fullscreen {
+        else if search != "" && viewModel.searchFullscreen {
             let results = database.searchNodes(query: search)
             setSearch(results: results, time: time)
         }
@@ -134,7 +133,6 @@ struct SearchBar: View {
 
 #Preview {
     SearchBar(
-        fullscreen: .constant(false),
         focused: FocusState<Bool>(),
         search: .constant(""),
         searchResults: .constant(nil), 

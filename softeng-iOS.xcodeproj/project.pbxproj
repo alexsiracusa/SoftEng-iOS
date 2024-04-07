@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA09CC142BC23AFE00BD7F52 /* NodeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC132BC23AFE00BD7F52 /* NodeDetail.swift */; };
 		FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */; };
 		FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */; };
 		FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */; };
@@ -48,7 +49,6 @@
 		FAF8F2752BBC8A6100ACD763 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F2742BBC8A6100ACD763 /* SearchView.swift */; };
 		FAF8F2792BBCB43B00ACD763 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F2782BBCB43B00ACD763 /* SearchResult.swift */; };
 		FAF8F27B2BBCE23100ACD763 /* FloorIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27A2BBCE23100ACD763 /* FloorIcon.swift */; };
-		FAF8F27F2BBCEA8400ACD763 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27E2BBCEA8400ACD763 /* TestView.swift */; };
 		FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2812BBCEC4B00ACD763 /* Fuse */; };
 		FAF8F2852BBCFC4600ACD763 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2842BBCFC4600ACD763 /* Algorithms */; };
 /* End PBXBuildFile section */
@@ -71,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA09CC132BC23AFE00BD7F52 /* NodeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDetail.swift; sourceTree = "<group>"; };
 		FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorData.swift; sourceTree = "<group>"; };
@@ -112,7 +113,6 @@
 		FAF8F2742BBC8A6100ACD763 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FAF8F2782BBCB43B00ACD763 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		FAF8F27A2BBCE23100ACD763 /* FloorIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorIcon.swift; sourceTree = "<group>"; };
-		FAF8F27E2BBCEA8400ACD763 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */,
-				FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */,
 				FA87A3CB2BB9AAFA0043C106 /* DatabaseEnvironment.swift */,
+				FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -217,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				FA87A3CE2BB9ABC90043C106 /* FloorView.swift */,
+				FA09CC132BC23AFE00BD7F52 /* NodeDetail.swift */,
 				FAF8F2732BBC8A0300ACD763 /* Serach */,
 			);
 			path = MainViews;
@@ -257,7 +258,6 @@
 				FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */,
 				FAEC47F12BB5E30800515518 /* ContentView.swift */,
 				FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */,
-				FAF8F27E2BBCEA8400ACD763 /* TestView.swift */,
 				FA18C9DB2BBBA88E00B8A96E /* ViewModel */,
 				FA87A3CD2BB9ABAC0043C106 /* MainViews */,
 				FA18C9E02BBBAF3B00B8A96E /* MenuItems */,
@@ -458,7 +458,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF8F27F2BBCEA8400ACD763 /* TestView.swift in Sources */,
 				FA18C9E22BBBAF5200B8A96E /* FloorSelector.swift in Sources */,
 				FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */,
 				FAF8F2702BBC436600ACD763 /* BinaryHeap.swift in Sources */,
@@ -476,6 +475,7 @@
 				FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */,
 				FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */,
 				FA87A37E2BB8839D0043C106 /* InitializeDatabase.swift in Sources */,
+				FA09CC142BC23AFE00BD7F52 /* NodeDetail.swift in Sources */,
 				FAF8F2722BBC625100ACD763 /* SearchBar.swift in Sources */,
 				FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */,
 				FAF8F2792BBCB43B00ACD763 /* SearchResult.swift in Sources */,

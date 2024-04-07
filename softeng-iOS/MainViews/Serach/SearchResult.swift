@@ -21,10 +21,11 @@ struct SearchResult: View {
     
     var body: some View {
         Button(action: {
-            database.selectNode = node
+            database.selectedNode = node
             viewModel.setFloor(floor: node.floor)
             self.focused = false
             self.fullscreen = false
+            viewModel.sheet = true
         }) {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {

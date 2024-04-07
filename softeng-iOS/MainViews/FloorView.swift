@@ -50,7 +50,7 @@ struct FloorView: View {
             GeometryReader { proxy in
                 ZStack {
                     // Render Selected Node
-                    if let selected = database.selectNode {
+                    if let selected = database.selectedNode {
                         AnyView(
                             renderNode(color: .red, node: selected)
                         )
