@@ -15,57 +15,50 @@ struct ViewController: View {
     @State private var selectedDetent = SHEET_LOW
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                
-                if viewModel.pickDirectionsView {
+        NavigationStack(path: $viewModel.path) {
+            GeometryReader { proxy in
+                ZStack {
+                    // Map View
+                    FloorView(floor: $viewModel.selectedFloor)
+                        .zIndex(0)
+                        .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
+                        .ignoresSafeArea()
+                    
+                    // Search View
+                    SearchView()
+                        .zIndex(2)
+                    
+                    // Floor Selector
                     VStack {
-                        DirectionsPicker()
-                        
                         Spacer()
+                        HStack {
+                            Spacer()
+                            FloorSelector(size: 50)
+                                .zIndex(1)
+                                .padding(.trailing, 25)
+                                .padding(.bottom, 40)
+                        }
                     }
-                    .zIndex(3)
+                    .offset(y: viewModel.sheet ? -proxy.size.height * 0.12 : 0)
+                    .ignoresSafeArea(.keyboard)
+                    
                 }
-                
-                // Map View
-                FloorView(floor: $viewModel.selectedFloor)
-                    .zIndex(0)
-                    .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
-                    .ignoresSafeArea()
-                
-                // Search View
-                SearchView()
-                    .zIndex(2)
-                
-                // Floor Selector
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        FloorSelector(size: 50)
-                            .zIndex(1)
-                            .padding(.trailing, 25)
-                            .padding(.bottom, 40)
-                    }
+                .navigationDestination(for: SetPath.self) { value in
+                    SearchView()
                 }
-                .offset(y: viewModel.sheet ? -proxy.size.height * 0.12 : 0)
-                .ignoresSafeArea(.keyboard)
-                
             }
-        }
-        .sheet(isPresented: $viewModel.presentSheet) {
-            NodeDetail(height: $selectedDetent)
-                .ignoresSafeArea()
-                .interactiveDismissDisabled()
-                .presentationDetents(
-                    Set(heights),
-                    selection: $selectedDetent
-                )
-                .presentationBackgroundInteraction(
-                    .enabled(upThrough: SHEET_MEDIUM)
-                )
-                
-            
+            .sheet(isPresented: $viewModel.presentNodeSheet) {
+                NodeDetail()
+                    .ignoresSafeArea()
+                    .interactiveDismissDisabled()
+                    .presentationDetents(
+                        Set(heights),
+                        selection: $viewModel.sheetHeight
+                    )
+                    .presentationBackgroundInteraction(
+                        .enabled(upThrough: SHEET_MEDIUM)
+                    )
+            }
         }
     }
 }

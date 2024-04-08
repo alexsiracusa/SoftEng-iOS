@@ -11,15 +11,21 @@ struct DirectionsButton: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
-    @Binding var sheetHeight: PresentationDetent
     let node: Node
     let size: CGFloat
     
     var body: some View {
         Button(action: {
             // TODO
-            viewModel.pickDirectionsView = true
-            sheetHeight = SHEET_LOW
+            viewModel.pickDirectionsView.toggle()
+            viewModel.sheetHeight = (
+                viewModel.pickDirectionsView ? 
+                SHEET_MEDIUM : viewModel.sheetHeight
+            )
+            database.pathEnd = (
+                viewModel.pickDirectionsView ?
+                node : nil
+            )
         }) {
             Directions(size: size)
         }
@@ -29,7 +35,6 @@ struct DirectionsButton: View {
 
 #Preview {
     DirectionsButton(
-        sheetHeight: .constant(SHEET_LOW),
         node: Node.example,
         size: 40
     )

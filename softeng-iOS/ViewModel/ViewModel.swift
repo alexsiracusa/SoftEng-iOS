@@ -6,29 +6,38 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum DisplayState {
     case MAP
     case SEARCH
 }
 
+enum SetPath {
+    case END
+    case START
+}
+
 class ViewModel: ObservableObject {
+    @Published var path: NavigationPath = NavigationPath()
+    
     @Published var floorViews: [FloorData]
     @Published var selectedFloor: FloorData
     @Published var displayState: DisplayState = .MAP
     
     @Published var searchFullscreen = false {
         didSet {
-            presentSheet = sheet && !searchFullscreen
+            presentNodeSheet = sheet && !searchFullscreen
         }
     }
     @Published var sheet: Bool = false {
         didSet {
-            presentSheet = sheet && !searchFullscreen
+            presentNodeSheet = sheet && !searchFullscreen
         }
     }
     
-    @Published var presentSheet: Bool = false
+    @Published var presentNodeSheet: Bool = false
+    @Published var sheetHeight: PresentationDetent = SHEET_LOW
     @Published var pickDirectionsView: Bool = false
     
     init() {

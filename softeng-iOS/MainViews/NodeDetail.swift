@@ -11,7 +11,9 @@ struct NodeDetail: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
-    @Binding var height: PresentationDetent
+    var height: PresentationDetent {
+        return viewModel.sheetHeight
+    }
     
     var node: Node? {
         return database.selectedNode
@@ -56,12 +58,10 @@ struct NodeDetail: View {
                         ScrollView(.horizontal) {
                             HStack(spacing: 10) {
                                 DirectionsButton(
-                                    sheetHeight: $height,
                                     node: node,
                                     size: 40
                                 )
                                 LocationButton(
-                                    sheetHeight: $height,
                                     node: node,
                                     size: 40
                                 )
@@ -74,6 +74,10 @@ struct NodeDetail: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 10)
                         }
+                        
+                        if viewModel.pickDirectionsView {
+                            DirectionsPicker()
+                        }
                     }
                 }
             }
@@ -85,7 +89,7 @@ struct NodeDetail: View {
     let database = DatabaseEnvironment()
     database.selectedNode = Node.example
     
-    return NodeDetail(height: .constant(SHEET_LOW))
+    return NodeDetail()
         .environmentObject(database)
         .environmentObject(ViewModel())
 }

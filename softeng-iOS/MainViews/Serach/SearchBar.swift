@@ -92,6 +92,8 @@ struct SearchBar: View {
                             else {
                                 Button(action: {
                                     database.selectedNode = nil
+                                    viewModel.pickDirectionsView = false
+                                    viewModel.sheetHeight = SHEET_LOW
                                     withAnimation {
                                         viewModel.sheet = false
                                     }

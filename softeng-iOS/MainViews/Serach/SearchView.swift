@@ -53,7 +53,7 @@ struct SearchView: View {
                                     search: $search,
                                     searchResults: $searchResults
                                 )
-                                    .id(index)
+                                .id(index)
                             }
                         }
                         .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in

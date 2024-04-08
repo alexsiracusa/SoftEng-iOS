@@ -11,14 +11,13 @@ struct LocationButton: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
-    @Binding var sheetHeight: PresentationDetent
     let node: Node
     let size: CGFloat
     
     var body: some View {
         Button(action: {
             // TODO
-            sheetHeight = SHEET_LOW
+            viewModel.sheetHeight = SHEET_LOW
             viewModel.setFloor(floor: node.floor)
         }) {
             Loaction(size: 40)
@@ -29,7 +28,6 @@ struct LocationButton: View {
 
 #Preview {
     LocationButton(
-        sheetHeight: .constant(SHEET_LOW),
         node: Node.example,
         size: 40
     )
