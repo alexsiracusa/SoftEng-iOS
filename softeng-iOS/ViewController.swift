@@ -11,7 +11,8 @@ struct ViewController: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
-    let heights = [SHEET_LOW, SHEET_MEDIUM, SHEET_HIGH]
+    let nodeSheetHeights = [SHEET_LOW, SHEET_MEDIUM, SHEET_HIGH]
+    let directionSheetHeights = [SHEET_LOWEST, SHEET_MEDIUM, SHEET_HIGH]
     @State private var selectedDetent = SHEET_LOW
     
     var body: some View {
@@ -44,20 +45,31 @@ struct ViewController: View {
                     
                 }
                 .navigationDestination(for: SetPath.self) { value in
-                    SearchView()
+                    DestinationSearch()
                 }
             }
             .sheet(isPresented: $viewModel.presentNodeSheet) {
-                NodeDetail()
-                    .ignoresSafeArea()
-                    .interactiveDismissDisabled()
-                    .presentationDetents(
-                        Set(heights),
-                        selection: $viewModel.sheetHeight
-                    )
-                    .presentationBackgroundInteraction(
-                        .enabled(upThrough: SHEET_MEDIUM)
-                    )
+                Group {
+                    if viewModel.pickDirectionsView {
+                        DirectionsView()
+                            .presentationDetents(
+                                Set(directionSheetHeights),
+                                selection: $viewModel.sheetHeight
+                            )
+                    }
+                    else {
+                        NodeDetail()
+                            .presentationDetents(
+                                Set(nodeSheetHeights),
+                                selection: $viewModel.sheetHeight
+                            )
+                    }
+                }
+                .ignoresSafeArea()
+                .interactiveDismissDisabled()
+                .presentationBackgroundInteraction(
+                    .enabled(upThrough: SHEET_MEDIUM)
+                )
             }
         }
     }

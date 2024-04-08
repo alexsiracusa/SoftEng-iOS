@@ -38,8 +38,8 @@ struct DirectionsPicker: View {
             
             VStack(spacing: 10) {
                 Button(action: {
-                    //viewModel.sheet = false
-                    //viewModel.path.append(SetPath.START)
+                    viewModel.sheet = false
+                    viewModel.path.append(SetPath.START)
                 }) {
                     RoundedRectangle(cornerRadius: 7)
                         .stroke(.gray, lineWidth: 1)
@@ -57,8 +57,8 @@ struct DirectionsPicker: View {
                 .buttonStyle(PlainButtonStyle())
                     
                 Button(action: {
-                    //viewModel.sheet = false
-                    //viewModel.path.append(SetPath.END)
+                    viewModel.sheet = false
+                    viewModel.path.append(SetPath.END)
                 }) {
                     RoundedRectangle(cornerRadius: 7)
                         .stroke(.gray, lineWidth: 1)
@@ -77,14 +77,12 @@ struct DirectionsPicker: View {
                 Spacer()
             }
             .padding(.top, 10)
-            .frame(height: 150)
             
             VStack {
                 
             }
             .frame(width: 50)
         }
-        .frame(height: 150)
     }
 }
 

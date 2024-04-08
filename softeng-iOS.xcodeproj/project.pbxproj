@@ -17,6 +17,8 @@
 		FA09CC242BC311EF00BD7F52 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC232BC311EF00BD7F52 /* SaveButton.swift */; };
 		FA09CC262BC31D7B00BD7F52 /* SheetHeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC252BC31D7B00BD7F52 /* SheetHeights.swift */; };
 		FA09CC282BC321FF00BD7F52 /* DirectionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC272BC321FF00BD7F52 /* DirectionsPicker.swift */; };
+		FA09CC2C2BC4247D00BD7F52 /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC2B2BC4247D00BD7F52 /* DirectionsView.swift */; };
+		FA09CC2F2BC4314900BD7F52 /* DestinationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC2E2BC4314900BD7F52 /* DestinationSearch.swift */; };
 		FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */; };
 		FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */; };
 		FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */; };
@@ -90,6 +92,8 @@
 		FA09CC232BC311EF00BD7F52 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		FA09CC252BC31D7B00BD7F52 /* SheetHeights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeights.swift; sourceTree = "<group>"; };
 		FA09CC272BC321FF00BD7F52 /* DirectionsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsPicker.swift; sourceTree = "<group>"; };
+		FA09CC2B2BC4247D00BD7F52 /* DirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
+		FA09CC2E2BC4314900BD7F52 /* DestinationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearch.swift; sourceTree = "<group>"; };
 		FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorData.swift; sourceTree = "<group>"; };
@@ -188,6 +192,16 @@
 			path = Directions;
 			sourceTree = "<group>";
 		};
+		FA09CC2D2BC42C5200BD7F52 /* Directions */ = {
+			isa = PBXGroup;
+			children = (
+				FA09CC2B2BC4247D00BD7F52 /* DirectionsView.swift */,
+				FA09CC272BC321FF00BD7F52 /* DirectionsPicker.swift */,
+				FA09CC2E2BC4314900BD7F52 /* DestinationSearch.swift */,
+			);
+			path = Directions;
+			sourceTree = "<group>";
+		};
 		FA18C9DB2BBBA88E00B8A96E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,7 +274,7 @@
 			children = (
 				FA87A3CE2BB9ABC90043C106 /* FloorView.swift */,
 				FA09CC132BC23AFE00BD7F52 /* NodeDetail.swift */,
-				FA09CC272BC321FF00BD7F52 /* DirectionsPicker.swift */,
+				FA09CC2D2BC42C5200BD7F52 /* Directions */,
 				FAF8F2732BBC8A0300ACD763 /* Serach */,
 			);
 			path = MainViews;
@@ -507,6 +521,7 @@
 				FAF8F2702BBC436600ACD763 /* BinaryHeap.swift in Sources */,
 				FA09CC202BC3102A00BD7F52 /* LocationButton.swift in Sources */,
 				FA09CC262BC31D7B00BD7F52 /* SheetHeights.swift in Sources */,
+				FA09CC2F2BC4314900BD7F52 /* DestinationSearch.swift in Sources */,
 				FA87A3822BB8987B0043C106 /* Schema.swift in Sources */,
 				FAF8F2752BBC8A6100ACD763 /* SearchView.swift in Sources */,
 				FAEC47F22BB5E30800515518 /* ContentView.swift in Sources */,
@@ -520,6 +535,7 @@
 				FA87A3F62BBA65D70043C106 /* ZoomableScrollView.swift in Sources */,
 				FA09CC1A2BC30C5000BD7F52 /* DirectionsButton.swift in Sources */,
 				FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */,
+				FA09CC2C2BC4247D00BD7F52 /* DirectionsView.swift in Sources */,
 				FA09CC182BC309E500BD7F52 /* Directions.swift in Sources */,
 				FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */,
 				FA87A37E2BB8839D0043C106 /* InitializeDatabase.swift in Sources */,

@@ -75,11 +75,9 @@ struct NodeDetail: View {
                             .padding(.top, 10)
                         }
                         
-                        if viewModel.pickDirectionsView {
-                            DirectionsPicker()
-                        }
                     }
                 }
+                
             }
         }
     }
