@@ -19,6 +19,10 @@
 		FA09CC282BC321FF00BD7F52 /* DirectionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC272BC321FF00BD7F52 /* DirectionsPicker.swift */; };
 		FA09CC2C2BC4247D00BD7F52 /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC2B2BC4247D00BD7F52 /* DirectionsView.swift */; };
 		FA09CC2F2BC4314900BD7F52 /* DestinationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC2E2BC4314900BD7F52 /* DestinationSearch.swift */; };
+		FA09CC312BC5D6B100BD7F52 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = FA09CC302BC5D6B100BD7F52 /* Fuse */; };
+		FA09CC342BC5D73600BD7F52 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FA09CC332BC5D73600BD7F52 /* Algorithms */; };
+		FA09CC362BC5D74000BD7F52 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FA09CC352BC5D74000BD7F52 /* Algorithms */; };
+		FA09CC382BC5D74A00BD7F52 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FA09CC372BC5D74A00BD7F52 /* Algorithms */; };
 		FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */; };
 		FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */; };
 		FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */; };
@@ -61,7 +65,6 @@
 		FAF8F2792BBCB43B00ACD763 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F2782BBCB43B00ACD763 /* SearchResult.swift */; };
 		FAF8F27B2BBCE23100ACD763 /* FloorIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF8F27A2BBCE23100ACD763 /* FloorIcon.swift */; };
 		FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2812BBCEC4B00ACD763 /* Fuse */; };
-		FAF8F2852BBCFC4600ACD763 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FAF8F2842BBCFC4600ACD763 /* Algorithms */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF8F2852BBCFC4600ACD763 /* Algorithms in Frameworks */,
+				FA09CC342BC5D73600BD7F52 /* Algorithms in Frameworks */,
 				FA87A37B2BB883450043C106 /* FMDB in Frameworks */,
 				FAF8F2822BBCEC4B00ACD763 /* Fuse in Frameworks */,
 			);
@@ -152,7 +155,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA09CC362BC5D74000BD7F52 /* Algorithms in Frameworks */,
 				FA87A3D52BB9ACF90043C106 /* FMDB in Frameworks */,
+				FA09CC312BC5D6B100BD7F52 /* Fuse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA09CC382BC5D74A00BD7F52 /* Algorithms in Frameworks */,
 				FA87A3D72BB9AD000043C106 /* FMDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,7 +387,7 @@
 			packageProductDependencies = (
 				FA87A37A2BB883450043C106 /* FMDB */,
 				FAF8F2812BBCEC4B00ACD763 /* Fuse */,
-				FAF8F2842BBCFC4600ACD763 /* Algorithms */,
+				FA09CC332BC5D73600BD7F52 /* Algorithms */,
 			);
 			productName = "softeng-iOS";
 			productReference = FAEC47EC2BB5E30800515518 /* softeng-iOS.app */;
@@ -403,6 +409,8 @@
 			name = "softeng-iOSTests";
 			packageProductDependencies = (
 				FA87A3D42BB9ACF90043C106 /* FMDB */,
+				FA09CC302BC5D6B100BD7F52 /* Fuse */,
+				FA09CC352BC5D74000BD7F52 /* Algorithms */,
 			);
 			productName = "softeng-iOSTests";
 			productReference = FAEC47FE2BB5E30900515518 /* softeng-iOSTests.xctest */;
@@ -424,6 +432,7 @@
 			name = "softeng-iOSUITests";
 			packageProductDependencies = (
 				FA87A3D62BB9AD000043C106 /* FMDB */,
+				FA09CC372BC5D74A00BD7F52 /* Algorithms */,
 			);
 			productName = "softeng-iOSUITests";
 			productReference = FAEC48082BB5E30900515518 /* softeng-iOSUITests.xctest */;
@@ -464,7 +473,7 @@
 			packageReferences = (
 				FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */,
 				FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */,
-				FAF8F2832BBCFC4600ACD763 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				FA09CC322BC5D73600BD7F52 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = FAEC47ED2BB5E30800515518 /* Products */;
 			projectDirPath = "";
@@ -886,6 +895,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FA09CC322BC5D73600BD7F52 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ccgus/fmdb.git";
@@ -902,17 +919,29 @@
 				minimumVersion = 1.4.0;
 			};
 		};
-		FAF8F2832BBCFC4600ACD763 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA09CC302BC5D6B100BD7F52 /* Fuse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */;
+			productName = Fuse;
+		};
+		FA09CC332BC5D73600BD7F52 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA09CC322BC5D73600BD7F52 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+		FA09CC352BC5D74000BD7F52 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA09CC322BC5D73600BD7F52 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+		FA09CC372BC5D74A00BD7F52 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA09CC322BC5D73600BD7F52 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
 		FA87A37A2BB883450043C106 /* FMDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA87A3792BB883450043C106 /* XCRemoteSwiftPackageReference "fmdb" */;
@@ -932,11 +961,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAF8F2802BBCEBC900ACD763 /* XCRemoteSwiftPackageReference "fuse-swift" */;
 			productName = Fuse;
-		};
-		FAF8F2842BBCFC4600ACD763 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FAF8F2832BBCFC4600ACD763 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
