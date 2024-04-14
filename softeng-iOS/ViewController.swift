@@ -45,8 +45,7 @@ struct ViewController: View {
                     
                 }
                 .navigationDestination(for: SetPath.self) { value in
-                    PathSearchView()
-                    //DestinationSearch()
+                    DirectionsSearchView(toSet: value)
                 }
             }
             .sheet(isPresented: $viewModel.presentNodeSheet) {

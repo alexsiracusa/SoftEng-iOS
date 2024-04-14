@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct PathSearchView: View {
+struct DirectionsSearchView: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
@@ -23,19 +23,23 @@ struct PathSearchView: View {
     
     let detector: CurrentValueSubject<CGFloat, Never>
     let publisher: AnyPublisher<CGFloat, Never>
+    
+    let toSet: SetPath
 
-    init() {
+    init(toSet: SetPath) {
         let detector = CurrentValueSubject<CGFloat, Never>(0)
         self.publisher = detector
             .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
             .dropFirst()
             .eraseToAnyPublisher()
         self.detector = detector
+        
+        self.toSet = toSet
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            PathSearchBar(
+            DirectionsSearchBar(
                 focused: _focused,
                 search: $search,
                 searchResults: $searchResults,
@@ -59,11 +63,12 @@ struct PathSearchView: View {
                                 Array(searchResults.enumerated()),
                                 id: \.offset
                             ) { index, node in
-                                PathSearchResultButton(
+                                DirectionsSearchResultButton(
                                     node: node,
                                     focused: _focused,
                                     search: $search,
-                                    searchResults: $searchResults
+                                    searchResults: $searchResults,
+                                    toSet: toSet
                                 )
                                 .id(index)
                             }
@@ -141,7 +146,7 @@ struct PathSearchView: View {
 }
 
 #Preview {
-    PathSearchView()
+    DirectionsSearchView(toSet: .START)
         .environmentObject(DatabaseEnvironment())
         .environmentObject(ViewModel())
 }

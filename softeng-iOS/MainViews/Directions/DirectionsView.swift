@@ -21,8 +21,13 @@ struct DirectionsView: View {
                 Spacer()
 
                 Button(action: {
+                    // close view
                     viewModel.pickDirectionsView = false
                     viewModel.sheetHeight = SHEET_LOW
+                    
+                    // reset path
+                    database.path = nil
+                    database.pathStart = nil
                 }) {
                     Image(systemName: "xmark")
                         .resizable()

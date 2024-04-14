@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PathSearchBar: View {
+struct DirectionsSearchBar: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.dismiss) var dismiss
@@ -89,7 +89,7 @@ struct PathSearchBar: View {
 }
 
 #Preview {
-    PathSearchBar(
+    DirectionsSearchBar(
         focused: FocusState<Bool>(),
         search: .constant(""),
         searchResults: .constant(nil),
