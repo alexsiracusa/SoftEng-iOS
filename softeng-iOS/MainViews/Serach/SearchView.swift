@@ -59,7 +59,7 @@ struct SearchView: View {
                                 Array(searchResults.enumerated()),
                                 id: \.offset
                             ) { index, node in
-                                SearchResult(
+                                SearchResultButton(
                                     node: node,
                                     fullscreen: $viewModel.searchFullscreen,
                                     focused: _focused,
