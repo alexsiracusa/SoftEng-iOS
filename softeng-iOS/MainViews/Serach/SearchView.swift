@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SearchView: View {
     @EnvironmentObject var database: DatabaseEnvironment
@@ -17,8 +18,20 @@ struct SearchView: View {
     @State var search = ""
     @State var searchResults: [Node]? = nil
     
-    @State var position: CGPoint = CGPoint(x: 0, y: 0)
+    @State var scrolling = false
     @State var scrollTarget: Int? = nil
+    
+    let detector: CurrentValueSubject<CGFloat, Never>
+    let publisher: AnyPublisher<CGFloat, Never>
+
+    init() {
+        let detector = CurrentValueSubject<CGFloat, Never>(0)
+        self.publisher = detector
+            .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
+            .dropFirst()
+            .eraseToAnyPublisher()
+        self.detector = detector
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -72,20 +85,26 @@ struct SearchView: View {
                     }
                     .background(GeometryReader { geometry in
                         Color.clear.preference(
-                            key: SizingPreferenceKey.self,
-                            value: geometry.frame(in: .named("scroll")).origin
+                            key: ViewOffsetKey.self,
+                            value: -geometry.frame(in: .named("scroll")).origin.y
                         )
                     })
+                    .onPreferenceChange(ViewOffsetKey.self) { detector.send($0) }
                 }
                 .coordinateSpace(name: "scroll")
-                .onPreferenceChange(SizingPreferenceKey.self) { position in
-                    if self.position != position &&
-                        self.position.y != 0 &&
-                        position.y != 0
-                    {
+                .onPreferenceChange(ViewOffsetKey.self) { yValue in
+                    if (
+                        !self.scrolling &&
+                        yValue != 0
+                    ) {
+                        // started scrolling
+                        self.scrolling = true
                         focused = false
                     }
-                    self.position = position
+                }
+                .onReceive(publisher) { _ in
+                    // stopped scrolling
+                    self.scrolling = false
                 }
                 .ignoresSafeArea()
             }
@@ -123,16 +142,17 @@ struct SearchView: View {
         if lastSearchTime == time {
             scrollTarget = 0
             self.searchResults = results
+            
         }
     }
     
 }
 
-struct SizingPreferenceKey: PreferenceKey {
-    static var defaultValue: CGPoint { .zero }
-    
-    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-        // No-op
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }
 
