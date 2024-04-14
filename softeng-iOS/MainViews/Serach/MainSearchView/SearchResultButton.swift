@@ -19,9 +19,6 @@ struct SearchResultButton: View {
     @Binding var search: String
     @Binding var searchResults: [Node]?
     
-    var isSelected: Bool {
-        return viewModel.selectedFloor.floor == node.floor
-    }
     
     var body: some View {
         Button(action: {

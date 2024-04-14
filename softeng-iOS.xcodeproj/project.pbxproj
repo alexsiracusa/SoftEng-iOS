@@ -24,6 +24,9 @@
 		FA09CC362BC5D74000BD7F52 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FA09CC352BC5D74000BD7F52 /* Algorithms */; };
 		FA09CC382BC5D74A00BD7F52 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = FA09CC372BC5D74A00BD7F52 /* Algorithms */; };
 		FA09CC3A2BCB715200BD7F52 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC392BCB715200BD7F52 /* SearchResult.swift */; };
+		FA09CC5E2BCB771C00BD7F52 /* PathSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC5D2BCB771C00BD7F52 /* PathSearchBar.swift */; };
+		FA09CC6A2BCB8F9C00BD7F52 /* PathSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC692BCB8F9C00BD7F52 /* PathSearchView.swift */; };
+		FA09CC6C2BCB904100BD7F52 /* PathSearchResultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09CC6B2BCB904100BD7F52 /* PathSearchResultButton.swift */; };
 		FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */; };
 		FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */; };
 		FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */; };
@@ -99,6 +102,9 @@
 		FA09CC2B2BC4247D00BD7F52 /* DirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
 		FA09CC2E2BC4314900BD7F52 /* DestinationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearch.swift; sourceTree = "<group>"; };
 		FA09CC392BCB715200BD7F52 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		FA09CC5D2BCB771C00BD7F52 /* PathSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathSearchBar.swift; sourceTree = "<group>"; };
+		FA09CC692BCB8F9C00BD7F52 /* PathSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathSearchView.swift; sourceTree = "<group>"; };
+		FA09CC6B2BCB904100BD7F52 /* PathSearchResultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathSearchResultButton.swift; sourceTree = "<group>"; };
 		FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA18C9DC2BBBA89E00B8A96E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		FA18C9DE2BBBA9BD00B8A96E /* FloorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorData.swift; sourceTree = "<group>"; };
@@ -208,6 +214,26 @@
 				FA09CC2E2BC4314900BD7F52 /* DestinationSearch.swift */,
 			);
 			path = Directions;
+			sourceTree = "<group>";
+		};
+		FA09CC3D2BCB729900BD7F52 /* MainSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				FAF8F2742BBC8A6100ACD763 /* SearchView.swift */,
+				FAF8F2712BBC625100ACD763 /* SearchBar.swift */,
+				FAF8F2782BBCB43B00ACD763 /* SearchResultButton.swift */,
+			);
+			path = MainSearchView;
+			sourceTree = "<group>";
+		};
+		FA09CC5C2BCB76FD00BD7F52 /* PathPickerSearch */ = {
+			isa = PBXGroup;
+			children = (
+				FA09CC692BCB8F9C00BD7F52 /* PathSearchView.swift */,
+				FA09CC5D2BCB771C00BD7F52 /* PathSearchBar.swift */,
+				FA09CC6B2BCB904100BD7F52 /* PathSearchResultButton.swift */,
+			);
+			path = PathPickerSearch;
 			sourceTree = "<group>";
 		};
 		FA18C9DB2BBBA88E00B8A96E /* ViewModel */ = {
@@ -363,9 +389,8 @@
 		FAF8F2732BBC8A0300ACD763 /* Serach */ = {
 			isa = PBXGroup;
 			children = (
-				FAF8F2742BBC8A6100ACD763 /* SearchView.swift */,
-				FAF8F2712BBC625100ACD763 /* SearchBar.swift */,
-				FAF8F2782BBCB43B00ACD763 /* SearchResultButton.swift */,
+				FA09CC3D2BCB729900BD7F52 /* MainSearchView */,
+				FA09CC5C2BCB76FD00BD7F52 /* PathPickerSearch */,
 				FA09CC392BCB715200BD7F52 /* SearchResult.swift */,
 			);
 			path = Serach;
@@ -528,6 +553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA18C9E22BBBAF5200B8A96E /* FloorSelector.swift in Sources */,
+				FA09CC6A2BCB8F9C00BD7F52 /* PathSearchView.swift in Sources */,
 				FA09CC1C2BC30E4200BD7F52 /* RoundedButton.swift in Sources */,
 				FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */,
 				FAF8F2702BBC436600ACD763 /* BinaryHeap.swift in Sources */,
@@ -547,8 +573,10 @@
 				FA87A3DE2BBA10E90043C106 /* Misc.swift in Sources */,
 				FA87A3F62BBA65D70043C106 /* ZoomableScrollView.swift in Sources */,
 				FA09CC1A2BC30C5000BD7F52 /* DirectionsButton.swift in Sources */,
+				FA09CC6C2BCB904100BD7F52 /* PathSearchResultButton.swift in Sources */,
 				FA18C9DF2BBBA9BD00B8A96E /* FloorData.swift in Sources */,
 				FA09CC2C2BC4247D00BD7F52 /* DirectionsView.swift in Sources */,
+				FA09CC5E2BCB771C00BD7F52 /* PathSearchBar.swift in Sources */,
 				FA09CC182BC309E500BD7F52 /* Directions.swift in Sources */,
 				FA87A3CC2BB9AAFA0043C106 /* DatabaseEnvironment.swift in Sources */,
 				FA87A37E2BB8839D0043C106 /* InitializeDatabase.swift in Sources */,

@@ -38,18 +38,32 @@ struct SearchBar: View {
         }
     }
     
+    func pressXButton() {
+        database.selectedNode = nil
+        viewModel.pickDirectionsView = false
+        viewModel.sheetHeight = SHEET_LOW
+        withAnimation {
+            viewModel.sheet = false
+        }
+        clearSearch()
+    }
+    
+    func fullscreen() -> Bool {
+        return viewModel.searchFullscreen
+    }
+    
     var body: some View {
         RoundedRectangle(cornerRadius: (1/2) * size)
             .fill(.white)
-            .stroke(viewModel.searchFullscreen ? .gray : .clear, lineWidth: 0.33)
-            .shadow(radius: !viewModel.searchFullscreen ? 3 : 0, y: !viewModel.searchFullscreen ? 3 : 0)
+            .stroke(fullscreen() ? .gray : .clear, lineWidth: 0.33)
+            .shadow(radius: !fullscreen() ? 3 : 0, y: !fullscreen() ? 3 : 0)
             .frame(maxWidth: .infinity)
             .frame(height: size)
             .overlay(
                 HStack() {
                     // Icon
                     HStack {
-                        if viewModel.searchFullscreen {
+                        if fullscreen() {
                             Button(action: closeView) {
                                 Image(systemName: "chevron.backward")
                             }
@@ -77,7 +91,7 @@ struct SearchBar: View {
                     // Clear Button
                     if search != "" {
                         HStack {
-                            if viewModel.searchFullscreen {
+                            if fullscreen() {
                                 Button(action: clearSearch) {
                                     Image(systemName: "xmark.circle")
                                         .resizable()
@@ -90,15 +104,7 @@ struct SearchBar: View {
                                 .buttonStyle(PlainButtonStyle())
                             }
                             else {
-                                Button(action: {
-                                    database.selectedNode = nil
-                                    viewModel.pickDirectionsView = false
-                                    viewModel.sheetHeight = SHEET_LOW
-                                    withAnimation {
-                                        viewModel.sheet = false
-                                    }
-                                    clearSearch()
-                                }) {
+                                Button(action: pressXButton) {
                                     Image(systemName: "xmark")
                                         .resizable()
                                         .font(.system(size: 6, weight: .semibold))
