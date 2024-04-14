@@ -121,6 +121,9 @@ struct DirectionsSearchView: View {
                 await runSearch(time: NSDate())
             }
         }
+        .onAppear {
+            focused = true
+        }
         .navigationBarBackButtonHidden(true)
     }
     

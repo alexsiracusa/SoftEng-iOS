@@ -39,6 +39,9 @@ struct SearchBar: View {
     }
     
     func pressXButton() {
+        if viewModel.pickDirectionsView {
+            database.resetPath()
+        }
         database.selectedNode = nil
         viewModel.pickDirectionsView = false
         viewModel.sheetHeight = SHEET_LOW

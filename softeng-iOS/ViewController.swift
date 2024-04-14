@@ -13,7 +13,6 @@ struct ViewController: View {
     
     let nodeSheetHeights = [SHEET_LOW, SHEET_MEDIUM, SHEET_HIGH]
     let directionSheetHeights = [SHEET_LOWEST, SHEET_MEDIUM, SHEET_HIGH]
-    @State private var selectedDetent = SHEET_LOW
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
@@ -22,7 +21,7 @@ struct ViewController: View {
                     // Map View
                     FloorView(floor: $viewModel.selectedFloor)
                         .zIndex(0)
-                        .offset(y: viewModel.sheet ? -proxy.size.height * 0.1 : 0)
+                        .offset(y: viewModel.sheet ? -SHEET_LOWEST_CGFLOAT : 0)
                         .ignoresSafeArea()
                     
                     // Search View
@@ -38,9 +37,9 @@ struct ViewController: View {
                                 .zIndex(1)
                                 .padding(.trailing, 25)
                                 .padding(.bottom, 40)
+                                .offset(y: viewModel.sheet ? -SHEET_LOW_CGFLOAT : 0)
                         }
                     }
-                    .offset(y: viewModel.sheet ? -proxy.size.height * 0.12 : 0)
                     .ignoresSafeArea(.keyboard)
                     
                 }

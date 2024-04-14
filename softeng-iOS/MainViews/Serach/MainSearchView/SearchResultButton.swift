@@ -27,13 +27,6 @@ struct SearchResultButton: View {
             self.focused = false
             self.fullscreen = false
             viewModel.sheet = true
-            
-            // run search with node name
-            Task {
-                self.search = node.long_name
-                let results = database.searchNodes(query: search)
-                self.searchResults = results
-            }
         }) {
             SearchResult(node: node)
         }

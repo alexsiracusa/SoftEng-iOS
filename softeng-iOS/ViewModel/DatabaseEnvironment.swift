@@ -142,6 +142,12 @@ class DatabaseEnvironment: ObservableObject {
         return results
     }
     
+    func resetPath() {
+        pathStart = nil
+        pathEnd = nil
+        path = nil
+    }
+    
 }
 
 

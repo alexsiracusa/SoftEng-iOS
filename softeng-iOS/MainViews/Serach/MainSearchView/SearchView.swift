@@ -124,6 +124,18 @@ struct SearchView: View {
                 await runSearch(time: NSDate())
             }
         }
+        .onChange(of: database.selectedNode) {
+            if let node = database.selectedNode {
+                Task {
+                    self.search = node.long_name
+                    let results = database.searchNodes(query: search)
+                    self.searchResults = results
+                }
+            }
+            else {
+                search = ""
+            }
+        }
     }
     
     func runSearch(time: NSDate) async {

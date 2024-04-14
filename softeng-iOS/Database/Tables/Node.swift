@@ -95,8 +95,7 @@ extension NodeType {
     }
 }
 
-class Node: Identifiable {
-    
+class Node: Identifiable, Equatable {
     static let dbColumns = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
     
     let id: String
@@ -194,6 +193,10 @@ class Node: Identifiable {
             long_name: "Hall",
             short_name: "Hall"
         )
+    }
+    
+    static func == (lhs: Node, rhs: Node) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
