@@ -117,6 +117,7 @@ class DatabaseEnvironment: ObservableObject {
         guard let pathStart, let pathEnd else {
             return
         }
+        selectedNode = nil
         pathfind(start: pathStart.id, end: pathEnd.id)
     }
     

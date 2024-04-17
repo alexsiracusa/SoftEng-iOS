@@ -22,9 +22,10 @@ struct DirectionsView: View {
 
                 Button(action: {
                     // close view
-                    viewModel.pickDirectionsView = false
                     viewModel.sheetHeight = SHEET_LOW
+                    viewModel.pickDirectionsView = false
                     
+                    database.selectedNode = database.pathEnd
                     database.resetPath()
                 }) {
                     Image(systemName: "xmark")

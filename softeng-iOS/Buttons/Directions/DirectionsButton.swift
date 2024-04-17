@@ -16,12 +16,7 @@ struct DirectionsButton: View {
     
     var body: some View {
         Button(action: {
-            // TODO
-            viewModel.pickDirectionsView.toggle()
-            viewModel.sheetHeight = (
-                viewModel.pickDirectionsView ? 
-                SHEET_MEDIUM : viewModel.sheetHeight
-            )
+            viewModel.focusDirections()
             database.pathEnd = (
                 viewModel.pickDirectionsView ?
                 node : nil

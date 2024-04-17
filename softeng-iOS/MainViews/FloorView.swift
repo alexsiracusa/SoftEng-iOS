@@ -50,22 +50,24 @@ struct FloorView: View {
             GeometryReader { proxy in
                 ZStack {
                     // Render Selected Node
-                    if let selected = database.selectedNode {
+                    if let selected = database.selectedNode, selected.floor == viewModel.selectedFloor.floor {
                         AnyView(
-                            renderNode(color: .red, node: selected)
+                            renderIcon(icon: NodeIconData(node: selected))
                         )
                     }
                     
                     if let path = database.path {
-                        ForEach(path.displayNodes, id: \.node.id) { color, node in
-                            AnyView(
-                                renderNode(color: color, node: node)
-                            )
-                        }
-                        ForEach(path.displayEdges, id: \.edge.id) { color, edge in
-                            AnyView(
-                                renderEdge(color: color, edge: edge)
-                            )
+                        let displayData = path.displayData(floor: floor.floor)
+                        
+                        ForEach(displayData, id: \.id) { pathData in
+                            ZStack {
+                                renderPath(nodes: pathData.path)
+                                
+                                ForEach(pathData.icons) { icon in
+                                    renderIcon(icon: icon)
+                                        .zIndex(999)
+                                }
+                            }
                         }
                     }
                 }
@@ -81,36 +83,27 @@ struct FloorView: View {
         .background(COLOR_BG_P)
     }
     
-    func renderNode(
-        color: Color,
-        node: Node
-    ) -> any View {
-        if node.floor == floor.floor {
-            Circle()
-                .fill(color)
-                .frame(width: 8, height: 8)
-                .position(getPoint(node: node))
-                .zIndex(1)
-        }
-        else {
-            EmptyView()
-        }
+    func renderIcon(icon: PathIcon) -> AnyView {
+        AnyView (
+            icon.view(size: 20)
+                .position(getPoint(node: icon.node))
+        )
     }
     
-    func renderEdge(
-        color: Color,
-        edge: Edge
-    ) -> any View {
-        if edge.onFloor(floor: floor.floor) {
+    func renderPath(nodes: [Node]) -> AnyView {
+        guard !nodes.isEmpty else {
+            return AnyView(EmptyView())
+        }
+        
+        return AnyView(
             Path() { path in
-                path.move(to: getPoint(node: edge.start))
-                path.addLine(to: getPoint(node: edge.end))
+                path.move(to: getPoint(node: nodes[0]))
+                for node in nodes[1..<nodes.count] {
+                    path.addLine(to: getPoint(node: node))
+                }
             }
-            .stroke(color, lineWidth: 2)
-        }
-        else {
-            EmptyView()
-        }
+            .stroke(.red, lineWidth: 2)
+        )
     }
 }
 

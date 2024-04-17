@@ -9,12 +9,16 @@ import Foundation
 import FMDB
 import SwiftUI
 
-enum Floor: Int {
+enum Floor: Int, Comparable {
     case L2 = -1
     case L1 = 0
     case F1 = 1
     case F2 = 2
     case F3 = 3
+    
+    static func <(a: Floor, b: Floor) -> Bool {
+        return a.rawValue < b.rawValue
+    }
     
     var description: String {
         switch self {
@@ -113,6 +117,10 @@ class Node: Identifiable, Equatable {
     
     var y_percent: Double {
         return Double(self.ycoord) / 3400
+    }
+    
+    var position: CGPoint {
+        return CGPoint(x: self.xcoord, y: self.ycoord)
     }
     
     var searchString: String {

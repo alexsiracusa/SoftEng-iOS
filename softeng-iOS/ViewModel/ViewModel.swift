@@ -8,11 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum DisplayState {
-    case MAP
-    case SEARCH
-}
-
 enum SetPath {
     case END
     case START
@@ -23,7 +18,6 @@ class ViewModel: ObservableObject {
     
     @Published var floorViews: [FloorData]
     @Published var selectedFloor: FloorData
-    @Published var displayState: DisplayState = .MAP
     
     @Published var searchFullscreen = false {
         didSet {
@@ -39,6 +33,16 @@ class ViewModel: ObservableObject {
     @Published var presentNodeSheet: Bool = false
     @Published var sheetHeight: PresentationDetent = SHEET_LOW
     @Published var pickDirectionsView: Bool = false
+    
+    func focusDirections() {
+        self.pickDirectionsView = true
+        sheetHeight = SHEET_MEDIUM
+    }
+    
+    func focusNodes() {
+        self.pickDirectionsView = false
+        sheetHeight = SHEET_MEDIUM
+    }
     
     init() {
         let floor3 = FloorData(floor: .F3, image_name: "03_thethirdfloor")
