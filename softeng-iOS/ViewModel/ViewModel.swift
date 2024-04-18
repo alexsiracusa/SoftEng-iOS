@@ -69,4 +69,8 @@ class ViewModel: ObservableObject {
     func setFloor(floor: Floor) {
         selectedFloor = floorViews.first(where: {$0.floor == floor}) ?? selectedFloor
     }
+    
+    func jumpToNode(node: Node) {
+        setFloor(floor: node.floor)
+    }
 }

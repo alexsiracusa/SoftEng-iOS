@@ -133,7 +133,8 @@ struct DirectionsSearchView: View {
             setSearch(results: [], time: time)
         }
         else if search != "" {
-            let results = database.searchNodes(query: search)
+            let other = toSet == .START ? database.pathEnd : database.pathStart
+            let results = database.searchNodes(query: search).filter({$0.id != other?.id})
             setSearch(results: results, time: time)
         }
     }

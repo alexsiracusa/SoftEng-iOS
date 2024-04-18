@@ -23,7 +23,7 @@ struct SearchResultButton: View {
     var body: some View {
         Button(action: {
             database.selectedNode = node
-            viewModel.setFloor(floor: node.floor)
+            viewModel.jumpToNode(node: node)
             self.focused = false
             self.fullscreen = false
             viewModel.sheet = true
