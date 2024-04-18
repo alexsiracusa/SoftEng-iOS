@@ -2,7 +2,7 @@
 //  SearchResult.swift
 //  softeng-iOS
 //
-//  Created by Alex Siracusa on 4/2/24.
+//  Created by Alex Siracusa on 4/13/24.
 //
 
 import SwiftUI
@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchResult: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
+    
     let node: Node
     
     var isSelected: Bool {
@@ -17,62 +18,34 @@ struct SearchResult: View {
     }
     
     var body: some View {
-        HStack(spacing: 0) {
-            FloorIcon(
-                selected: isSelected,
-                name: String(describing: node.floor),
-                size: 25
-            )
-            .padding(.trailing, 7)
-            Text("\(node.long_name) (\(node.building))")
-            
-            Spacer()
-            
-            Button(action: {
-                if database.pathStart?.id == node.id {
-                    database.pathStart = nil
-                    database.path = nil
-                }
-                else {
-                    database.pathStart = node
-                }
-            }) {
-                Image(systemName: "location.circle")
-                    .foregroundColor(
-                        database.pathStart?.id ?? "" == node.id ?
-                            .blue : .black
-                    )
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                FloorIcon(
+                    selected: isSelected,
+                    name: String(describing: node.floor),
+                    size: 25
+                )
+                .padding(.trailing, 15)
+                
+                Text("\(node.long_name) (\(node.building))")
+                    .lineLimit(2)
+                
+                Spacer()
+                
+                node.icon
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                
+                Image(systemName: "arrow.up.left")
+                    .padding(.leading, 10)
             }
-            .buttonStyle(PlainButtonStyle())
+            .padding(.vertical, 17)
+            .padding(.horizontal, 20)
             
-            Spacer()
-                .frame(width: 15)
-            
-            Button(action: {
-                if database.pathEnd?.id == node.id {
-                    database.pathEnd = nil
-                    database.path = nil
-                }
-                else {
-                    database.pathEnd = node
-                }
-            }) {
-                Image(systemName: "arrow.triangle.turn.up.right.circle")
-                    .foregroundColor(
-                        database.pathEnd?.id ?? "" == node.id ?
-                            .blue : .black
-                    )
-            }
-            .buttonStyle(PlainButtonStyle())
+            Divider()
+                .padding(.leading, 60)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 20)
-        .background(.white)
-        
     }
-    
-    
-    
 }
 
 #Preview {

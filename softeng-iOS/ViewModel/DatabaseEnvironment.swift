@@ -18,6 +18,9 @@ class DatabaseEnvironment: ObservableObject {
     @Published var nodes: [Node]
     @Published var edges: [Edge]
     
+    //
+    @Published var selectedNode: Node? = nil
+    
     // pathfinding
     @Published var path: PathfindingResult? = nil
     @Published var pathStart: Node? = nil {
@@ -114,6 +117,7 @@ class DatabaseEnvironment: ObservableObject {
         guard let pathStart, let pathEnd else {
             return
         }
+        selectedNode = nil
         pathfind(start: pathStart.id, end: pathEnd.id)
     }
     
@@ -137,6 +141,12 @@ class DatabaseEnvironment: ObservableObject {
             .map({$0.node})
         
         return results
+    }
+    
+    func resetPath() {
+        pathStart = nil
+        pathEnd = nil
+        path = nil
     }
     
 }

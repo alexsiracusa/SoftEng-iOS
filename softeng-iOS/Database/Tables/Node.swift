@@ -7,13 +7,18 @@
 
 import Foundation
 import FMDB
+import SwiftUI
 
-enum Floor: Int {
+enum Floor: Int, Comparable {
     case L2 = -1
     case L1 = 0
     case F1 = 1
     case F2 = 2
     case F3 = 3
+    
+    static func <(a: Floor, b: Floor) -> Bool {
+        return a.rawValue < b.rawValue
+    }
     
     var description: String {
         switch self {
@@ -22,6 +27,16 @@ enum Floor: Int {
         case .F1: return "F1 The First Floor 1"
         case .F2: return "F2 The Second Floor 2"
         case .F3: return "F3 The Third Floor 3"
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .L2: return "L2"
+        case .L1: return "L2"
+        case .F1: return "F1"
+        case .F2: return "F2"
+        case .F3: return "F3"
         }
     }
 }
@@ -41,18 +56,18 @@ extension Floor {
 }
 
 enum NodeType: String {
-    case CONF = "CONF"
-    case DEPT = "DEPT"
+    case CONF = "CONF" // ConferenceIcon
+    case DEPT = "DEPT" // DepartmentIcon
     case HALL = "HALL"
-    case LABS = "LABS"
-    case REST = "REST"
-    case SERV = "SERV"
-    case ELEV = "ELEV"
-    case EXIT = "EXIT"
-    case STAI = "STAI"
-    case RETL = "RETL"
-    case INFO = "INFO"
-    case BATH = "BATH"
+    case LABS = "LABS" // LabIcon
+    case REST = "REST" // RestroomIcon
+    case SERV = "SERV" // Service Icon or ATM
+    case ELEV = "ELEV" // ElevatorIcon
+    case EXIT = "EXIT" // ExitIcon
+    case STAI = "STAI" // EscalatorIcon
+    case RETL = "RETL" // VendingIcon or CafeIcon or GiftShopIcon or FoodIcon
+    case INFO = "INFO" // InfoIcon
+    case BATH = "BATH" // RestroomIcon
     
     var description: String {
         switch self {
@@ -84,8 +99,7 @@ extension NodeType {
     }
 }
 
-class Node: Identifiable {
-    
+class Node: Identifiable, Equatable {
     static let dbColumns = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
     
     let id: String
@@ -105,10 +119,45 @@ class Node: Identifiable {
         return Double(self.ycoord) / 3400
     }
     
+    var position: CGPoint {
+        return CGPoint(x: self.xcoord, y: self.ycoord)
+    }
+    
     var searchString: String {
         return [long_name, short_name, building, type.description, floor.description + id]
             .joined(separator: " ")
             .lowercased()
+    }
+    
+    var icon: Image {
+        switch type {
+        case .CONF: return Image(uiImage: UIImage(named: "ConferenceIcon")!)
+        case .DEPT: return Image(uiImage: UIImage(named: "DepartmentIcon")!)
+        case .HALL: return Image(uiImage: UIImage(named: "InfoIcon")!)
+        case .LABS: return Image(uiImage: UIImage(named: "LabIcon")!)
+        case .REST: return Image(uiImage: UIImage(named: "RestroomIcon")!)
+        case .SERV: 
+            if self.long_name.lowercased().contains("atm") {
+                return Image(uiImage: UIImage(named: "ATMIcon")!)
+            }
+            return Image(uiImage: UIImage(named: "ServiceIcon")!)
+        case .ELEV: return Image(uiImage: UIImage(named: "ElevatorIcon1")!)
+        case .EXIT: return Image(uiImage: UIImage(named: "ExitIcon")!)
+        case .STAI: return Image(uiImage: UIImage(named: "EscalatorIcon")!)
+        case .RETL: 
+            if self.long_name.lowercased().contains("vending") {
+                return Image(uiImage: UIImage(named: "VendingIcon")!)
+            }
+            else if self.long_name.lowercased().contains("cafe") {
+                return Image(uiImage: UIImage(named: "CafeIcon")!)
+            }
+            else if self.long_name.lowercased().contains("gift") {
+                return Image(uiImage: UIImage(named: "GiftShopIcon")!)
+            }
+            return Image(uiImage: UIImage(named: "FoodIcon")!)
+        case .INFO: return Image(uiImage: UIImage(named: "InfoIcon")!)
+        case .BATH: return Image(uiImage: UIImage(named: "RestroomIcon")!)
+        }
     }
     
     init(
@@ -152,6 +201,10 @@ class Node: Identifiable {
             long_name: "Hall",
             short_name: "Hall"
         )
+    }
+    
+    static func == (lhs: Node, rhs: Node) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

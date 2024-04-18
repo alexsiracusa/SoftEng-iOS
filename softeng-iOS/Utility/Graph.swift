@@ -14,24 +14,133 @@ func < (lhs: (Double, String), rhs: (Double, String)) -> Bool { lhs.0 < rhs.0 }
 
 class PathfindingResult {
     let path: [Node]
+    var icons: [PathIcon?]! = nil
+    
     let edges: [Edge]
     
     init(path: [Node], edges: [Edge]) {
         self.path = path
         self.edges = edges
+        
+        // initialize icons
+        initializeIcons()
     }
     
-    var displayNodes: [(color: Color, node: Node)] {
-        var nodes = [(Color, Node)]()
-        nodes.append((.red, path.first!))
-        nodes.append((.red, path.last!))
-        return Array(nodes.uniqued(on: {$0.1.id}))
+    private func initializeIcons() {
+        guard path.count > 0 else {
+            self.icons = []
+            return
+        }
+        
+        guard path.count > 1 else {
+            self.icons = [NodeIconData(node: path[0])]
+            return
+        }
+        
+        var icons: [PathIcon?] = Array.init(repeating: nil, count: path.count)
+        icons[0] = NodeIconData(node: path[0])
+        icons[path.count - 1] = NodeIconData(node: path[path.count - 1])
+        for index in 1...path.count - 2 {
+            let node = path[index]
+            let previous = path[index - 1]
+            let next = path[index + 1]
+            
+            if node.floor != next.floor {
+                icons[index] = FloorIconData(
+                    node: node,
+                    floor: next.floor,
+                    up: node.floor < next.floor
+                )
+            }
+            else if node.floor != previous.floor {
+                icons[index] = FloorIconData(
+                    node: node,
+                    floor: previous.floor,
+                    up: node.floor < previous.floor
+                )
+            }
+        }
+        
+        self.icons = icons
     }
     
-    var displayEdges: [(color: Color, edge: Edge)] {
-        var edges = [(Color, Edge)]()
-        edges = self.edges.map({(.red, $0)})
-        return edges
+    func displayData(floor: Floor) -> [PathData] {
+        var paths = [PathData]()
+        
+        var path = [Node]()
+        var icons = [PathIcon]()
+        
+        for (node, icon) in zip(self.path, self.icons) {
+            if node.floor == floor {
+                path.append(node)
+                if let icon {
+                    icons.append(icon)
+                }
+            }
+            else if path.count != 0 {
+                paths.append(PathData(path: path, icons: icons))
+                path = []
+                icons = []
+            }
+        }
+        
+        if path.count != 0 {
+            paths.append(PathData(path: path, icons: icons))
+        }
+        
+        return paths
+    }
+}
+
+class PathData {
+    let id = UUID()
+    let path: [Node]
+    let icons: [PathIcon]
+    
+    init(path: [Node], icons: [PathIcon]) {
+        self.path = path
+        self.icons = icons
+    }
+}
+
+class PathIcon: Identifiable {
+    let id = UUID()
+    
+    let node: Node
+    func floor() -> Floor! { return nil }
+    func view(size: CGFloat) -> (AnyView)! { return nil }
+    
+    init(node: Node) {
+        self.node = node
+    }
+}
+
+class NodeIconData: PathIcon {
+    override func view(size: CGFloat) -> AnyView {
+        return AnyView(NodeIcon(node: node, size: size))
+    }
+    
+    override func floor() -> Floor {
+        return node.floor
+    }
+}
+
+class FloorIconData: PathIcon {
+    let floorTo: Floor
+    let up: Bool
+    
+    override func view(size: CGFloat) -> AnyView {
+        return AnyView(FloorChangeIcon(floor: floorTo, up: up, size: size))
+    }
+    
+    override func floor() -> Floor {
+        return node.floor
+    }
+    
+    init(node: Node, floor: Floor, up: Bool) {
+        self.floorTo = floor
+        self.up = up
+        super.init(node: node)
     }
 }
 

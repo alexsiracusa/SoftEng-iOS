@@ -31,10 +31,7 @@ struct FloorView: View {
     }
     
     func getPoint(node: Node) -> CGPoint {
-        CGPoint(
-            x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-            y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-        )
+        return getPoint(x_percent: node.x_percent, y_percent: node.y_percent)
     }
     
     var body: some View {
@@ -52,26 +49,24 @@ struct FloorView: View {
         .overlay(
             GeometryReader { proxy in
                 ZStack {
+                    // Render Selected Node
+                    if let selected = database.selectedNode, selected.floor == viewModel.selectedFloor.floor {
+                        AnyView(
+                            renderIcon(icon: NodeIconData(node: selected))
+                        )
+                    }
+                    
                     if let path = database.path {
-                        ForEach(path.displayNodes, id: \.node.id) { color, node in
-                            if node.floor == floor.floor {
-                                Circle()
-                                    .fill(color)
-                                    .frame(width: 8, height: 8)
-                                    .position(
-                                        x: (mapSize.width * node.x_percent * zoom) - offset.x + origin.x,
-                                        y: (mapSize.height * node.y_percent * zoom) - offset.y + origin.y
-                                    )
-                                    .zIndex(1)
-                            }
-                        }
-                        ForEach(path.displayEdges, id: \.edge.id) { color, edge in
-                            if edge.onFloor(floor: floor.floor) {
-                                Path() { path in
-                                    path.move(to: getPoint(node: edge.start))
-                                    path.addLine(to: getPoint(node: edge.end))
+                        let displayData = path.displayData(floor: floor.floor)
+                        
+                        ForEach(displayData, id: \.id) { pathData in
+                            ZStack {
+                                renderPath(nodes: pathData.path)
+                                
+                                ForEach(pathData.icons) { icon in
+                                    renderIcon(icon: icon)
+                                        .zIndex(999)
                                 }
-                                .stroke(color, lineWidth: 2)
                             }
                         }
                     }
@@ -86,6 +81,29 @@ struct FloorView: View {
         )
         .zIndex(0)
         .background(COLOR_BG_P)
+    }
+    
+    func renderIcon(icon: PathIcon) -> AnyView {
+        AnyView (
+            icon.view(size: 20)
+                .position(getPoint(node: icon.node))
+        )
+    }
+    
+    func renderPath(nodes: [Node]) -> AnyView {
+        guard !nodes.isEmpty else {
+            return AnyView(EmptyView())
+        }
+        
+        return AnyView(
+            Path() { path in
+                path.move(to: getPoint(node: nodes[0]))
+                for node in nodes[1..<nodes.count] {
+                    path.addLine(to: getPoint(node: node))
+                }
+            }
+            .stroke(.red, lineWidth: 2)
+        )
     }
 }
 

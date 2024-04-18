@@ -6,16 +6,54 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum DisplayState {
-    case MAP
-    case SEARCH
+enum SetPath {
+    case END
+    case START
 }
 
 class ViewModel: ObservableObject {
+    @Published var path: NavigationPath = NavigationPath()
+    
     @Published var floorViews: [FloorData]
     @Published var selectedFloor: FloorData
-    @Published var displayState: DisplayState = .MAP
+    
+    @Published var searchFullscreen = false {
+        didSet {
+            presentNodeSheet = sheet && !searchFullscreen
+        }
+    }
+    @Published var sheet: Bool = false {
+        didSet {
+            presentNodeSheet = sheet && !searchFullscreen
+        }
+    }
+    
+    @Published var presentNodeSheet: Bool = false
+    @Published var sheetHeight: PresentationDetent = SHEET_LOW
+    @Published var pickDirectionsView: Bool = false {
+        didSet {
+            directionInstructions = pickDirectionsView
+            directionsExpanded = true
+        }
+    }
+    @Published var directionInstructions: Bool = false
+    @Published var directionsExpanded: Bool = true
+    
+    func focusDirections() {
+        withAnimation {
+            self.pickDirectionsView = true
+        }
+        sheetHeight = SHEET_LOWEST
+    }
+    
+    func focusNode() {
+        withAnimation {
+            self.directionInstructions = false
+        }
+        sheetHeight = SHEET_MEDIUM
+    }
     
     init() {
         let floor3 = FloorData(floor: .F3, image_name: "03_thethirdfloor")
@@ -26,5 +64,14 @@ class ViewModel: ObservableObject {
         
         self.floorViews = [lower2, lower1, floor1, floor2, floor3]
         self.selectedFloor = floor1
+    }
+    
+    func setFloor(floor: Floor) {
+        selectedFloor = floorViews.first(where: {$0.floor == floor}) ?? selectedFloor
+    }
+    
+    func jumpToNode(node: Node?) {
+        guard let node else { return }
+        setFloor(floor: node.floor)
     }
 }
