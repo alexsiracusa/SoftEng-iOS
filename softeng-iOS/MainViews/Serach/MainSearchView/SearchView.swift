@@ -125,16 +125,23 @@ struct SearchView: View {
             }
         }
         .onChange(of: database.selectedNode) {
-            if let node = database.selectedNode {
-                Task {
-                    self.search = node.long_name
-                    let results = database.searchNodes(query: search)
-                    self.searchResults = results
-                }
+            syncSearch()
+        }
+        .onAppear() {
+            syncSearch()
+        }
+    }
+    
+    func syncSearch() {
+        if let node = database.selectedNode {
+            Task {
+                self.search = node.long_name
+                let results = database.searchNodes(query: search)
+                self.searchResults = results
             }
-            else {
-                search = ""
-            }
+        }
+        else {
+            search = ""
         }
     }
     

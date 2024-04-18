@@ -23,8 +23,10 @@ struct DirectionsView: View {
                 Button(action: {
                     // close view
                     viewModel.sheetHeight = SHEET_LOW
-                    viewModel.pickDirectionsView = false
-                    
+                    withAnimation {
+                        viewModel.pickDirectionsView = false
+                        viewModel.directionInstructions = false
+                    }
                     database.selectedNode = database.pathEnd
                     database.resetPath()
                 }) {
@@ -50,7 +52,7 @@ struct DirectionsView: View {
         
             ScrollView {
                 VStack(alignment: .leading) {
-                    DirectionsPicker()
+                    Text("Instructions")
                         .opacity(viewModel.sheetHeight == SHEET_LOWEST ? 0 : 1)
                         .disabled(viewModel.sheetHeight == SHEET_LOWEST)
                 }

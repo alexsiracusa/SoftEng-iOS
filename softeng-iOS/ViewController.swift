@@ -17,16 +17,36 @@ struct ViewController: View {
     var body: some View {
         NavigationStack(path: $viewModel.path) {
             GeometryReader { proxy in
-                ZStack {
+                ZStack(alignment: .top) {
                     // Map View
                     FloorView(floor: $viewModel.selectedFloor)
                         .zIndex(0)
                         .offset(y: viewModel.sheet ? -SHEET_LOWEST_CGFLOAT : 0)
                         .ignoresSafeArea()
                     
+                    // Directions View
+                    if viewModel.pickDirectionsView
+                    {
+                        if viewModel.directionInstructions &&
+                            viewModel.directionsExpanded {
+                            DirectionsPicker()
+                                .background(
+                                    Color.white
+                                        .ignoresSafeArea()
+                                        .shadow(radius: 3)
+                                )
+                                .transition(.opacity)
+                                .zIndex(2)
+                        }
+                        else {
+                            CollapsedDirections()
+                        }
+                    }
                     // Search View
-                    SearchView()
-                        .zIndex(2)
+                    else {
+                        SearchView()
+                            .zIndex(2)
+                    }
                     
                     // Floor Selector
                     VStack {
@@ -49,7 +69,7 @@ struct ViewController: View {
             }
             .sheet(isPresented: $viewModel.presentNodeSheet) {
                 Group {
-                    if viewModel.pickDirectionsView {
+                    if viewModel.directionInstructions {
                         DirectionsView()
                             .presentationDetents(
                                 Set(directionSheetHeights),

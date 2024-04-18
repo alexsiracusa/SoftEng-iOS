@@ -32,15 +32,24 @@ class ViewModel: ObservableObject {
     
     @Published var presentNodeSheet: Bool = false
     @Published var sheetHeight: PresentationDetent = SHEET_LOW
-    @Published var pickDirectionsView: Bool = false
+    @Published var pickDirectionsView: Bool = false {
+        didSet {
+            directionInstructions = pickDirectionsView
+            directionsExpanded = true
+        }
+    }
+    @Published var directionInstructions: Bool = false
+    @Published var directionsExpanded: Bool = true
     
     func focusDirections() {
-        self.pickDirectionsView = true
-        sheetHeight = SHEET_MEDIUM
+        withAnimation {
+            self.pickDirectionsView = true
+        }
+        sheetHeight = SHEET_LOWEST
     }
     
-    func focusNodes() {
-        self.pickDirectionsView = false
+    func focusNode() {
+        self.directionInstructions = false
         sheetHeight = SHEET_MEDIUM
     }
     

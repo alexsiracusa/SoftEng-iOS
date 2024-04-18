@@ -16,7 +16,7 @@ struct NodeIcon: View {
     var body: some View {
         Button(action: {
             database.selectedNode = node
-            viewModel.focusNodes()
+            viewModel.focusNode()
         }) {
             node.icon
                 .resizable()

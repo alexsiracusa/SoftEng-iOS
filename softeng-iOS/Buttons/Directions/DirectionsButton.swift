@@ -17,10 +17,9 @@ struct DirectionsButton: View {
     var body: some View {
         Button(action: {
             viewModel.focusDirections()
-            database.pathEnd = (
-                viewModel.pickDirectionsView ?
-                node : nil
-            )
+            database.pathStart = nil
+            database.pathEnd = node
+            database.path = nil
         }) {
             Directions(size: size)
         }

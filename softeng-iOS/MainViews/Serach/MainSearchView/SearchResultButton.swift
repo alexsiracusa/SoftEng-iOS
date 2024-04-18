@@ -27,6 +27,7 @@ struct SearchResultButton: View {
             self.focused = false
             self.fullscreen = false
             viewModel.sheet = true
+            viewModel.directionInstructions = false
         }) {
             SearchResult(node: node)
         }
