@@ -12,16 +12,26 @@ struct CollapsedDirections: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             Button(action: {
-                viewModel.focusDirections()
+                if viewModel.directionInstructions {
+                    viewModel.focusDirections()
+                }
+                else {
+                    viewModel.directionInstructions = true
+                    viewModel.sheetHeight = SHEET_LOWEST
+                    viewModel.directionsExpanded = false
+                }
             }) {
                 Circle()
                     .fill(.white)
                     .shadow(radius: 2)
                     .frame(width: 40, height: 40)
                     .overlay(
-                        Image(systemName: "chevron.backward")
+                        Image(systemName: "chevron.forward")
+                            .rotationEffect(.degrees(
+                                viewModel.directionInstructions ? 0 : 90
+                            ))
                             .font(.system(size: 18))
                             .bold()
                     )
@@ -48,7 +58,6 @@ struct CollapsedDirections: View {
                             .font(.system(size: 18))
                             .bold()
                     )
-                    .padding([.leading, .top], 15)
             }
             .buttonStyle(PlainButtonStyle())
         }

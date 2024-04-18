@@ -12,42 +12,16 @@ struct DirectionsView: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 Text("Directions")
                     .font(.title)
                     .bold()
+                
+                .buttonStyle(PlainButtonStyle())
 
                 Spacer()
-
-                Button(action: {
-                    // close view
-                    viewModel.sheetHeight = SHEET_LOW
-                    withAnimation {
-                        viewModel.pickDirectionsView = false
-                        viewModel.directionInstructions = false
-                    }
-                    database.selectedNode = database.pathEnd
-                    database.resetPath()
-                }) {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .foregroundColor(.gray)
-                        .bold()
-                        .font(.system(size: 6, weight: .regular))
-                        .frame(
-                            width: 10,
-                            height: 10
-                        )
-                        .background(
-                            Circle()
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(width: 25, height: 25)
-                        )
-                }
-                .buttonStyle(PlainButtonStyle())
             }
-            .padding(.horizontal, 20)
             .padding(.top, 20)
         
             ScrollView {
@@ -58,6 +32,7 @@ struct DirectionsView: View {
                 }
             }
         }
+        .padding(.horizontal, 20)
     }
 }
 

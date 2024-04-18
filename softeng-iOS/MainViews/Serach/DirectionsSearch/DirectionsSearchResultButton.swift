@@ -41,6 +41,7 @@ struct DirectionsSearchResultButton: View {
             // jump to start if path is complete
             if let _ = database.path, let floor = database.pathStart?.floor {
                 viewModel.setFloor(floor: floor)
+                viewModel.directionsExpanded = false
             }
         }) {
             SearchResult(node: node)

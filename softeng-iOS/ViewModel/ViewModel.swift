@@ -49,7 +49,9 @@ class ViewModel: ObservableObject {
     }
     
     func focusNode() {
-        self.directionInstructions = false
+        withAnimation {
+            self.directionInstructions = false
+        }
         sheetHeight = SHEET_MEDIUM
     }
     
