@@ -141,7 +141,7 @@ class Node: Identifiable, Equatable {
                 return Image(uiImage: UIImage(named: "ATMIcon")!)
             }
             return Image(uiImage: UIImage(named: "ServiceIcon")!)
-        case .ELEV: return Image(uiImage: UIImage(named: "ElevatorIcon2")!)
+        case .ELEV: return Image(uiImage: UIImage(named: "ElevatorIcon1")!)
         case .EXIT: return Image(uiImage: UIImage(named: "ExitIcon")!)
         case .STAI: return Image(uiImage: UIImage(named: "EscalatorIcon")!)
         case .RETL: 
