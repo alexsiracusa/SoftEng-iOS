@@ -100,7 +100,7 @@ struct DirectionsPicker: View {
                             viewModel.pickDirectionsView = false
                             viewModel.directionInstructions = false
                         }
-                        database.selectedNode = database.pathEnd
+                        database.selectedNode = database.pathEnd != nil ? database.pathEnd : database.pathStart
                         database.resetPath()
                     }) {
                         Image(systemName: "xmark")
@@ -111,6 +111,22 @@ struct DirectionsPicker: View {
                     .frame(height: 42)
                     
                     Spacer()
+                    
+                    Button(action: {
+                        // swap start and end
+                        let start = database.pathStart
+                        let end = database.pathEnd
+                        
+                        database.pathStart = nil
+                        database.pathStart = end
+                        database.pathEnd = start
+                    }) {
+                        Image(systemName: "arrow.up.arrow.down")
+                            .font(.system(size: 18))
+                            .bold()
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(height: 42)
                 }
                 .frame(width: 55, height: 95)
             }

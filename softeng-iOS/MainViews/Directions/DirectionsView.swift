@@ -22,40 +22,30 @@ struct DirectionsView: View {
 
                 Spacer()
                 
-                if let start = database.pathStart {
-                    Button(action: {
-                        viewModel.jumpToNode(node: start)
-                    }) {
-                        Image(systemName: "location.circle")
-                            .font(.system(size: 22))
-                            .bold()
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .frame(width: 30)
-                } 
-                else {
-                    Spacer()
-                        .frame(width: 30)
+                Button(action: {
+                    viewModel.jumpToNode(node: database.pathStart)
+                }) {
+                    Image(systemName: "location.circle")
+                        .font(.system(size: 22))
+                        .bold()
                 }
+                .buttonStyle(PlainButtonStyle())
+                .disabled(database.pathStart == nil)
+                .frame(width: 30)
                 
                 Spacer()
                     .frame(width: 15)
                 
-                if let end = database.pathEnd {
-                    Button(action: {
-                        viewModel.jumpToNode(node: end)
-                    }) {
-                        Image(systemName: "arrow.triangle.turn.up.right.circle")
-                            .font(.system(size: 22))
-                            .bold()
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .frame(width: 30)
+                Button(action: {
+                    viewModel.jumpToNode(node: database.pathEnd)
+                }) {
+                    Image(systemName: "arrow.triangle.turn.up.right.circle")
+                        .font(.system(size: 22))
+                        .bold()
                 }
-                else {
-                    Spacer()
-                        .frame(width: 30)
-                }
+                .buttonStyle(PlainButtonStyle())
+                .disabled(database.pathEnd == nil)
+                .frame(width: 30)
             }
             .padding(.top, 20)
         

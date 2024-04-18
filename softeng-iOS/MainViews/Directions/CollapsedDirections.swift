@@ -46,7 +46,7 @@ struct CollapsedDirections: View {
                     viewModel.pickDirectionsView = false
                     viewModel.directionInstructions = false
                 }
-                database.selectedNode = database.pathEnd
+                database.selectedNode = database.pathEnd != nil ? database.pathEnd : database.pathStart
                 database.resetPath()
             }) {
                 Circle()
