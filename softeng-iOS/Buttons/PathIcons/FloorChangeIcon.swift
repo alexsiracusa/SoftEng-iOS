@@ -16,7 +16,6 @@ struct FloorChangeIcon: View {
     
     var body: some View {
         Button(action: {
-            print("pressed")
             viewModel.setFloor(floor: floor)
         }) {
             Circle()

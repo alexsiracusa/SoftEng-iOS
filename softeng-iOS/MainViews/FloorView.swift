@@ -85,7 +85,7 @@ struct FloorView: View {
     
     func renderIcon(icon: PathIcon) -> AnyView {
         AnyView (
-            icon.view(size: 20)
+            icon.view(size: 30)
                 .position(getPoint(node: icon.node))
         )
     }
@@ -102,7 +102,7 @@ struct FloorView: View {
                     path.addLine(to: getPoint(node: node))
                 }
             }
-            .stroke(.red, lineWidth: 2)
+            .stroke(COLOR_AC_P, lineWidth: 4)
         )
     }
 }
