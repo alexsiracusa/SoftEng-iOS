@@ -149,6 +149,42 @@ class DatabaseEnvironment: ObservableObject {
         path = nil
     }
     
+    func displayNodes(zoom: CGFloat) -> [Node] {
+        let displayGroup: [Set<NodeType>] = [
+            Set<NodeType>([.EXIT]),
+            Set<NodeType>([.STAI, .ELEV]),
+            Set<NodeType>([.INFO, .DEPT, .REST, .BATH]),
+            Set<NodeType>([.SERV, .RETL, .LABS, .CONF]),
+            Set<NodeType>([.HALL]),
+        ]
+        
+        return nodes
+            .filter({!displayGroup[4].contains($0.type)})
+            .filter({!displayGroup[3].contains($0.type) || zoom > 6})
+            .filter({!displayGroup[2].contains($0.type) || zoom > 4})
+            .filter({!displayGroup[1].contains($0.type) || zoom > 2})
+            .filter({!displayGroup[0].contains($0.type) || zoom > 0})
+   
+        
+        //    case .EXIT: return "Exit"
+        
+        //    case .ELEV: return "Elevator"
+        //    case .STAI: return "Stairs"
+        
+        //    case .INFO: return "Information"
+        //    case .DEPT: return "Department"
+        //    case .REST: return "Restroom"
+        //    case .BATH: return "Bathroom"
+        
+        //    case .SERV: return "Service"
+        //    case .RETL: return "Retail"
+        //    case .LABS: return "Labratory"
+        //    case .CONF: return "Conference"
+        
+//    case .HALL: return "Hallway"
+        
+    }
+    
 }
 
 

@@ -79,7 +79,7 @@ enum NodeType: String {
         case .SERV: return "Service"
         case .ELEV: return "Elevator"
         case .EXIT: return "Exit"
-        case .STAI: return "Staris"
+        case .STAI: return "Stairs"
         case .RETL: return "Retail"
         case .INFO: return "Information"
         case .BATH: return "Bathroom"

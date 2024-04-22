@@ -254,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				FA09CC162BC309D900BD7F52 /* Directions */,
-				FABCE0962BD05206007694BC /* PathIcons */,
+				FABCE0962BD05206007694BC /* MapIcons */,
 				FA09CC152BC309C300BD7F52 /* FloorSelector */,
 			);
 			path = Buttons;
@@ -328,13 +328,13 @@
 			path = Tables;
 			sourceTree = "<group>";
 		};
-		FABCE0962BD05206007694BC /* PathIcons */ = {
+		FABCE0962BD05206007694BC /* MapIcons */ = {
 			isa = PBXGroup;
 			children = (
 				FABCE0972BD0522F007694BC /* NodeIcon.swift */,
 				FABCE0992BD05239007694BC /* FloorChangeIcon.swift */,
 			);
-			path = PathIcons;
+			path = MapIcons;
 			sourceTree = "<group>";
 		};
 		FAEC47E32BB5E30800515518 = {

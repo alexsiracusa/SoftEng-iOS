@@ -70,6 +70,9 @@ struct FloorView: View {
                             }
                         }
                     }
+                    else {
+                        renderExploreIcons()
+                    }
                 }
                 .onChange(of: mapSize) {
                     self.origin = CGPoint(
@@ -83,9 +86,11 @@ struct FloorView: View {
         .background(COLOR_BG_P)
     }
     
+    let iconSize: CGFloat = 30
+    
     func renderIcon(icon: PathIcon) -> AnyView {
         AnyView (
-            icon.view(size: 30)
+            icon.view(size: iconSize)
                 .position(getPoint(node: icon.node))
         )
     }
@@ -103,6 +108,18 @@ struct FloorView: View {
                 }
             }
             .stroke(COLOR_AC_P, lineWidth: 4)
+        )
+    }
+    
+    func renderExploreIcons() -> AnyView {
+        return AnyView(
+            ForEach(
+                database.displayNodes(zoom: zoom)
+                    .filter({$0.floor == viewModel.selectedFloor.floor})
+            ) { node in
+                NodeIcon(node: node, size: iconSize)
+                    .position(getPoint(node: node))
+            }
         )
     }
 }

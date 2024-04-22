@@ -41,7 +41,14 @@ class ViewModel: ObservableObject {
     @Published var directionInstructions: Bool = false
     @Published var directionsExpanded: Bool = true
     
+    private func presentSheet() {
+        if (!sheet) {
+            sheet = true
+        }
+    }
+    
     func focusDirections() {
+        presentSheet()
         withAnimation {
             self.pickDirectionsView = true
         }
@@ -49,6 +56,7 @@ class ViewModel: ObservableObject {
     }
     
     func focusNode() {
+        presentSheet()
         withAnimation {
             self.directionInstructions = false
         }
