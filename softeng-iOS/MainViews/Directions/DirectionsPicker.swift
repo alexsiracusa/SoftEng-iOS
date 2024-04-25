@@ -140,6 +140,6 @@ struct DirectionsPicker: View {
 
 #Preview {
     DirectionsPicker()
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

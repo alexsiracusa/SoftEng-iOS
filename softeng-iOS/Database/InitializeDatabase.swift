@@ -8,7 +8,15 @@
 import Foundation
 import FMDB
 
-func setupDatabase() -> FMDatabase {
+func setupDatabase() async -> FMDatabase {
+    do {
+        let map = try await getMap()
+        print(map)
+    }
+    catch {
+        print(error.localizedDescription)
+    }
+    
     let db = getDB()
     runSchema(db: db)
     insertNodes(into: db)

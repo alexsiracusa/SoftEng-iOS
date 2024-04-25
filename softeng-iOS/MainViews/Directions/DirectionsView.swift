@@ -63,6 +63,6 @@ struct DirectionsView: View {
 
 #Preview {
     DirectionsView()
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

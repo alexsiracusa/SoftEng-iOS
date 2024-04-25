@@ -126,6 +126,6 @@ struct FloorView: View {
 
 #Preview {
     FloorView(floor: .constant(FloorData(floor: .F1, image_name: "01_thefirstfloor")))
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

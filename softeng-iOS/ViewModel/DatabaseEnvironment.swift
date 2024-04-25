@@ -14,9 +14,9 @@ class DatabaseEnvironment: ObservableObject {
     @Published var loaded: Bool = false
     
     // raw data
-    var fmdb: FMDatabase
-    @Published var nodes: [Node]
-    @Published var edges: [Edge]
+    var fmdb: FMDatabase!
+    @Published var nodes: [Node]!
+    @Published var edges: [Edge]!
     
     //
     @Published var selectedNode: Node? = nil
@@ -35,34 +35,87 @@ class DatabaseEnvironment: ObservableObject {
     }
     
     // quick lookup for pathfinding
-    private var nodeDict: [String: Node]
-    private var edgeDict: [String: [Edge]]
+    private var nodeDict: [String: Node]!
+    private var edgeDict: [String: [Edge]]!
     private var graph: Graph!
     
     // quick lookup for searching
-    private var nodeSearchList: [String]
-    private var nodeSearchDict: [String: Node]
+    private var nodeSearchList: [String]!
+    private var nodeSearchDict: [String: Node]!
     
     init() {
-        fmdb = setupDatabase()
+//        fmdb = setupDatabase()
+//        
+//        self.nodes = []
+//        self.edges = []
+//        
+//        self.nodeDict = [:]
+//        self.edgeDict = [:]
+//        self.graph = nil
+//        
+//        self.nodeSearchList = []
+//        self.nodeSearchDict = [:]
+//        
+//        do {
+//            try self.loadDatabase()
+//        }
+//        catch {
+//            print("failed to read map data")
+//        }
         
-        self.nodes = []
-        self.edges = []
+    }
+    
+    static var example: DatabaseEnvironment? {
+        let database = DatabaseEnvironment()
         
-        self.nodeDict = [:]
-        self.edgeDict = [:]
-        self.graph = nil
+        let db = getDB()
+        runSchema(db: db)
+        insertNodes(into: db)
+        insertEdges(into: db)
+        database.fmdb = db
         
-        self.nodeSearchList = []
-        self.nodeSearchDict = [:]
-        
+        database.nodes = []
+        database.edges = []
+
+        database.nodeDict = [:]
+        database.edgeDict = [:]
+        database.graph = nil
+
+        database.nodeSearchList = []
+        database.nodeSearchDict = [:]
+
         do {
-            try self.loadDatabase()
+            try database.loadDatabase()
+            return database
         }
         catch {
             print("failed to read map data")
+            return nil
         }
-        
+    }
+    
+    func load() async {
+        Task { @MainActor in
+            self.fmdb = await setupDatabase()
+            
+            self.nodes = []
+            self.edges = []
+            
+            self.nodeDict = [:]
+            self.edgeDict = [:]
+            self.graph = nil
+            
+            self.nodeSearchList = []
+            self.nodeSearchDict = [:]
+            
+            do {
+                try self.loadDatabase()
+                self.loaded = true
+            }
+            catch {
+                print("failed to read map data")
+            }
+        }
     }
     
     func loadDatabase() throws {

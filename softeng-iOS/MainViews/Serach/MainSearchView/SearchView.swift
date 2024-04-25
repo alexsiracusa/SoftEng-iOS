@@ -177,6 +177,6 @@ struct ViewOffsetKey: PreferenceKey {
 
 #Preview {
     SearchView()
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

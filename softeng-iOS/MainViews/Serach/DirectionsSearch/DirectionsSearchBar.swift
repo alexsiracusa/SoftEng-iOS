@@ -96,6 +96,6 @@ struct DirectionsSearchBar: View {
         scrollTarget: .constant(0),
         size: 40
     )
-    .environmentObject(DatabaseEnvironment())
+    .environmentObject(DatabaseEnvironment.example!)
     .environmentObject(ViewModel())
 }

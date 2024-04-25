@@ -17,6 +17,7 @@ func getCSVData(from: URL) -> [[String]]? {
         return parsedCSV
     }
     catch {
+        print(error)
         return nil
     }
 }
