@@ -107,7 +107,7 @@ struct FloorView: View {
                     path.addLine(to: getPoint(node: node))
                 }
             }
-            .stroke(COLOR_AC_P, lineWidth: 4)
+                .stroke(.red, lineWidth: 2)
         )
     }
     
