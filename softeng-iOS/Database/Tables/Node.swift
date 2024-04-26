@@ -112,15 +112,15 @@ class Node: Identifiable, Equatable {
     let short_name: String
     
     var x_percent: Double {
-        return Double(self.xcoord) / 5000
+        return Double(self.position.x) / 5000
     }
     
     var y_percent: Double {
-        return Double(self.ycoord) / 3400
+        return Double(self.position.y) / 3400
     }
     
     var position: CGPoint {
-        return CGPoint(x: self.xcoord, y: self.ycoord)
+        return CGPoint(x: self.xcoord, y: self.ycoord) + FLOOR_OFFSETS[self.floor]!
     }
     
     var searchString: String {
