@@ -32,21 +32,30 @@ struct DirectionsPicker: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top, spacing: 0) {
-                VStack {
-                    Button(action: {
-                        // collapse view
-                        viewModel.directionsExpanded = false
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .font(.system(size: 18))
-                            .bold()
+                HStack(spacing: 0) {
+                    VStack {
+                        Button(action: {
+                            // collapse view
+                            viewModel.directionsExpanded = false
+                        }) {
+                            Image(systemName: "chevron.backward")
+                                .font(.system(size: 18))
+                                .bold()
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(height: 42)
+                        
+                        Spacer()
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .frame(height: 42)
                     
                     Spacer()
+                        .frame(minWidth: 0)
+                    
+                    ToFromIcon(width: 16)
                 }
-                .frame(width: 55, height: 95)
+                .padding(.leading, 20)
+                .padding(.trailing, 8)
+                .frame(width: 70, height: 95)
                 
                 VStack(spacing: 10) {
                     Button(action: {
@@ -128,7 +137,7 @@ struct DirectionsPicker: View {
                     .buttonStyle(PlainButtonStyle())
                     .frame(height: 42)
                 }
-                .frame(width: 55, height: 95)
+                .frame(width: 45, height: 95)
             }
             
             Spacer()

@@ -29,6 +29,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }
