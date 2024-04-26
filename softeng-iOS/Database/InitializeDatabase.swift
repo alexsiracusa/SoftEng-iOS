@@ -10,18 +10,27 @@ import FMDB
 
 func setupDatabase() async -> FMDatabase {
     do {
-        let map = try await getMap()
+        let map = try await API.getMap()
         print(map)
     }
     catch {
         print(error.localizedDescription)
     }
     
+    let new = dbExists()
     let db = getDB()
-    runSchema(db: db)
-    insertNodes(into: db)
-    insertEdges(into: db)
+    
+    if new {
+        runSchema(db: db)
+        insertNodes(into: db)
+        insertEdges(into: db)
+    }
     return db
+}
+
+func dbExists() -> Bool {
+    let databasePath = URL.applicationSupportDirectory.appending(path: "softeng").appending(path: "database.sqlite")
+    return !FileManager.default.fileExists(atPath: databasePath.path)
 }
 
 func getDB() -> FMDatabase {
@@ -31,7 +40,7 @@ func getDB() -> FMDatabase {
     let db = FMDatabase(url: databaseFile)
     db.open()
     
-    print("Database created at: \(databaseDir) ")
+    print("Database created at: \(databaseDir.absoluteString) ")
     return db
 }
 
