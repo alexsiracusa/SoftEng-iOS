@@ -43,27 +43,7 @@ class DatabaseEnvironment: ObservableObject {
     private var nodeSearchList: [String]!
     private var nodeSearchDict: [String: Node]!
     
-    init() {
-//        fmdb = setupDatabase()
-//        
-//        self.nodes = []
-//        self.edges = []
-//        
-//        self.nodeDict = [:]
-//        self.edgeDict = [:]
-//        self.graph = nil
-//        
-//        self.nodeSearchList = []
-//        self.nodeSearchDict = [:]
-//        
-//        do {
-//            try self.loadDatabase()
-//        }
-//        catch {
-//            print("failed to read map data")
-//        }
-        
-    }
+    init() {}
     
     static var example: DatabaseEnvironment? {
         let database = DatabaseEnvironment()

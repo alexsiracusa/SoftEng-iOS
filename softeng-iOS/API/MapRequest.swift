@@ -37,35 +37,6 @@ class API: NSObject, URLSessionTaskDelegate {
 }
 
 class InsecureDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
-    //    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-    //       //Trust the certificate even if not valid
-    //       let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-    //
-    //       completionHandler(.useCredential, urlCredential)
-    //    }
-    
-//    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-//        completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
-//    }
-    
-//    func urlSession(_ session: URLSession,
-//            didReceive challenge: URLAuthenticationChallenge,
-//            completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-//        {
-//        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-//            if let certFile = Bundle.main.path(forResource: "my-cert", ofType: "cer"),
-//                let data = try? Data(contentsOf: URL(fileURLWithPath: certFile)),
-//                let cert = SecCertificateCreateWithData(nil, data as CFData),
-//                let trust = challenge.protectionSpace.serverTrust
-//            {
-//                SecTrustSetAnchorCertificates(trust, [cert] as CFArray)
-//                completionHandler(.useCredential, URLCredential(trust: trust))
-//            } else {
-//                completionHandler(.cancelAuthenticationChallenge, nil)
-//            }
-//        }
-//    }
-    
     public func urlSession(_ session: URLSession,
         didReceive challenge: URLAuthenticationChallenge,
         completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
