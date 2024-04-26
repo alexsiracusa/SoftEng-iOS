@@ -8,6 +8,9 @@
 import Foundation
 import FMDB
 
+let NODE_COLUMNS = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
+let EDGE_COLUMNS = ["id", "start_id", "end_id", "blocked", "heat"]
+
 func getCSVData(from: URL) -> [[String]]? {
     do {
         let content = try String(contentsOfFile: from.path(), encoding: .utf8)
@@ -17,6 +20,7 @@ func getCSVData(from: URL) -> [[String]]? {
         return parsedCSV
     }
     catch {
+        print(error)
         return nil
     }
 }
@@ -34,10 +38,9 @@ func insertNodes(into: FMDatabase) {
         return
     }
     
-    let columns = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
     for row in rows.dropFirst() {
         do {
-            try insert(values: row, columns: columns, table: "Node", db: db)
+            try insert(values: row, columns: NODE_COLUMNS, table: "Node", db: db)
         } catch {
             print("failed to insert \(row) into Node")
         }
@@ -58,10 +61,9 @@ func insertEdges(into: FMDatabase) {
         return
     }
     
-    let columns = ["id", "start_id", "end_id"]
     for row in rows.dropFirst() {
         do {
-            try insert(values: row, columns: columns, table: "Edge", db: db)
+            try insert(values: row + ["0", "0"], columns: EDGE_COLUMNS, table: "Edge", db: db)
         } catch {
             print("failed to insert \(row) into Edge")
         }

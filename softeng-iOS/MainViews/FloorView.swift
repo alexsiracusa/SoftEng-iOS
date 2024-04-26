@@ -107,7 +107,7 @@ struct FloorView: View {
                     path.addLine(to: getPoint(node: node))
                 }
             }
-            .stroke(COLOR_AC_P, lineWidth: 4)
+                .stroke(.red, lineWidth: 2)
         )
     }
     
@@ -126,6 +126,6 @@ struct FloorView: View {
 
 #Preview {
     FloorView(floor: .constant(FloorData(floor: .F1, image_name: "01_thefirstfloor")))
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

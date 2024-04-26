@@ -69,6 +69,6 @@ struct CollapsedDirections: View {
 
 #Preview {
     CollapsedDirections()
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

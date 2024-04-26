@@ -59,6 +59,9 @@
 		FABCE0982BD0522F007694BC /* NodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCE0972BD0522F007694BC /* NodeIcon.swift */; };
 		FABCE09A2BD05239007694BC /* FloorChangeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCE0992BD05239007694BC /* FloorChangeIcon.swift */; };
 		FABCE09C2BD09ABF007694BC /* CollapsedDirections.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCE09B2BD09ABF007694BC /* CollapsedDirections.swift */; };
+		FACA0D292BDAF29D0035F0F8 /* MapRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA0D282BDAF29D0035F0F8 /* MapRequest.swift */; };
+		FACA0D2B2BDAF34D0035F0F8 /* WebsiteURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA0D2A2BDAF34D0035F0F8 /* WebsiteURL.swift */; };
+		FACA0D2D2BDAF4C00035F0F8 /* MapResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA0D2C2BDAF4C00035F0F8 /* MapResult.swift */; };
 		FAEC47F02BB5E30800515518 /* softeng_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */; };
 		FAEC47F22BB5E30800515518 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC47F12BB5E30800515518 /* ContentView.swift */; };
 		FAEC48032BB5E30900515518 /* softeng_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC48022BB5E30900515518 /* softeng_iOSTests.swift */; };
@@ -134,6 +137,10 @@
 		FABCE0972BD0522F007694BC /* NodeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeIcon.swift; sourceTree = "<group>"; };
 		FABCE0992BD05239007694BC /* FloorChangeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorChangeIcon.swift; sourceTree = "<group>"; };
 		FABCE09B2BD09ABF007694BC /* CollapsedDirections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedDirections.swift; sourceTree = "<group>"; };
+		FACA0D282BDAF29D0035F0F8 /* MapRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRequest.swift; sourceTree = "<group>"; };
+		FACA0D2A2BDAF34D0035F0F8 /* WebsiteURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteURL.swift; sourceTree = "<group>"; };
+		FACA0D2C2BDAF4C00035F0F8 /* MapResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapResult.swift; sourceTree = "<group>"; };
+		FACA0D2E2BDB28910035F0F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FAEC47EC2BB5E30800515518 /* softeng-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "softeng-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = softeng_iOSApp.swift; sourceTree = "<group>"; };
 		FAEC47F12BB5E30800515518 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -337,6 +344,16 @@
 			path = MapIcons;
 			sourceTree = "<group>";
 		};
+		FACA0D272BDAF27C0035F0F8 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FACA0D2A2BDAF34D0035F0F8 /* WebsiteURL.swift */,
+				FACA0D282BDAF29D0035F0F8 /* MapRequest.swift */,
+				FACA0D2C2BDAF4C00035F0F8 /* MapResult.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		FAEC47E32BB5E30800515518 = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +377,7 @@
 		FAEC47EE2BB5E30800515518 /* softeng-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				FACA0D2E2BDB28910035F0F8 /* Info.plist */,
 				FAEC47EF2BB5E30800515518 /* softeng_iOSApp.swift */,
 				FAEC47F12BB5E30800515518 /* ContentView.swift */,
 				FA18C9D92BBBA7DD00B8A96E /* ViewController.swift */,
@@ -368,6 +386,7 @@
 				FA18C9E02BBBAF3B00B8A96E /* Buttons */,
 				FA87A33C2BB84D450043C106 /* StaticData */,
 				FA87A37C2BB8837F0043C106 /* Database */,
+				FACA0D272BDAF27C0035F0F8 /* API */,
 				FA87A3CA2BB9AAC00043C106 /* Utility */,
 				FAEC47F52BB5E30900515518 /* Assets.xcassets */,
 				FAEC47F72BB5E30900515518 /* Preview Content */,
@@ -567,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA18C9E22BBBAF5200B8A96E /* FloorSelector.swift in Sources */,
+				FACA0D2B2BDAF34D0035F0F8 /* WebsiteURL.swift in Sources */,
 				FA09CC6A2BCB8F9C00BD7F52 /* DirectionsSearchView.swift in Sources */,
 				FA09CC1C2BC30E4200BD7F52 /* RoundedButton.swift in Sources */,
 				FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */,
@@ -578,6 +598,8 @@
 				FAF8F2752BBC8A6100ACD763 /* SearchView.swift in Sources */,
 				FAEC47F22BB5E30800515518 /* ContentView.swift in Sources */,
 				FA87A3532BB85AC90043C106 /* ImportGraphData.swift in Sources */,
+				FACA0D292BDAF29D0035F0F8 /* MapRequest.swift in Sources */,
+				FACA0D2D2BDAF4C00035F0F8 /* MapResult.swift in Sources */,
 				FA87A3DA2BBA0ABB0043C106 /* Node.swift in Sources */,
 				FA79763F2BBBC637009D90C3 /* FloorSelectorIcon.swift in Sources */,
 				FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */,
@@ -778,8 +800,8 @@
 				DEVELOPMENT_TEAM = 9LZB553FST;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "softeng-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
@@ -807,8 +829,8 @@
 				DEVELOPMENT_TEAM = 9LZB553FST;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "softeng-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;

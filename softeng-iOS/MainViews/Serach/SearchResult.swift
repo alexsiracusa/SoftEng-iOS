@@ -50,6 +50,6 @@ struct SearchResult: View {
 
 #Preview {
     SearchResult(node: Node.example)
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

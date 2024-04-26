@@ -151,6 +151,6 @@ struct DirectionsSearchView: View {
 
 #Preview {
     DirectionsSearchView(toSet: .START)
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

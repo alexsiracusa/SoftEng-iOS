@@ -7,13 +7,23 @@
 
 import SwiftUI
 import FMDB
-//import LazyPager
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel: ViewModel
     @EnvironmentObject var database: DatabaseEnvironment
     
     var body: some View {
-        ViewController()
+        if database.loaded {
+            ViewController()
+        }
+        else {
+            Text("Loading")
+                .onAppear() {
+                    Task {
+                        await database.load()
+                    }
+                }
+        }
     }
 }
 

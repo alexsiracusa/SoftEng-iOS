@@ -45,6 +45,6 @@ struct SearchResultButton: View {
         search: .constant(""),
         searchResults: .constant(nil)
     )
-    .environmentObject(DatabaseEnvironment())
+    .environmentObject(DatabaseEnvironment.example!)
     .environmentObject(ViewModel())
 }

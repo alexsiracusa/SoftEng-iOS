@@ -59,6 +59,6 @@ struct DirectionsSearchResultButton: View {
         searchResults: .constant(nil),
         toSet: .START
     )
-    .environmentObject(DatabaseEnvironment())
+    .environmentObject(DatabaseEnvironment.example!)
     .environmentObject(ViewModel())
 }
