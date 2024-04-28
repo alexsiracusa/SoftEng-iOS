@@ -73,11 +73,16 @@ struct SearchBar: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                         else {
-                            Image("Brigham_and_Womens_Hospital_Logo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding((3/40) * size)
-                                .padding(.leading, (3/40) * size)
+                            Button(action: {
+                                viewModel.path.append(Page.CREDITS)
+                            }) {
+                                Image("Brigham_and_Womens_Hospital_Logo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding((3/40) * size)
+                                    .padding(.leading, (3/40) * size)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .frame(
@@ -124,6 +129,22 @@ struct SearchBar: View {
                             height: (5/7) * size
                         )
                         .padding(.trailing, (3/40) * size)
+                    }
+                    // Gift Request Icon
+                    else {
+                        Button(action: {
+                            viewModel.path.append(Page.GIFT_REQUEST)
+                        }) {
+                            Image(systemName: "gift.circle")
+                                .foregroundColor(COLOR_LOGO_T)
+                                .font(.system(size: (5/7) * size))
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(
+                            width: (5/7) * size,
+                            height: (5/7) * size
+                        )
+                        .padding(.trailing, (2/40) * size)
                     }
                 }
                 .padding(5)

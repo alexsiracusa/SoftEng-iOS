@@ -32,7 +32,10 @@ let COLOR_AC_S = Color(hex: 0xf6bd38)
 
 let COLOR_LOGO_P = Color(hex: 0x009ca6)
 let COLOR_LOGO_S = Color(hex: 0x003a96)
+let COLOR_LOGO_T = Color(hex: 0x009ca6)
 let COLOR_ICON = Color(hex: 0x6b6d6f)
+
+
 
 
 
