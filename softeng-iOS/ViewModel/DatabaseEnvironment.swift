@@ -10,13 +10,16 @@ import FMDB
 import Fuse
 
 class DatabaseEnvironment: ObservableObject {
-    // if the view has loaded data from the database
+    // if the view has loaded all data from the database
     @Published var loaded: Bool = false
     
     // raw data
     var fmdb: FMDatabase!
     @Published var nodes: [Node]!
     @Published var edges: [Edge]!
+    
+    // gift request data
+    @Published var cartItems: [CartItem]?
     
     //
     @Published var selectedNode: Node? = nil
@@ -88,12 +91,22 @@ class DatabaseEnvironment: ObservableObject {
             self.nodeSearchList = []
             self.nodeSearchDict = [:]
             
+            // try to setup database (needs to succeed)
             do {
                 try self.loadDatabase()
                 self.loaded = true
             }
             catch {
                 print("failed to read map data")
+            }
+            
+            // try to fetch cart items (is allowed to fail)
+            do {
+                try await self.loadCartItems()
+            }
+            catch {
+                print(error)
+                print("failed to get cart items on launch")
             }
         }
     }
@@ -114,6 +127,12 @@ class DatabaseEnvironment: ObservableObject {
         catch let error {
             self.loaded = false
             throw error
+        }
+    }
+    
+    func loadCartItems() async throws {
+        Task { @MainActor in
+            self.cartItems = try await API.getCartItems()
         }
     }
     

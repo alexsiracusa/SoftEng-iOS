@@ -7,9 +7,7 @@
 
 import Foundation
 
-class API: NSObject, URLSessionTaskDelegate {
-    static let delegate = InsecureDelegate()
-    
+extension API {
     static func getMap() async throws -> MapResult {
         let route = "/api/map"
         guard let url = URL(string: WEBSITE_URL + route) else {
@@ -32,19 +30,6 @@ class API: NSObject, URLSessionTaskDelegate {
         }
         catch {
             throw error
-        }
-    }
-}
-
-class InsecureDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
-    public func urlSession(_ session: URLSession,
-        didReceive challenge: URLAuthenticationChallenge,
-        completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-    {
-        if challenge.protectionSpace.serverTrust != nil {
-            completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
-        } else {
-            completionHandler(.useCredential, nil)
         }
     }
 }

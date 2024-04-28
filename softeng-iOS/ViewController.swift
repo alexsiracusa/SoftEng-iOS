@@ -69,7 +69,7 @@ struct ViewController: View {
                 .navigationDestination(for: Page.self) { value in
                     switch value {
                     case .GIFT_REQUEST:
-                        Text("Gift Request")
+                        GiftRequest()
                     case .CREDITS:
                         Text("Credits")
                     }
