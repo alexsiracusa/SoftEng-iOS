@@ -22,16 +22,21 @@ struct AddToCartButton: View {
                     }
                 } label: {}
             } label: {
-                Text("Quantity: \(quantity)")
-                    .font(.system(size: (3/8) * size))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, (1/2) * size)
-                    .padding(.vertical, (5/16) * size)
-                    .background {
-                        RoundedRectangle(cornerRadius: (1/2) * size)
-                            .fill(COLOR_LOGO_P)
-                            .frame(height: size)
-                    }
+                HStack {
+                    Text("Quantity: \(quantity)")
+                        .font(.system(size: (3/8) * size))
+                    
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.system(size: (3/8) * size))
+                }
+                .padding(.horizontal, (1/2) * size)
+                .padding(.vertical, (5/16) * size)
+                .background {
+                    RoundedRectangle(cornerRadius: (1/2) * size)
+                        .fill(COLOR_LOGO_P)
+                        .frame(height: size)
+                }
+                .foregroundStyle(.white)
             }
             .pickerStyle(.inline)
             .buttonStyle(PlainButtonStyle())
