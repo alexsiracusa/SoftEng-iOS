@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GiftRequest: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
@@ -20,8 +22,45 @@ struct GiftRequest: View {
                             .padding(.horizontal, 10)
                     }
                 }
+                .padding(.vertical, 10)
             }
-            .navigationTitle("Gift Request")
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 15))
+                                .bold()
+                            Text("Back")
+                        }
+                    }
+                }
+                
+                ToolbarItem(placement: .principal){
+                    HStack {
+                        Text("GiftRequest")
+                            .font(.headline)
+                    }
+                }
+                
+                
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button {
+                        // action
+                    } label: {
+                        HStack {
+                            Text("Cart")
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 15))
+                                .bold()
+                        }
+                    }
+                }
+            }
+            .tint(COLOR_LOGO_P)
         }
         else {
             Text("Loading")
@@ -35,7 +74,9 @@ struct GiftRequest: View {
 }
 
 #Preview {
-    GiftRequest()
-        .environmentObject(DatabaseEnvironment())
-        .environmentObject(ViewModel())
+    NavigationView {
+        GiftRequest()
+            .environmentObject(DatabaseEnvironment())
+            .environmentObject(ViewModel())
+    }
 }

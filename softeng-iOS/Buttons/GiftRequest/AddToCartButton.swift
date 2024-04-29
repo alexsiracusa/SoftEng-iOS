@@ -29,7 +29,7 @@ struct AddToCartButton: View {
                     .padding(.vertical, (5/16) * size)
                     .background {
                         RoundedRectangle(cornerRadius: (1/2) * size)
-                            .fill(.blue)
+                            .fill(COLOR_LOGO_P)
                             .frame(height: size)
                     }
             }
@@ -43,7 +43,7 @@ struct AddToCartButton: View {
                     size: size,
                     text: "Add Item",
                     textColor: .white,
-                    backgroundColor: .blue
+                    backgroundColor: COLOR_LOGO_P
                 )
             }
             .buttonStyle(PlainButtonStyle())
