@@ -14,8 +14,11 @@ struct GiftRequest: View {
     var body: some View {
         if let items = database.cartItems {
             ScrollView {
-                ForEach(items, id: \.id) { item in
-                    Text(item.name)
+                VStack(spacing: 10) {
+                    ForEach(items, id: \.id) { item in
+                        CartItemCard(item: item)
+                            .padding(.horizontal, 10)
+                    }
                 }
             }
             .navigationTitle("Gift Request")

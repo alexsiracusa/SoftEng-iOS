@@ -131,7 +131,7 @@ struct SearchBar: View {
                         .padding(.trailing, (3/40) * size)
                     }
                     // Gift Request Icon
-                    else {
+                    else if !fullscreen() {
                         Button(action: {
                             viewModel.path.append(Page.GIFT_REQUEST)
                         }) {
