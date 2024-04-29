@@ -33,6 +33,18 @@ class DatabaseEnvironment: ObservableObject {
     func cartSize() -> Int {
         return cart.values.reduce(0, +)
     }
+    func cartTotal() -> Double {
+        return cartSubTotal() + cartTax() + cartShipping()
+    }
+    func cartSubTotal() -> Double {
+        return cart.keys.reduce(0, {$0 + ($1.priceDouble ?? 0)})
+    }
+    func cartTax() -> Double {
+        return 0.15 * cart.keys.reduce(0, {$0 + ($1.priceDouble ?? 0)})
+    }
+    func cartShipping() -> Double {
+        return 2.99
+    }
     
     //
     @Published var selectedNode: Node? = nil

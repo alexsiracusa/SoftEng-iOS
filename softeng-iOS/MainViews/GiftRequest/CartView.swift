@@ -16,13 +16,21 @@ struct CartView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(database.cart.sorted(by: {$0.key.id > $1.key.id}), id: \.key.id) { item, quantity in
-                    CartItemCard(item: item, checkout: true)
+                VStack(spacing: 10) {
+                    ForEach(database.cart.sorted(by: {$0.key.id > $1.key.id}), id: \.key.id) { item, quantity in
+                        CartItemCard(item: item, checkout: true)
+                    }
                 }
+                
+                Divider()
+                    .padding(.vertical, 15)
+                
+                CartCheckout()
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 15)
         }
+        .padding(.bottom, 15)
         .customNavigationBar(title: "Cart", next: "Checkout", nextPage: .CHECKOUT)
     }
 }
