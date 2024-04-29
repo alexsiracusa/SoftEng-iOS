@@ -9,13 +9,16 @@ import SwiftUI
 
 struct CartItemCard: View {
     let item: CartItem
+    let height: CGFloat
     let checkout: Bool
     
     init(
         item: CartItem,
+        height: CGFloat = 120,
         checkout: Bool = false
     ) {
         self.item = item
+        self.height = height
         self.checkout = checkout
     }
     
@@ -25,14 +28,14 @@ struct CartItemCard: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 120)
+                    .frame(width: (5/6) * height, height: height)
                     .clipped()
             } placeholder: {
                 Color.gray
                     .opacity(0.4)
-                    .frame(width: 100, height: 120)
+                    .frame(width: (5/6) * height, height: height)
             }
-            .cornerRadius(8)
+            .clipShape(RoundedRectangle(cornerRadius: checkout ? 0 : 8))
             
             VStack(alignment: .leading) {
                 HStack {
@@ -60,8 +63,15 @@ struct CartItemCard: View {
             }
             .padding(.vertical, 5)
             .padding(.leading, 5)
+            .padding(.trailing, checkout ? (1/6) * height : 0)
         }
-        .frame(height: 120)
+        .frame(height: height)
+        .clipShape(RoundedRectangle(cornerRadius: checkout ? (1/4) * height : 0))
+        .background(
+            Color.white
+                .clipShape(RoundedRectangle(cornerRadius: checkout ? (1/4) * height : 0))
+                .shadow(radius: checkout ? 8 : 0)
+        )
     }
 }
 
@@ -71,6 +81,7 @@ struct CartItemCard: View {
         CartItemCard(item: CART_ITEMS[1], checkout: true)
         CartItemCard(item: CART_ITEMS[2], checkout: true)
     }
+    .padding(.horizontal, 10)
     .environmentObject(DatabaseEnvironment.example!)
     .environmentObject(ViewModel())
 }

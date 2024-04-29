@@ -34,7 +34,6 @@
 		FA4E08332BDF08AE000EE0D3 /* CartItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08322BDF08AE000EE0D3 /* CartItems.swift */; };
 		FA4E08352BDF08E1000EE0D3 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08342BDF08E1000EE0D3 /* CartItem.swift */; };
 		FA4E08372BDF099B000EE0D3 /* CartItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08362BDF099B000EE0D3 /* CartItemsRequest.swift */; };
-		FA4E083B2BDF11BE000EE0D3 /* GiftShopCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E083A2BDF11BE000EE0D3 /* GiftShopCard.swift */; };
 		FA4E083D2BDF17AB000EE0D3 /* AddToCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E083C2BDF17AB000EE0D3 /* AddToCartButton.swift */; };
 		FA4E083F2BDF285C000EE0D3 /* RoundedSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E083E2BDF285C000EE0D3 /* RoundedSquareButton.swift */; };
 		FA4E08442BDF33F2000EE0D3 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08432BDF33F2000EE0D3 /* CartView.swift */; };
@@ -133,7 +132,6 @@
 		FA4E08322BDF08AE000EE0D3 /* CartItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItems.swift; sourceTree = "<group>"; };
 		FA4E08342BDF08E1000EE0D3 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		FA4E08362BDF099B000EE0D3 /* CartItemsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemsRequest.swift; sourceTree = "<group>"; };
-		FA4E083A2BDF11BE000EE0D3 /* GiftShopCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftShopCard.swift; sourceTree = "<group>"; };
 		FA4E083C2BDF17AB000EE0D3 /* AddToCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartButton.swift; sourceTree = "<group>"; };
 		FA4E083E2BDF285C000EE0D3 /* RoundedSquareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedSquareButton.swift; sourceTree = "<group>"; };
 		FA4E08432BDF33F2000EE0D3 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 				FA4E08302BDF0837000EE0D3 /* GiftRequest.swift */,
 				FA4E08432BDF33F2000EE0D3 /* CartView.swift */,
 				FA4E08452BDF33FC000EE0D3 /* CheckoutView.swift */,
-				FA4E083A2BDF11BE000EE0D3 /* GiftShopCard.swift */,
 				FA4E08492BE016F1000EE0D3 /* CartItemCard.swift */,
 				FA4E08472BDF3855000EE0D3 /* CustomNavigationBar.swift */,
 			);
@@ -709,7 +706,6 @@
 				FA4E08312BDF0837000EE0D3 /* GiftRequest.swift in Sources */,
 				FA18C9DD2BBBA89E00B8A96E /* ViewModel.swift in Sources */,
 				FABCE0982BD0522F007694BC /* NodeIcon.swift in Sources */,
-				FA4E083B2BDF11BE000EE0D3 /* GiftShopCard.swift in Sources */,
 				FAF8F2792BBCB43B00ACD763 /* SearchResultButton.swift in Sources */,
 				FA4E08352BDF08E1000EE0D3 /* CartItem.swift in Sources */,
 				FA87A3882BB8A5E40043C106 /* Helper.swift in Sources */,

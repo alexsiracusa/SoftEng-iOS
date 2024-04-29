@@ -39,7 +39,7 @@ struct CartQuantityPicker: View {
                 .fill(COLOR_LOGO_T)
                 .frame(width: size)
                 .overlay(
-                    Image(systemName: quantity == 1 ? "trash" : "minus")
+                    Image(systemName: quantity <= 1 ? "trash" : "minus")
                         .font(.system(size: (1/2) * size))
                         .foregroundStyle(.white)
                         .bold()
@@ -58,6 +58,9 @@ struct CartQuantityPicker: View {
                         .foregroundStyle(.black)
                         .bold()
                         .padding(.horizontal, (1/10) * size)
+                        .onSubmit {
+                            quantity = quantity
+                        }
                 )
             
             Button(action: {

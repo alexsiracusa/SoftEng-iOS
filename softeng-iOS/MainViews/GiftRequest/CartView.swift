@@ -17,9 +17,11 @@ struct CartView: View {
         ScrollView {
             VStack {
                 ForEach(database.cart.sorted(by: {$0.key.id > $1.key.id}), id: \.key.id) { item, quantity in
-                    Text("\(quantity): \(item.name)")
+                    CartItemCard(item: item, checkout: true)
                 }
             }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 15)
         }
         .customNavigationBar(title: "Cart", next: "Checkout", nextPage: .CHECKOUT)
     }
