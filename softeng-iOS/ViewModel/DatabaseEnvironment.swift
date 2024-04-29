@@ -45,6 +45,9 @@ class DatabaseEnvironment: ObservableObject {
     func cartShipping() -> Double {
         return 2.99
     }
+    func clearCart() {
+        self.cart = [:]
+    }
     
     //
     @Published var selectedNode: Node? = nil

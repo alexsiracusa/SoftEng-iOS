@@ -16,14 +16,67 @@ struct CheckoutView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Checkout")
+                HStack {
+                    Text("TOTAL")
+                        .font(.title3)
+                    
+                    Spacer()
+                    
+                    Text("\(database.cartTotal(), specifier: "%.2f")")
+                        .font(.title2)
+                }
+                .padding(.bottom, 10)
                 
-                Button(action: {
-                    viewModel.path = NavigationPath()
-                }) {
-                    Text("Back to root")
+                HStack {
+                    Text("Subtotal")
+                        .font(.subheadline)
+                    
+                    Spacer()
+                    
+                    Text("\(database.cartSubTotal(), specifier: "%.2f")")
+                        .font(.subheadline)
+                }
+                
+                HStack {
+                    Text("Shipping")
+                        .font(.subheadline)
+                    
+                    Spacer()
+                    
+                    Text("\(database.cartShipping(), specifier: "%.2f")")
+                        .font(.subheadline)
+                }
+                
+                HStack {
+                    Text("Tax")
+                        .font(.subheadline)
+                    
+                    Spacer()
+                    
+                    Text("\(database.cartTax(), specifier: "%.2f")")
+                        .font(.subheadline)
+                }
+                .padding(.bottom, 40)
+                
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        RoundedButton(size: 40, text: "  Cancel  ", textColor: .black, backgroundColor: .red.opacity(0.3))
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        viewModel.path.append(Page.CHECKOUT)
+                    }) {
+                        RoundedButton(size: 40, text: "  Purchase  ", textColor: .white, backgroundColor: COLOR_LOGO_T)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
+            .padding(.horizontal, 25)
         }
         .customNavigationBar(title: "Checkout")
     }
