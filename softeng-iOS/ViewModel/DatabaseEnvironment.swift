@@ -24,6 +24,9 @@ class DatabaseEnvironment: ObservableObject {
     func addToCart(item: CartItem, quantity: Int) {
         cart[item] = (cart[item] ?? 0) + quantity
     }
+    func setItemQuantity(item: CartItem, quantity: Int) {
+        cart[item] = quantity
+    }
     func removeFromCart(item: CartItem) {
         cart[item] = nil
     }
@@ -76,6 +79,13 @@ class DatabaseEnvironment: ObservableObject {
 
         database.nodeSearchList = []
         database.nodeSearchDict = [:]
+        
+        database.cartItems = CART_ITEMS
+        database.cart = [
+            CART_ITEMS[0]: 1,
+            CART_ITEMS[1]: 1,
+            CART_ITEMS[2]: 4,
+        ]
 
         do {
             try database.loadDatabase()

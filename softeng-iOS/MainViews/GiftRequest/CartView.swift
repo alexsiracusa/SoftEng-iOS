@@ -24,9 +24,9 @@ struct CartView: View {
         .customNavigationBar(title: "Cart", next: "Checkout", nextPage: .CHECKOUT)
     }
 }
-
+ 
 #Preview {
     CartView()
-        .environmentObject(DatabaseEnvironment())
+        .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

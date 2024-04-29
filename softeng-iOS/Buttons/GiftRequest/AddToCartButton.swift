@@ -68,9 +68,7 @@ struct AddToCartButton: View {
 }
 
 #Preview {
-    let items = try! JSONDecoder().decode([CartItem].self, from: CART_ITEMS.data(using: .utf8)!)
-    
-    return AddToCartButton(size: 50, item: items[0])
+    AddToCartButton(size: 50, item: CART_ITEMS[0])
         .environmentObject(DatabaseEnvironment.example!)
         .environmentObject(ViewModel())
 }

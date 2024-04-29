@@ -2,21 +2,21 @@
 //  CartItemCard.swift
 //  softeng-iOS
 //
-//  Created by Alex Siracusa on 4/29/24.
+//  Created by Alex Siracusa on 4/28/24.
 //
 
 import SwiftUI
 
-struct CartItemCard: View {
+struct GiftShopCard: View {
+    let height: CGFloat
     let item: CartItem
-    let checkout: Bool
     
     init(
-        item: CartItem,
-        checkout: Bool = false
+        height: CGFloat = 120,
+        item: CartItem
     ) {
+        self.height = height
         self.item = item
-        self.checkout = checkout
     }
     
     var body: some View {
@@ -30,7 +30,7 @@ struct CartItemCard: View {
             } placeholder: {
                 Color.gray
                     .opacity(0.4)
-                    .frame(width: 100, height: 120)
+                    .frame(width: (5/6) * height, height: height)
             }
             .cornerRadius(8)
             
@@ -50,27 +50,17 @@ struct CartItemCard: View {
                 HStack {
                     Spacer()
                     
-                    if checkout {
-                        CartQuantityPicker(size: 30, item: item)
-                    }
-                    else {
-                        AddToCartButton(size: 30, item: item)
-                    }
+                    AddToCartButton(size: 30, item: item)
                 }
             }
             .padding(.vertical, 5)
             .padding(.leading, 5)
         }
-        .frame(height: 120)
+        .frame(height: height)
     }
 }
 
 #Preview {
-    VStack {
-        CartItemCard(item: CART_ITEMS[0])
-        CartItemCard(item: CART_ITEMS[1], checkout: true)
-        CartItemCard(item: CART_ITEMS[2], checkout: true)
-    }
-    .environmentObject(DatabaseEnvironment.example!)
-    .environmentObject(ViewModel())
+    GiftShopCard(item: CART_ITEMS[0])
+        .padding(.horizontal, 10)
 }

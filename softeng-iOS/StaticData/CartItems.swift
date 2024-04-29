@@ -7,7 +7,7 @@
 
 import Foundation
 
-let CART_ITEMS = """
+let CART_ITEMS_JSON = """
 [
     {
         "id": -1,
@@ -107,3 +107,6 @@ let CART_ITEMS = """
     }
 ]
 """
+
+let CART_ITEMS = try! JSONDecoder().decode([CartItem].self, from: CART_ITEMS_JSON.data(using: .utf8)!)
+

@@ -18,7 +18,7 @@ struct GiftRequest: View {
             ScrollView {
                 VStack(spacing: 10) {
                     ForEach(items, id: \.id) { item in
-                        CartItemCard(item: item)
+                        GiftShopCard(item: item)
                             .padding(.horizontal, 10)
                     }
                 }

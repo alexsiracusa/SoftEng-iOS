@@ -10,7 +10,7 @@ import Foundation
 extension API {
     static func getCartItems() async throws -> [CartItem] {
         do {
-            if let data = CART_ITEMS.data(using: .utf8) {
+            if let data = CART_ITEMS_JSON.data(using: .utf8) {
                 return try JSONDecoder().decode([CartItem].self, from: data)
             }
             else {
