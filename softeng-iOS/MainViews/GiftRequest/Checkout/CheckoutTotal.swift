@@ -59,6 +59,7 @@ struct CheckoutTotal: View {
 
 #Preview {
     CheckoutTotal()
+        .padding(.horizontal, 20)
         .environmentObject(DatabaseEnvironment())
         .environmentObject(ViewModel())
 }

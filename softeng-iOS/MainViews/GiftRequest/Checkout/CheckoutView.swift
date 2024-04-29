@@ -15,9 +15,10 @@ struct CheckoutView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 50) {
+                CheckoutForm()
+                
                 CheckoutTotal()
-                    .padding(.bottom, 40)
                 
                 CheckoutFooter()
             }
