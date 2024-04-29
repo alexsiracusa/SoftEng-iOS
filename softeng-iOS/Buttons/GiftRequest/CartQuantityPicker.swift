@@ -52,7 +52,7 @@ struct CartQuantityPicker: View {
                 .fill(COLOR_LOGO_T.opacity(0.3))
                 .frame(width: (4/3) * size)
                 .overlay(
-                    TextField("0", value: $quantity, formatter: NumberFormatter())
+                    TextField("0", value: $quantity, format: .number)
                         .multilineTextAlignment(.center)
                         .font(.system(size: (1/2) * size))
                         .foregroundStyle(.black)

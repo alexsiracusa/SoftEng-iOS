@@ -46,6 +46,7 @@
 		FA4E08562BE038E2000EE0D3 /* CheckoutTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08552BE038E2000EE0D3 /* CheckoutTotal.swift */; };
 		FA4E085A2BE039AB000EE0D3 /* CheckoutFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08592BE039AB000EE0D3 /* CheckoutFooter.swift */; };
 		FA4E085C2BE03AB0000EE0D3 /* CheckoutForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E085B2BE03AB0000EE0D3 /* CheckoutForm.swift */; };
+		FA4E085E2BE04F47000EE0D3 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E085D2BE04F47000EE0D3 /* FormField.swift */; };
 		FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79763A2BBBBCB7009D90C3 /* Colors.swift */; };
 		FA79763D2BBBC112009D90C3 /* FloorIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79763C2BBBC112009D90C3 /* FloorIconButton.swift */; };
 		FA79763F2BBBC637009D90C3 /* FloorSelectorIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79763E2BBBC637009D90C3 /* FloorSelectorIcon.swift */; };
@@ -149,6 +150,7 @@
 		FA4E08552BE038E2000EE0D3 /* CheckoutTotal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTotal.swift; sourceTree = "<group>"; };
 		FA4E08592BE039AB000EE0D3 /* CheckoutFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFooter.swift; sourceTree = "<group>"; };
 		FA4E085B2BE03AB0000EE0D3 /* CheckoutForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutForm.swift; sourceTree = "<group>"; };
+		FA4E085D2BE04F47000EE0D3 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		FA79763A2BBBBCB7009D90C3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FA79763C2BBBC112009D90C3 /* FloorIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorIconButton.swift; sourceTree = "<group>"; };
 		FA79763E2BBBC637009D90C3 /* FloorSelectorIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorSelectorIcon.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				FA4E08452BDF33FC000EE0D3 /* CheckoutView.swift */,
 				FA4E08552BE038E2000EE0D3 /* CheckoutTotal.swift */,
 				FA4E085B2BE03AB0000EE0D3 /* CheckoutForm.swift */,
+				FA4E085D2BE04F47000EE0D3 /* FormField.swift */,
 				FA4E08592BE039AB000EE0D3 /* CheckoutFooter.swift */,
 			);
 			path = Checkout;
@@ -699,6 +702,7 @@
 				FA4E08502BE03379000EE0D3 /* EmptyCart.swift in Sources */,
 				FA09CC6A2BCB8F9C00BD7F52 /* DirectionsSearchView.swift in Sources */,
 				FA4E08372BDF099B000EE0D3 /* CartItemsRequest.swift in Sources */,
+				FA4E085E2BE04F47000EE0D3 /* FormField.swift in Sources */,
 				FA09CC1C2BC30E4200BD7F52 /* RoundedButton.swift in Sources */,
 				FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */,
 				FAF8F2702BBC436600ACD763 /* BinaryHeap.swift in Sources */,
