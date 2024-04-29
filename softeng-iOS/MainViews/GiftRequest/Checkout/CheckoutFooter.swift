@@ -13,6 +13,9 @@ struct CheckoutFooter: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
+    @ObservedObject var formData: GiftFormData
+    @State var alert = false
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -25,17 +28,28 @@ struct CheckoutFooter: View {
             Spacer()
             
             Button(action: {
-                viewModel.path.append(Page.CHECKOUT)
+                alert = true
             }) {
-                RoundedButton(size: 40, text: "  Purchase  ", textColor: .white, backgroundColor: COLOR_LOGO_T)
+                RoundedButton(
+                    size: 40,
+                    text: "  Purchase  ",
+                    textColor: formData.complete() ? .white : .black,
+                    backgroundColor: formData.complete() ? COLOR_LOGO_T : .gray.opacity(0.3)
+                )
             }
+            .disabled(!formData.complete())
             .buttonStyle(PlainButtonStyle())
+            .alert("Order Sent", isPresented: $alert) {
+                Button("OK", role: .cancel) {
+                    viewModel.path = NavigationPath()
+                }
+            }
         }
     }
 }
 
 #Preview {
-    CheckoutFooter()
+    CheckoutFooter(formData: GiftFormData())
         .environmentObject(DatabaseEnvironment())
         .environmentObject(ViewModel())
 }

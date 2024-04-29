@@ -16,6 +16,8 @@ struct CheckoutForm: View {
     @EnvironmentObject var database: DatabaseEnvironment
     @EnvironmentObject var viewModel: ViewModel
     
+    @ObservedObject var formData: GiftFormData
+    
     @State var senderName: String = ""
     @State var recipientName: String = ""
     @State var cardNumber: String = ""
@@ -34,8 +36,10 @@ struct CheckoutForm: View {
     }
     
     func submitCardNumber(value: String) -> String {
-        let num = formatCardNumber(value: value)
-        return num.count == 16 ? num : ""
+        var num = formatCardNumber(value: value)
+        num = num.count == 16 ? num : ""
+        formData.cardNumber = num == "" ? nil : Int64(num)
+        return num
     }
     
     // CVV Formatting
@@ -44,8 +48,10 @@ struct CheckoutForm: View {
     }
     
     func submitCVV(value: String) -> String {
-        let cvv = formatCVV(value: value)
-        return cvv.count == 3 ? cvv : ""
+        var cvv = formatCVV(value: value)
+        cvv = cvv.count == 3 ? cvv : ""
+        formData.cardCVV = cvv == "" ? nil : Int(cvv)
+        return cvv
     }
     
     // Date Formatting
@@ -64,17 +70,36 @@ struct CheckoutForm: View {
             let formatter = DateFormatter()
             formatter.dateFormat = "MM/dd"
             if let _ = formatter.date(from: "\(month)/\(day)") {
-                return "\(month)/\(day)"
+                let date = "\(month)/\(day)"
+                formData.cardExpirationDate = date
+                return date
             }
         }
         
+        formData.cardExpirationDate = nil
         return ""
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            FormField(value: $senderName, title: "Sender Name*", placeholder: "Sender Name")
-            FormField(value: $recipientName, title: "Recipient Name*", placeholder: "Recipient Name")
+            FormField(
+                value: $senderName,
+                title: "Sender Name*",
+                placeholder: "Sender Name",
+                onSubmit: { value in
+                    formData.senderName = value == "" ? nil : value
+                    return value
+                }
+            )
+            FormField(
+                value: $recipientName,
+                title: "Recipient Name*",
+                placeholder: "Recipient Name",
+                onSubmit: { value in
+                    formData.recipientName = value == "" ? nil : value
+                    return value
+                }
+            )
             
             HStack {
                 FormField(
@@ -101,7 +126,11 @@ struct CheckoutForm: View {
                 FormField(
                     value: $cardHolderName,
                     title: "Card Holder*",
-                    placeholder: "Card Holder Name"
+                    placeholder: "Card Holder Name",
+                    onSubmit: { value in
+                        formData.cardHolderName = value == "" ? nil : value
+                        return value
+                    }
                 )
                 
                 Spacer()
@@ -120,7 +149,7 @@ struct CheckoutForm: View {
 }
 
 #Preview {
-    CheckoutForm()
+    CheckoutForm(formData: GiftFormData())
         .padding(.horizontal, 20)
         .environmentObject(DatabaseEnvironment())
         .environmentObject(ViewModel())
