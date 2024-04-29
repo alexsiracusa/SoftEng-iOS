@@ -25,7 +25,7 @@ struct CartFooter: View {
             Button(action: {
                 viewModel.path.append(Page.CHECKOUT)
             }) {
-                RoundedButton(size: 40, text: "  Order  ", textColor: .white, backgroundColor: COLOR_LOGO_T)
+                RoundedButton(size: 40, text: "  Checkout  ", textColor: .white, backgroundColor: COLOR_LOGO_T)
             }
             .buttonStyle(PlainButtonStyle())
         }
