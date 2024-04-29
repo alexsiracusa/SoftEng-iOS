@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CartItem: Decodable {
+struct CartItem: Decodable, Hashable {
     let id: Int
     let type: String
     let imageURL: String

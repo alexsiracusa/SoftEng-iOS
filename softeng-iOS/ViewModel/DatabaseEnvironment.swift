@@ -20,6 +20,16 @@ class DatabaseEnvironment: ObservableObject {
     
     // gift request data
     @Published var cartItems: [CartItem]?
+    @Published var cart: [CartItem: Int] = [:]
+    func addToCart(item: CartItem, quantity: Int) {
+        cart[item] = (cart[item] ?? 0) + quantity
+    }
+    func removeFromCart(item: CartItem) {
+        cart[item] = nil
+    }
+    func cartSize() -> Int {
+        return cart.values.reduce(0, +)
+    }
     
     //
     @Published var selectedNode: Node? = nil

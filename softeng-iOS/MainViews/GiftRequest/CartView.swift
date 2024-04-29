@@ -16,12 +16,8 @@ struct CartView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Cart")
-                
-                Button(action: {
-                    viewModel.path = NavigationPath()
-                }) {
-                    Text("Back to root")
+                ForEach(database.cart.sorted(by: {$0.key.id < $1.key.id}), id: \.value) { item, quantity in
+                    Text("\(quantity): \(item.name)")
                 }
             }
         }

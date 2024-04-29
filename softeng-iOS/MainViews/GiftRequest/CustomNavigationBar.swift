@@ -58,7 +58,7 @@ struct CustomNavigationBar: ViewModifier {
                             viewModel.path.append(nextPage)
                         } label: {
                             HStack {
-                                Text(next)
+                                Text("\(next)" + "\(next == "Cart" ? " (\(database.cartSize()))" : "")")
                                 Image(systemName: "chevron.right")
                                     .font(.system(size: 15))
                                     .bold()

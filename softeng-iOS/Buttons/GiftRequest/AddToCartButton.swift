@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct AddToCartButton: View {
+    @EnvironmentObject var database: DatabaseEnvironment
+    @EnvironmentObject var viewModel: ViewModel
+    
+    @State private var showAlert = false
     let size: CGFloat
     let item: CartItem
     @State var quantity = 1
@@ -42,7 +46,8 @@ struct AddToCartButton: View {
             .buttonStyle(PlainButtonStyle())
             
             Button(action: {
-                
+                database.addToCart(item: item, quantity: quantity)
+                showAlert = true
             }) {
                 RoundedButton(
                     size: size,
@@ -53,6 +58,12 @@ struct AddToCartButton: View {
             }
             .buttonStyle(PlainButtonStyle())
         }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Item Added"),
+                message: Text("(\(quantity)) \(item.name) has been added to your cart")
+            )
+        }
     }
 }
 
@@ -60,4 +71,6 @@ struct AddToCartButton: View {
     let items = try! JSONDecoder().decode([CartItem].self, from: CART_ITEMS.data(using: .utf8)!)
     
     return AddToCartButton(size: 50, item: items[0])
+        .environmentObject(DatabaseEnvironment.example!)
+        .environmentObject(ViewModel())
 }
