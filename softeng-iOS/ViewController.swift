@@ -70,10 +70,15 @@ struct ViewController: View {
                     switch value {
                     case .GIFT_REQUEST:
                         GiftRequest()
+                    case .CART:
+                        CartView()
+                    case .CHECKOUT:
+                        CheckoutView()
                     case .CREDITS:
                         Text("Credits")
                     }
                 }
+                .toolbar(.hidden)
                 
             }
             .sheet(isPresented: $viewModel.presentNodeSheet) {

@@ -15,6 +15,8 @@ enum SetPath {
 
 enum Page {
     case GIFT_REQUEST
+    case CART
+    case CHECKOUT
     case CREDITS
 }
 

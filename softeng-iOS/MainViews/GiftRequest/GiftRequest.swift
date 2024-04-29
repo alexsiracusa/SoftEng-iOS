@@ -24,43 +24,7 @@ struct GiftRequest: View {
                 }
                 .padding(.vertical, 10)
             }
-            .navigationBarBackButtonHidden()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 15))
-                                .bold()
-                            Text("Back")
-                        }
-                    }
-                }
-                
-                ToolbarItem(placement: .principal){
-                    HStack {
-                        Text("GiftRequest")
-                            .font(.headline)
-                    }
-                }
-                
-                
-                ToolbarItem(placement: .navigationBarTrailing){
-                    Button {
-                        // action
-                    } label: {
-                        HStack {
-                            Text("Cart")
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 15))
-                                .bold()
-                        }
-                    }
-                }
-            }
-            .tint(COLOR_LOGO_P)
+            .customNavigationBar(title: "Gift Request", next: "Cart", nextPage: .CART)
         }
         else {
             Text("Loading")
@@ -74,9 +38,7 @@ struct GiftRequest: View {
 }
 
 #Preview {
-    NavigationView {
-        GiftRequest()
-            .environmentObject(DatabaseEnvironment())
-            .environmentObject(ViewModel())
-    }
+    GiftRequest()
+        .environmentObject(DatabaseEnvironment())
+        .environmentObject(ViewModel())
 }
