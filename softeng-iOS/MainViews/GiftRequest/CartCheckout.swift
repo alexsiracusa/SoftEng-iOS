@@ -69,7 +69,7 @@ struct CartCheckout: View {
                 Button(action: {
                     
                 }) {
-                    RoundedButton(size: 40, text: "  Clear  ", textColor: .white, backgroundColor: COLOR_LOGO_T)
+                    RoundedButton(size: 40, text: "  Purchase  ", textColor: .white, backgroundColor: COLOR_LOGO_T)
                 }
             }
         }
