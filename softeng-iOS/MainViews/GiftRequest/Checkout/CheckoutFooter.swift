@@ -14,7 +14,8 @@ struct CheckoutFooter: View {
     @EnvironmentObject var viewModel: ViewModel
     
     @ObservedObject var formData: GiftFormData
-    @State var alert = false
+    @State var alertSucess = false
+    @State var alertFail = false
     
     var body: some View {
         HStack {
@@ -28,7 +29,15 @@ struct CheckoutFooter: View {
             Spacer()
             
             Button(action: {
-                alert = true
+                Task { @MainActor in
+                    do {
+                        try await API.postGiftRequest(formData: formData)
+                        alertSucess = true
+                    }
+                    catch {
+                        alertFail = true
+                    }
+                }
             }) {
                 RoundedButton(
                     size: 40,
@@ -39,9 +48,14 @@ struct CheckoutFooter: View {
             }
             .disabled(!formData.complete())
             .buttonStyle(PlainButtonStyle())
-            .alert("Order Sent", isPresented: $alert) {
+            .alert("Order Sent", isPresented: $alertSucess) {
                 Button("OK", role: .cancel) {
                     viewModel.path = NavigationPath()
+                }
+            }
+            .alert("Order Failed to Send", isPresented: $alertFail) {
+                Button("OK", role: .cancel) {
+                    alertFail = false
                 }
             }
         }
