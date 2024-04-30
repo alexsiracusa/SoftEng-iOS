@@ -14,7 +14,7 @@ extension API {
             throw RuntimeError("invalid url")
         }
         
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5)
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 1)
         request.httpMethod = "GET"
         
         request.setValue(
@@ -23,7 +23,11 @@ extension API {
         )
         
         do {
-            let session = URLSession(configuration: .default, delegate: delegate, delegateQueue: OperationQueue.main)
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 1
+            config.timeoutIntervalForResource = 1
+            let session = URLSession(configuration: config, delegate: delegate, delegateQueue: OperationQueue.main)
+            
             let (data, _) = try await session.data(from: url)
             let items = try JSONDecoder().decode([CartItem].self, from: data)
             print("got cart items from API")

@@ -14,7 +14,7 @@ extension API {
             throw RuntimeError("invalid url")
         }
         
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5)
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 1)
         request.httpMethod = "POST"
         
         request.setValue(
@@ -30,7 +30,12 @@ extension API {
             let data = try encoder.encode(formData)
             //request.httpBody = data
             
-            let (_, response) = try await URLSession.shared.upload(for: request, from: data, delegate: delegate)
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 0.3
+            config.timeoutIntervalForResource = 0.3
+            let session = URLSession(configuration: config, delegate: delegate, delegateQueue: OperationQueue.main)
+            
+            let (_, response) = try await session.upload(for: request, from: data, delegate: delegate)
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
                     print("gift request posted successfully")
