@@ -14,11 +14,21 @@ struct SaveButton: View {
     let node: Node
     let size: CGFloat
     
+    var saved: Bool {
+        database.savedLocations.contains(node)
+    }
+    
     var body: some View {
         Button(action: {
-            // TODO
+            if saved {
+                database.savedLocations.remove(node)
+            }
+            else {
+                database.savedLocations.insert(node)
+            }
         }) {
-            Save(size: 40)
+            Save(size: 40, saved: saved)
+                .animation(nil, value: UUID())
         }
         .buttonStyle(PlainButtonStyle())
     }

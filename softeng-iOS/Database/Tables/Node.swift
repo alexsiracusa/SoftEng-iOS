@@ -99,7 +99,7 @@ extension NodeType {
     }
 }
 
-class Node: Identifiable, Equatable {
+class Node: Identifiable, Equatable, Hashable {
     static let dbColumns = ["id", "xcoord", "ycoord", "floor", "building", "type", "long_name", "short_name"]
     
     let id: String
@@ -110,6 +110,10 @@ class Node: Identifiable, Equatable {
     let type: NodeType
     let long_name: String
     let short_name: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
     
     var x_percent: Double {
         return Double(self.position.x) / 5000

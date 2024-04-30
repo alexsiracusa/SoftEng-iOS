@@ -18,6 +18,34 @@ class DatabaseEnvironment: ObservableObject {
     @Published var nodes: [Node]!
     @Published var edges: [Edge]!
     
+    // saved locations
+    @Published var savedLocations = Set<Node>()
+    
+    //
+    @Published var selectedNode: Node? = nil
+    
+    // pathfinding
+    @Published var path: PathfindingResult? = nil
+    @Published var pathStart: Node? = nil {
+        didSet {
+            tryPath()
+        }
+    }
+    @Published var pathEnd: Node? = nil {
+        didSet {
+            tryPath()
+        }
+    }
+    
+    // quick lookup for pathfinding
+    private var nodeDict: [String: Node]!
+    private var edgeDict: [String: [Edge]]!
+    private var graph: Graph!
+    
+    // quick lookup for searching
+    private var nodeSearchList: [String]!
+    private var nodeSearchDict: [String: Node]!
+    
     // gift request data
     @Published var cartItems: [CartItem]?
     @Published var cart: [CartItem: Int] = [:]
@@ -48,31 +76,6 @@ class DatabaseEnvironment: ObservableObject {
     func clearCart() {
         self.cart = [:]
     }
-    
-    //
-    @Published var selectedNode: Node? = nil
-    
-    // pathfinding
-    @Published var path: PathfindingResult? = nil
-    @Published var pathStart: Node? = nil {
-        didSet {
-            tryPath()
-        }
-    }
-    @Published var pathEnd: Node? = nil {
-        didSet {
-            tryPath()
-        }
-    }
-    
-    // quick lookup for pathfinding
-    private var nodeDict: [String: Node]!
-    private var edgeDict: [String: [Edge]]!
-    private var graph: Graph!
-    
-    // quick lookup for searching
-    private var nodeSearchList: [String]!
-    private var nodeSearchDict: [String: Node]!
     
     init() {}
     

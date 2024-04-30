@@ -9,14 +9,15 @@ import SwiftUI
 
 struct Save: View {
     let size: CGFloat
+    let saved: Bool
     
     var body: some View {
         RoundedButton(
             size: size,
-            icon: Image(systemName: "bookmark"),
-            iconScaleWidth: (1/4),
-            iconScaleHeight: (1/3),
-            text: "Save",
+            icon: Image(systemName: saved ? "checkmark.circle" : "bookmark"),
+            iconScaleWidth: saved ? (1/3) : (1/4),
+            iconScaleHeight: saved ? (1/3) : (1/3),
+            text: saved ? "Saved" : "Save",
             textColor: .blue,
             backgroundColor: .blue.opacity(0.1)
         )
@@ -24,5 +25,5 @@ struct Save: View {
 }
 
 #Preview {
-    Save(size: 40)
+    Save(size: 40, saved: false)
 }
