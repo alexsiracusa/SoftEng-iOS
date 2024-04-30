@@ -23,6 +23,10 @@ struct SearchView: View {
     
     let detector: CurrentValueSubject<CGFloat, Never>
     let publisher: AnyPublisher<CGFloat, Never>
+    
+    var savedLocations: Array<(offset: Int, element: Node)> {
+        return Array(database.savedLocations.sorted(by: {$0.id > $1.id}).enumerated())
+    }
 
     init() {
         let detector = CurrentValueSubject<CGFloat, Never>(0)
@@ -47,7 +51,7 @@ struct SearchView: View {
             .background(viewModel.searchFullscreen ? .white : .clear)
             .animation(nil, value: UUID())
             
-            if searchResults == nil || !viewModel.searchFullscreen {
+            if !viewModel.searchFullscreen {
                 Spacer()
             }
             
@@ -108,6 +112,34 @@ struct SearchView: View {
                 }
                 .ignoresSafeArea()
             }
+            else if viewModel.searchFullscreen {
+                ScrollView {
+                    if !database.savedLocations.isEmpty {
+                        LazyVStack(alignment: .leading, spacing: 0) {
+                            Text("Saved Locations")
+                                .font(.headline)
+                                .padding(.leading, 5)
+                                .padding(.bottom, 5)
+                                .padding(.top, 10)
+                            
+                            ForEach(
+                                savedLocations,
+                                id: \.offset
+                            ) { index, node in
+                                SearchResultButton(
+                                    node: node,
+                                    fullscreen: $viewModel.searchFullscreen,
+                                    focused: _focused,
+                                    search: $search,
+                                    searchResults: $searchResults
+                                )
+                                .id(index)
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+            }
         }
         .background(viewModel.searchFullscreen ? COLOR_BG_P : .clear)
         .ignoresSafeArea(.keyboard)
@@ -148,7 +180,7 @@ struct SearchView: View {
     func runSearch(time: NSDate) async {
         self.lastSearchTime = time
         if search == "" {
-            setSearch(results: [], time: time)
+            setSearch(results: nil, time: time)
         }
         else if search != "" && viewModel.searchFullscreen {
             let results = database.searchNodes(query: search)
@@ -157,7 +189,7 @@ struct SearchView: View {
     }
     
     @MainActor
-    func setSearch(results: [Node], time: NSDate) {
+    func setSearch(results: [Node]?, time: NSDate) {
         if lastSearchTime == time {
             scrollTarget = 0
             self.searchResults = results

@@ -21,7 +21,7 @@ struct SearchBar: View {
     
     func clearSearch() {
         self.search = ""
-        searchResults = []
+        searchResults = nil
     }
     
     func closeView() {
