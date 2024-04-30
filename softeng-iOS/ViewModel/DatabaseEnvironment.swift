@@ -40,7 +40,7 @@ class DatabaseEnvironment: ObservableObject {
         return cart.reduce(0, {$0 + (Double($1.value) * ($1.key.priceDouble ?? 0))})
     }
     func cartTax() -> Double {
-        return 0.15 * cartSubTotal()
+        return 0.0625 * cartSubTotal()
     }
     func cartShipping() -> Double {
         return 2.99
