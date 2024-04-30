@@ -125,6 +125,16 @@ class NodeIconData: PathIcon {
     }
 }
 
+class StartIconData: PathIcon {
+    override func view(size: CGFloat) -> AnyView {
+        return AnyView(PathStartIcon(node: node, size: size))
+    }
+    
+    override func floor() -> Floor {
+        return node.floor
+    }
+}
+
 class FloorIconData: PathIcon {
     let floorTo: Floor
     let up: Bool

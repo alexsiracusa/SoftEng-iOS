@@ -50,6 +50,7 @@
 		FA4E08622BE0615B000EE0D3 /* GiftFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08612BE0615B000EE0D3 /* GiftFormData.swift */; };
 		FA4E08652BE06A82000EE0D3 /* PostGiftRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08642BE06A82000EE0D3 /* PostGiftRequest.swift */; };
 		FA4E08672BE08318000EE0D3 /* SaveSavedNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08662BE08318000EE0D3 /* SaveSavedNodes.swift */; };
+		FA4E08692BE0B0DA000EE0D3 /* PathStartIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E08682BE0B0DA000EE0D3 /* PathStartIcon.swift */; };
 		FA79763B2BBBBCB7009D90C3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79763A2BBBBCB7009D90C3 /* Colors.swift */; };
 		FA79763D2BBBC112009D90C3 /* FloorIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79763C2BBBC112009D90C3 /* FloorIconButton.swift */; };
 		FA79763F2BBBC637009D90C3 /* FloorSelectorIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79763E2BBBC637009D90C3 /* FloorSelectorIcon.swift */; };
@@ -157,6 +158,7 @@
 		FA4E08612BE0615B000EE0D3 /* GiftFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftFormData.swift; sourceTree = "<group>"; };
 		FA4E08642BE06A82000EE0D3 /* PostGiftRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGiftRequest.swift; sourceTree = "<group>"; };
 		FA4E08662BE08318000EE0D3 /* SaveSavedNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSavedNodes.swift; sourceTree = "<group>"; };
+		FA4E08682BE0B0DA000EE0D3 /* PathStartIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathStartIcon.swift; sourceTree = "<group>"; };
 		FA79763A2BBBBCB7009D90C3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FA79763C2BBBC112009D90C3 /* FloorIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorIconButton.swift; sourceTree = "<group>"; };
 		FA79763E2BBBC637009D90C3 /* FloorSelectorIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorSelectorIcon.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				FABCE0972BD0522F007694BC /* NodeIcon.swift */,
+				FA4E08682BE0B0DA000EE0D3 /* PathStartIcon.swift */,
 				FABCE0992BD05239007694BC /* FloorChangeIcon.swift */,
 			);
 			path = MapIcons;
@@ -731,6 +734,7 @@
 				FA87A3DA2BBA0ABB0043C106 /* Node.swift in Sources */,
 				FA79763F2BBBC637009D90C3 /* FloorSelectorIcon.swift in Sources */,
 				FA4E08332BDF08AE000EE0D3 /* CartItems.swift in Sources */,
+				FA4E08692BE0B0DA000EE0D3 /* PathStartIcon.swift in Sources */,
 				FA18C9DA2BBBA7DD00B8A96E /* ViewController.swift in Sources */,
 				FAEC47F02BB5E30800515518 /* softeng_iOSApp.swift in Sources */,
 				FAF8F26E2BBC3FC200ACD763 /* Graph.swift in Sources */,
