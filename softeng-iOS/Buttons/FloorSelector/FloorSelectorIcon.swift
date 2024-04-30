@@ -19,9 +19,7 @@ struct FloorSelectorIcon: View {
     
     var body: some View {
         Button(action: toggle) {
-            RoundedRectangle(cornerRadius: (3/8) * size)
-                .fill(COLOR_AC_P)
-                .frame(width: size, height: size)
+            RoundedSquareButton(size: size, color: COLOR_AC_P)
                 .overlay(
                     Image(systemName: "square.3.layers.3d")
                         .resizable()

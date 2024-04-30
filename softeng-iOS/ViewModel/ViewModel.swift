@@ -13,6 +13,13 @@ enum SetPath {
     case START
 }
 
+enum Page {
+    case GIFT_REQUEST
+    case CART
+    case CHECKOUT
+    case CREDITS
+}
+
 class ViewModel: ObservableObject {
     @Published var path: NavigationPath = NavigationPath()
     

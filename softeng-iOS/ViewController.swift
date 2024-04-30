@@ -66,6 +66,20 @@ struct ViewController: View {
                 .navigationDestination(for: SetPath.self) { value in
                     DirectionsSearchView(toSet: value)
                 }
+                .navigationDestination(for: Page.self) { value in
+                    switch value {
+                    case .GIFT_REQUEST:
+                        GiftRequest()
+                    case .CART:
+                        CartView()
+                    case .CHECKOUT:
+                        CheckoutView()
+                    case .CREDITS:
+                        Text("Credits")
+                    }
+                }
+                .toolbar(.hidden)
+                
             }
             .sheet(isPresented: $viewModel.presentNodeSheet) {
                 Group {

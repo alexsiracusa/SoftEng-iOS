@@ -10,13 +10,44 @@ import FMDB
 import Fuse
 
 class DatabaseEnvironment: ObservableObject {
-    // if the view has loaded data from the database
+    // if the view has loaded all data from the database
     @Published var loaded: Bool = false
     
     // raw data
     var fmdb: FMDatabase!
     @Published var nodes: [Node]!
     @Published var edges: [Edge]!
+    
+    // gift request data
+    @Published var cartItems: [CartItem]?
+    @Published var cart: [CartItem: Int] = [:]
+    func addToCart(item: CartItem, quantity: Int) {
+        cart[item] = (cart[item] ?? 0) + quantity
+    }
+    func setItemQuantity(item: CartItem, quantity: Int) {
+        cart[item] = quantity
+    }
+    func removeFromCart(item: CartItem) {
+        cart[item] = nil
+    }
+    func cartSize() -> Int {
+        return cart.values.reduce(0, +)
+    }
+    func cartTotal() -> Double {
+        return cartSubTotal() + cartTax() + cartShipping()
+    }
+    func cartSubTotal() -> Double {
+        return cart.reduce(0, {$0 + (Double($1.value) * ($1.key.priceDouble ?? 0))})
+    }
+    func cartTax() -> Double {
+        return 0.0625 * cartSubTotal()
+    }
+    func cartShipping() -> Double {
+        return 2.99
+    }
+    func clearCart() {
+        self.cart = [:]
+    }
     
     //
     @Published var selectedNode: Node? = nil
@@ -63,6 +94,13 @@ class DatabaseEnvironment: ObservableObject {
 
         database.nodeSearchList = []
         database.nodeSearchDict = [:]
+        
+        database.cartItems = CART_ITEMS
+        database.cart = [
+            CART_ITEMS[0]: 1,
+            CART_ITEMS[1]: 1,
+            CART_ITEMS[2]: 4,
+        ]
 
         do {
             try database.loadDatabase()
@@ -88,12 +126,22 @@ class DatabaseEnvironment: ObservableObject {
             self.nodeSearchList = []
             self.nodeSearchDict = [:]
             
+            // try to setup database (needs to succeed)
             do {
                 try self.loadDatabase()
                 self.loaded = true
             }
             catch {
                 print("failed to read map data")
+            }
+            
+            // try to fetch cart items (is allowed to fail)
+            do {
+                try await self.loadCartItems()
+            }
+            catch {
+                print(error)
+                print("failed to get cart items on launch")
             }
         }
     }
@@ -114,6 +162,12 @@ class DatabaseEnvironment: ObservableObject {
         catch let error {
             self.loaded = false
             throw error
+        }
+    }
+    
+    func loadCartItems() async throws {
+        Task { @MainActor in
+            self.cartItems = try await API.getCartItems()
         }
     }
     

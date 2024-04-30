@@ -13,9 +13,7 @@ struct FloorIcon: View {
     let size: CGFloat
     
     var body: some View {
-        RoundedRectangle(cornerRadius: (3/8) * size)
-            .fill(selected ? COLOR_AC_S : COLOR_LOGO_S)
-            .frame(width: size, height: size)
+        RoundedSquareButton(size: size, color: selected ? COLOR_AC_S : COLOR_LOGO_S)
             .overlay(
                 Text(name)
                     .monospaced()

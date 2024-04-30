@@ -72,7 +72,7 @@ struct NodeDetail: View {
                             }
                             .frame(height: 40)
                             .padding(.horizontal, 10)
-                            .padding(.top, 10)
+                            .padding(.vertical, 5)
                         }
                         
                     }
