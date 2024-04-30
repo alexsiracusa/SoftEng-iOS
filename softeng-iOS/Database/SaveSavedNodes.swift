@@ -8,6 +8,24 @@
 import Foundation
 import FMDB
 
+func getSavedNodes(from: FMDatabase) throws -> [String] {
+    let db = from
+    
+    do {
+        let results = try db.executeQuery("SELECT node_id from \"Saved_Node\"", values: nil)
+        
+        var nodeIds = [String]()
+        while(results.next()) {
+            let id = try results.string(forColumn: "node_id") ?! RuntimeError("failed to read saved nodes")
+            nodeIds.append(id)
+        }
+        
+        return nodeIds
+    } catch let error {
+        throw error
+    }
+}
+
 func saveSavedNodes(into: FMDatabase, nodes: [Node]) throws {
     let db = into
     
@@ -16,7 +34,7 @@ func saveSavedNodes(into: FMDatabase, nodes: [Node]) throws {
     }
     
     do {
-        let results = try db.executeQuery("SELECT node_id from \"Saved_Node\"", values: nil)
+        let results = try db.executeQuery("SELECT node_id FROM \"Saved_Node\";", values: nil)
         
         var nodeIds = Set(nodes.map({$0.id}))
         while(results.next()) {
@@ -25,13 +43,18 @@ func saveSavedNodes(into: FMDatabase, nodes: [Node]) throws {
                 nodeIds.remove(id)
             }
             else {
-                try db.executeQuery("DELETE FROM \"Saved_Node\" WHERE node_id = \"\(id)\";", values: nil)
+                print("deleting")
+                try db.executeQuery("""
+                    DELETE FROM "Saved_Node" WHERE node_id = "\(id)";
+                """, values: nil)
             }
         }
         
         let toAdd = Array(nodeIds)
         if (toAdd.count > 0) {
-            try insert(values: toAdd, columns: ["node_id"], table: "Saved_Node", db: db)
+            for id in toAdd {
+                try insert(values: [id], columns: ["node_id"], table: "Saved_Node", db: db)
+            }
         }
     } catch let error {
         db.rollback()

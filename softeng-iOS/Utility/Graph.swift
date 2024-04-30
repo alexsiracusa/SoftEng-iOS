@@ -145,7 +145,7 @@ class FloorIconData: PathIcon {
 }
 
 class Graph {
-    private var nodeDict: [String: Node]
+    var nodeDict: [String: Node]
     private var edges: [Edge]
     private var edgeDict: [String: [Edge]]
     

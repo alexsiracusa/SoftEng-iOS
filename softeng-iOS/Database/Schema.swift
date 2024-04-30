@@ -7,18 +7,7 @@
 
 import Foundation
 
-let SCHEMA = """
-
-
-PRAGMA foreign_keys = ON;
-
-DROP TABLE IF EXISTS Saved_Nodes;
-DROP TABLE IF EXISTS Flower_Request;
-DROP TABLE IF EXISTS Maintenance_Request;
-DROP TABLE IF EXISTS Service_Request;
-DROP TABLE IF EXISTS Edge;
-DROP TABLE IF EXISTS Node;
-
+let CREATE_NODE_TABLE = """
 CREATE TABLE IF NOT EXISTS Node (
     id          TEXT        PRIMARY KEY,
     xcoord      INT,
@@ -31,7 +20,9 @@ CREATE TABLE IF NOT EXISTS Node (
     long_name   TEXT,
     short_name  TEXT
 ) STRICT;
+"""
 
+let CREATE_EDGE_TABLE = """
 CREATE TABLE IF NOT EXISTS Edge (
     id          TEXT        PRIMARY KEY,
     start_id    TEXT        REFERENCES node(id),
@@ -39,35 +30,29 @@ CREATE TABLE IF NOT EXISTS Edge (
     blocked     INT,        -- actuall a Bool, 0 or 1
     heat        INT
 ) STRICT;
+"""
 
-CREATE TABLE IF NOT EXISTS Service_Request (
-    id          INT         PRIMARY KEY,
-    type        TEXT        CHECK (type IN ('MAINTENANCE', 'FLOWERS')),
-    notes       TEXT,
-    location_id TEXT
-) STRICT;
-
-CREATE TABLE IF NOT EXISTS Maintenance_Request (
-    request_id          INT     REFERENCES Service_Request(id),
-    maintenance_type    TEXT    CHECK (maintenance_type IN ('PLUMBING', 'ELEVATOR')),
-    workers_needed      INT,
-
-    PRIMARY KEY (request_id)
-) STRICT;
-
-CREATE TABLE IF NOT EXISTS Flower_Request (
-    request_id          INT     REFERENCES Service_Request(id),
-    flower_type         TEXT    CHECK (flower_type IN ('ROSE', 'DANDELION')),
-    number_flowers      INT,
-
-    PRIMARY KEY (request_id)
-) STRICT;
-
+let CREATE_SAVED_NODE_TABLE = """
 CREATE TABLE IF NOT EXISTS Saved_Node (
-    node_id     TEXT        REFERENCES node(id),
+    node_id     TEXT,
 
     PRIMARY KEY (node_id)
 ) STRICT;
+"""
+
+let SCHEMA = """
+
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS Saved_Node;
+DROP TABLE IF EXISTS Edge;
+DROP TABLE IF EXISTS Node;
+
+\(CREATE_NODE_TABLE)
+
+\(CREATE_EDGE_TABLE)
+
+\(CREATE_SAVED_NODE_TABLE)
 
 """
 

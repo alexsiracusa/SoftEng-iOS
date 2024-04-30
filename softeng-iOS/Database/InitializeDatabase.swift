@@ -13,6 +13,10 @@ func setupDatabase() async -> FMDatabase {
     let new = dbExists()
     let db = getDB()
     
+    if new {
+        runSchema(db: db)
+    }
+    
     do {
         let map = try await API.getMap()
         try map.saveTo(db: db)
@@ -24,7 +28,6 @@ func setupDatabase() async -> FMDatabase {
     }
     
     if new {
-        runSchema(db: db)
         insertNodes(into: db)
         insertEdges(into: db)
         print("loaded database static CSVs")
@@ -52,6 +55,7 @@ func getDB() -> FMDatabase {
 }
 
 func runSchema(db: FMDatabase) {
+    print("ran schema")
     db.executeStatements(SCHEMA)
 }
 

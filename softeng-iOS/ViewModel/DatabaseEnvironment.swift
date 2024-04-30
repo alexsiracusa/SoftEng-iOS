@@ -142,6 +142,7 @@ class DatabaseEnvironment: ObservableObject {
             // try to setup database (needs to succeed)
             do {
                 try self.loadDatabase()
+                try self.loadSavedNodes()
                 self.loaded = true
             }
             catch {
@@ -171,6 +172,17 @@ class DatabaseEnvironment: ObservableObject {
             
             self.graph = Graph(nodeDict: nodeDict, edges: edges, edgeDict: edgeDict)
             self.loaded = true
+        }
+        catch let error {
+            self.loaded = false
+            throw error
+        }
+    }
+    
+    func loadSavedNodes() throws {
+        do {
+            let savedNodes = try getSavedNodes(from: fmdb)
+            self.savedLocations = Set(savedNodes.map({graph.nodeDict[$0]}).compactMap({ $0 }))
         }
         catch let error {
             self.loaded = false
@@ -266,24 +278,6 @@ class DatabaseEnvironment: ObservableObject {
 //            .filter({!displayGroup[0].contains($0.type) || zoom > 0})
         
         return []
-   
-        
-        //    case .EXIT: return "Exit"
-        
-        //    case .ELEV: return "Elevator"
-        //    case .STAI: return "Stairs"
-        
-        //    case .INFO: return "Information"
-        //    case .DEPT: return "Department"
-        //    case .REST: return "Restroom"
-        //    case .BATH: return "Bathroom"
-        
-        //    case .SERV: return "Service"
-        //    case .RETL: return "Retail"
-        //    case .LABS: return "Labratory"
-        //    case .CONF: return "Conference"
-        
-//    case .HALL: return "Hallway"
         
     }
     

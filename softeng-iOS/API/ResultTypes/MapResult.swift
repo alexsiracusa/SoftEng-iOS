@@ -20,7 +20,10 @@ struct MapResult: Decodable {
         do {
             try db.executeUpdate("DROP TABLE IF EXISTS Node;", values: nil)
             try db.executeUpdate("DROP TABLE IF EXISTS Edge;", values: nil)
-            runSchema(db: db)
+            
+            try db.executeUpdate(CREATE_NODE_TABLE, values: nil)
+            try db.executeUpdate(CREATE_EDGE_TABLE, values: nil)
+            //try db.executeUpdate(SCHEMA, values: nil)
         }
         catch {
             throw error
