@@ -53,6 +53,7 @@ struct FloorView: View {
                     if let selected = database.selectedNode, selected.floor == viewModel.selectedFloor.floor {
                         AnyView(
                             renderIcon(icon: NodeIconData(node: selected))
+                                .zIndex(99)
                         )
                     }
                     
@@ -65,7 +66,7 @@ struct FloorView: View {
                                 
                                 ForEach(pathData.icons) { icon in
                                     renderIcon(icon: icon)
-                                        .zIndex(999)
+                                        .zIndex(99)
                                 }
                             }
                         }
@@ -111,13 +112,18 @@ struct FloorView: View {
         )
     }
     
+    func exploreIconSize() -> CGFloat {
+        return iconSize * min((0.25 + 0.75 * ((zoom - 1) / 5)), 1)
+    }
+    
     func renderExploreIcons() -> AnyView {
         return AnyView(
             ForEach(
                 database.displayNodes(zoom: zoom)
                     .filter({$0.floor == viewModel.selectedFloor.floor})
+                    .filter({$0.id != database.selectedNode?.id})
             ) { node in
-                NodeIcon(node: node, size: iconSize)
+                NodeIcon(node: node, size: exploreIconSize())
                     .position(getPoint(node: node))
             }
         )

@@ -270,15 +270,12 @@ class DatabaseEnvironment: ObservableObject {
             Set<NodeType>([.HALL]),
         ]
         
-//        return nodes
-//            .filter({!displayGroup[4].contains($0.type)})
-//            .filter({!displayGroup[3].contains($0.type) || zoom > 6})
-//            .filter({!displayGroup[2].contains($0.type) || zoom > 4})
-//            .filter({!displayGroup[1].contains($0.type) || zoom > 2})
-//            .filter({!displayGroup[0].contains($0.type) || zoom > 0})
-        
-        return []
-        
+        return nodes
+            .filter({!displayGroup[4].contains($0.type)})
+            .filter({!displayGroup[3].contains($0.type) || zoom > 5})
+            .filter({!displayGroup[2].contains($0.type) || zoom > 4})
+            .filter({!displayGroup[1].contains($0.type) || zoom > 3})
+            .filter({!displayGroup[0].contains($0.type) || zoom > 2})
     }
     
 }
