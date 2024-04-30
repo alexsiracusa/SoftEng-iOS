@@ -12,6 +12,7 @@ let SCHEMA = """
 
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS Saved_Nodes;
 DROP TABLE IF EXISTS Flower_Request;
 DROP TABLE IF EXISTS Maintenance_Request;
 DROP TABLE IF EXISTS Service_Request;
@@ -62,6 +63,11 @@ CREATE TABLE IF NOT EXISTS Flower_Request (
     PRIMARY KEY (request_id)
 ) STRICT;
 
+CREATE TABLE IF NOT EXISTS Saved_Node (
+    node_id     TEXT        REFERENCES node(id),
+
+    PRIMARY KEY (node_id)
+) STRICT;
 
 """
 

@@ -19,7 +19,17 @@ class DatabaseEnvironment: ObservableObject {
     @Published var edges: [Edge]!
     
     // saved locations
-    @Published var savedLocations = Set<Node>()
+    @Published var savedLocations = Set<Node>() {
+        didSet {
+            let savedNodes = Array(savedLocations.sorted(by: {$0.id > $1.id}))
+            do {
+                try saveSavedNodes(into: fmdb, nodes: savedNodes)
+            }
+            catch {
+                print(error)
+            }
+        }
+    }
     
     //
     @Published var selectedNode: Node? = nil
