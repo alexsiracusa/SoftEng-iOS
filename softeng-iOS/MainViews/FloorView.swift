@@ -113,7 +113,7 @@ struct FloorView: View {
     }
     
     func exploreIconSize() -> CGFloat {
-        return iconSize * min((0.25 + 0.75 * ((zoom - 1) / 5)), 1)
+        return iconSize * min((0.25 + 0.75 * ((zoom - 1) / 7)), 1)
     }
     
     func renderExploreIcons() -> AnyView {

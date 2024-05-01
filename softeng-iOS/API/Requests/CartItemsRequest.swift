@@ -9,6 +9,11 @@ import Foundation
 
 extension API {
     static func getCartItems() async throws -> [CartItem] {
+        if let data = CART_ITEMS_JSON.data(using: .utf8) {
+            print("got cart items from static data")
+            return try JSONDecoder().decode([CartItem].self, from: data)
+        }
+        
         let route = "/api/cart-items"
         guard let url = URL(string: WEBSITE_URL + route) else {
             throw RuntimeError("invalid url")
