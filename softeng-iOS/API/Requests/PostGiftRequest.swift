@@ -31,8 +31,8 @@ extension API {
             //request.httpBody = data
             
             let config = URLSessionConfiguration.default
-            config.timeoutIntervalForRequest = 0.3
-            config.timeoutIntervalForResource = 0.3
+            config.timeoutIntervalForRequest = 2
+            config.timeoutIntervalForResource = 2
             let session = URLSession(configuration: config, delegate: delegate, delegateQueue: OperationQueue.main)
             
             let (_, response) = try await session.upload(for: request, from: data, delegate: delegate)

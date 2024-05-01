@@ -29,8 +29,8 @@ extension API {
         
         do {
             let config = URLSessionConfiguration.default
-            config.timeoutIntervalForRequest = 1
-            config.timeoutIntervalForResource = 1
+            config.timeoutIntervalForRequest = 4
+            config.timeoutIntervalForResource = 4
             let session = URLSession(configuration: config, delegate: delegate, delegateQueue: OperationQueue.main)
             
             let (data, _) = try await session.data(from: url)
